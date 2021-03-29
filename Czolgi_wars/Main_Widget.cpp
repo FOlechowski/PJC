@@ -1,5 +1,6 @@
 #include "Main_Widget.h"
 #include "ui_widget.h"
+#include "ui_Main_Widget.h"
 #include <QDebug>
 #include <QImage>
 #include <QGraphicsPixmapItem>
