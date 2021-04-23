@@ -2,27 +2,61 @@
 #define MENU_H
 
 #include <QGraphicsView>
+#include <QGraphicsView>
+#include <QGraphicsScene>
+#include <QGraphicsTextItem>
+#include <QDialog>
+#include <QMediaPlayer>
+#include "credits.h"
+#include "button.h"
 
-class Menu : public QGraphicsView
+class Game : public QGraphicsView
 {
     Q_OBJECT
 
 public:
-    Menu(QWidget *parent = nullptr, int w_size = 1360, int h_size = 800);
+    Game(QWidget *parent = nullptr);
 
     void display_menu();
+    void play_music();
 
-    ~Menu();
+    int win_width = 1360;
+    int win_height = 800;
+    int up_width = 800;
+    int up_height = 400;
+    int font_size = 32;
+
+    QString bckg_path = ":/img/img/background_02.png";
+    QString icon_path = ":/img/img/icon.png";
+
+    ~Game();
 
 public slots:
     void quit_ask();
+    void credits();
 
 private:
-    QGraphicsScene* scene;
+
+    QString win_title = "CZOLGI WARS";
+
+    QMediaPlayer* intro;
+
+    QGraphicsScene* menu;
     QGraphicsTextItem* title;
     QGraphicsTextItem* ver_inf;
-    QDialog* quit;
-    QGraphicsView* quit_view;
-    QGraphicsScene* quit_scene;
+
+    Button* new_game;
+    Button* load_game;
+    Button* quit_butt;
+    Button* info;
+    Button* leave;
+    Button* stay;
+
+    Credits* cr;
+
+    QDialog* dialog = new QDialog(this);
+    QGraphicsView* dialog_view = new QGraphicsView(dialog);
+    QGraphicsScene* dialog_scene = new QGraphicsScene;
+
 };
 #endif // MENU_H

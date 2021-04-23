@@ -1,4 +1,5 @@
-QT       += core gui
+QT       += core gui \
+            multimedia
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -10,12 +11,16 @@ CONFIG += c++11
 
 SOURCES += \
     button.cpp \
+    credits.cpp \
     main.cpp \
-    menu.cpp
+    menu.cpp \
+    quitwindow.cpp
 
 HEADERS += \
     button.h \
-    menu.h
+    credits.h \
+    menu.h \
+    quitwindow.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

@@ -3,9 +3,10 @@
 #include <QGraphicsSceneMouseEvent>
 #include <QBrush>
 #include <QGraphicsTextItem>
+#include <QFont>
 
 
-button::button( int width, int height, QString name, QObject *parent) : QObject(parent)
+Button::Button( int width, int height, QString name, QObject *parent) : QObject(parent)
 {
     //creating rectangle button
 
@@ -28,12 +29,12 @@ button::button( int width, int height, QString name, QObject *parent) : QObject(
         this->setAcceptHoverEvents(true);
 }
 
-void button::mousePressEvent(QGraphicsSceneMouseEvent *event)
+void Button::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
     emit clicked();
 }
 
-void button::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
+void Button::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 {
     QBrush brush;
     brush.setStyle(Qt::SolidPattern);
@@ -41,7 +42,7 @@ void button::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
     setBrush(brush);
 }
 
-void button::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
+void Button::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
     QBrush brush;
     brush.setStyle(Qt::SolidPattern);
@@ -50,7 +51,7 @@ void button::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 }
 
 
-button::~button()
+Button::~Button()
 {
 
 }

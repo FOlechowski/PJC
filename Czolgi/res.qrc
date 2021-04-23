@@ -4,5 +4,9 @@
         <file>img/icon.png</file>
         <file>img/uncle_sam.png</file>
     </qresource>
-    <qresource prefix="/sound"/>
+    <qresource prefix="/sound">
+        <file>snd/Intro3.WAV</file>
+        <file>snd/leave.WAV</file>
+        <file>snd/Nothing.WAV</file>
+    </qresource>
 </RCC>
