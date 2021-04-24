@@ -17,17 +17,17 @@ Game::Game(QWidget *parent) :QGraphicsView(parent)
 
 void Game::play_music()
 {
-    //#TODO Naprawic dzwiek zeby sie caly odtworzyl
+    //Intro sound
     intro = new QMediaPlayer;
     intro->setMedia(QUrl("qrc:/sound/snd/Intro3.WAV"));
-    intro->play();
+   // intro->play();
 }
 
 
 void  Game::display_menu()
 {
     //create new scene
-    menu = new QGraphicsScene(this);
+    menu = new QGraphicsScene();
     menu->setSceneRect(0, 0, this->width(), this->height()-2);
     this->setScene(menu);
 
@@ -62,6 +62,7 @@ void  Game::display_menu()
     int ngbxPos = this->width()/2 - new_game->boundingRect().width()/2;
     int ngbyPos = 250;
     new_game->setPos(ngbxPos,ngbyPos);
+    connect(new_game, SIGNAL(clicked()), this, SLOT(display_map()));
     menu->addItem(new_game);
 
     load_game = new Button(400, 80, QString("Wczytaj gre"));
@@ -94,7 +95,7 @@ void Game::quit_ask()
 
     QMediaPlayer leave_ask;
     leave_ask.setMedia(QUrl("qrc:/sound/snd/leave.WAV"));
-    leave_ask.play();
+    //leave_ask.play();
 
     dialog->setModal(true);
     dialog->setFixedSize(QSize(up_width,up_height));
@@ -133,6 +134,12 @@ void Game::credits()
     cr = new Credits(icon_path);
 }
 
+void Game::display_map()
+{
+    mp = new Map();
+    this->hide();
+}
+
 Game::~Game()
 {
     delete menu;
@@ -152,5 +159,6 @@ Game::~Game()
 
     delete intro;
     delete cr;
+    delete mp;
 }
 

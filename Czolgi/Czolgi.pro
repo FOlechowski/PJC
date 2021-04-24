@@ -13,13 +13,17 @@ SOURCES += \
     button.cpp \
     credits.cpp \
     main.cpp \
+    map.cpp \
     menu.cpp \
+    player.cpp \
     quitwindow.cpp
 
 HEADERS += \
     button.h \
     credits.h \
+    map.h \
     menu.h \
+    player.h \
     quitwindow.h
 
 # Default rules for deployment.

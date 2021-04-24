@@ -9,6 +9,7 @@
 #include <QMediaPlayer>
 #include "credits.h"
 #include "button.h"
+#include "map.h"
 
 class Game : public QGraphicsView
 {
@@ -34,6 +35,7 @@ public:
 public slots:
     void quit_ask();
     void credits();
+    void display_map();
 
 private:
 
@@ -53,6 +55,7 @@ private:
     Button* stay;
 
     Credits* cr;
+    Map* mp;
 
     QDialog* dialog = new QDialog(this);
     QGraphicsView* dialog_view = new QGraphicsView(dialog);
