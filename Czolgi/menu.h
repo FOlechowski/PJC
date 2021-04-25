@@ -7,19 +7,20 @@
 #include <QGraphicsTextItem>
 #include <QDialog>
 #include <QMediaPlayer>
+
 #include "credits.h"
 #include "quitwindow.h"
 #include "button.h"
-#include "map.h"
+#include "game.h"
 
-class Game : public QGraphicsView
+class Menu : public QGraphicsView
 {
     Q_OBJECT
 
 public:
-    Game(QWidget *parent = nullptr);
+    Menu(QWidget *parent = nullptr);
 
-    void display_menu();
+    void display();
     void play_music();
 
     int win_width = 1360;
@@ -32,17 +33,18 @@ public:
 
     QString bckg_path = ":/img/img/background_02.png";
     QString icon_path = ":/img/img/icon.png";
+    QString win_title = "CZOLGI WARS";
 
-    ~Game();
+    ~Menu();
 
 public slots:
     void quit_ask();
     void credits();
-    void display_map();
+    void start_game();
 
 private:
 
-    QString win_title = "CZOLGI WARS";
+
 
     QMediaPlayer* intro;
 
@@ -56,6 +58,6 @@ private:
     Button* info;
     QuitWindow* quit;
     Credits* cr;
-    Map* mp;
+    Game* game;
 };
 #endif // MENU_H

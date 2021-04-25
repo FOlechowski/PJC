@@ -1,7 +1,9 @@
 #include "menu.h"
+#include "game.h"
 #include <QIcon>
 
-Game::Game(QWidget *parent) :QGraphicsView(parent)
+
+Menu::Menu(QWidget *parent) :QGraphicsView(parent)
 
 {
     //define size and set icon, title
@@ -15,7 +17,7 @@ Game::Game(QWidget *parent) :QGraphicsView(parent)
 }
 
 
-void Game::play_music()
+void Menu::play_music()
 {
     //Intro sound
     intro = new QMediaPlayer;
@@ -24,7 +26,7 @@ void Game::play_music()
 }
 
 
-void  Game::display_menu()
+void  Menu::display()
 {
     //create new scene
     menu = new QGraphicsScene();
@@ -62,7 +64,7 @@ void  Game::display_menu()
     int ngbxPos = this->width()/2 - new_game->boundingRect().width()/2;
     int ngbyPos = 250;
     new_game->setPos(ngbxPos,ngbyPos);
-    connect(new_game, SIGNAL(clicked()), this, SLOT(display_map()));
+    connect(new_game, SIGNAL(clicked()), this, SLOT(start_game()));
     menu->addItem(new_game);
 
     load_game = new Button(400, 80, QString("Wczytaj gre"));
@@ -87,23 +89,23 @@ void  Game::display_menu()
 
 }
 
-void Game::quit_ask()
+void Menu::quit_ask()
 {
     quit = new QuitWindow(this,icon_path);
 }
 
-void Game::credits()
+void Menu::credits()
 {
     cr = new Credits(icon_path);
 }
 
-void Game::display_map()
+void Menu::start_game()
 {
-    mp = new Map();
+    game = new Game(this);
     this->hide();
 }
 
-Game::~Game()
+Menu::~Menu()
 {
     delete menu;
 
@@ -117,7 +119,6 @@ Game::~Game()
 
     delete intro;
     delete cr;
-    delete mp;
     delete quit;
 }
 

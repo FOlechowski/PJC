@@ -1,22 +1,39 @@
 #ifndef GAME_H
 #define GAME_H
 
+#include <QObject>
 #include <QWidget>
+#include <QGridLayout>
 #include <QGraphicsView>
+#include <QGraphicsScene>
+#include <QMediaPlayer>
+#include "button.h"
+#include "map.h"
+#include "player.h"
 
-class Menu : public QGraphicsView
+class Menu;
+
+class Game: public QWidget
 {
     Q_OBJECT
-
 public:
-    Menu(QWidget *parent = nullptr, int w_size = 1360, int h_size = 800);
+    Game(Menu* mn);
+    int df_level();
+    void create_player();
+    void draw_map();
 
-    QGraphicsScene* scene;
-    QGraphicsTextItem* title;
-    QGraphicsTextItem* ver_inf;
+private:
+    Menu* menu;
 
-    void display_menu();
+    QGridLayout* layout;
+    QGraphicsView* map_view;
+    QGraphicsView* game_interfece;
 
-    ~Menu();
+    Button* red_baron;
+    Button* kabaczek;
+    Button* fiolet;
+
+
 };
+
 #endif // GAME_H
