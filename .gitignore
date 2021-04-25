@@ -1,9 +1,13 @@
 # Prerequisites
 *.d
 
-#build directory
+# Build directory
 build-Czolgi-Desktop_Qt_5_15_2_MinGW_32_bit-Debug/
 build-Czolgi-Desktop_Qt_5_15_2_MinGW_64_bit-Debug/
+
+# User extensions files
+
+*.user
 
 # Compiled Object files
 *.slo
