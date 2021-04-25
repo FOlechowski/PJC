@@ -11,7 +11,11 @@ class Player : public QGraphicsPixmapItem
 {
 public:
     Player();
+
     void keyPressEvent(QKeyEvent * event);
+
+private:
+    QString name;
 };
 
 #endif // PLAYER_H
