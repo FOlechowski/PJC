@@ -89,44 +89,7 @@ void  Game::display_menu()
 
 void Game::quit_ask()
 {
-    //Przeniesc do nowej klasy PopupWindow #eksperymentalne
-
-    dialog_scene->clear();
-
-    QMediaPlayer leave_ask;
-    leave_ask.setMedia(QUrl("qrc:/sound/snd/leave.WAV"));
-    //leave_ask.play();
-
-    dialog->setModal(true);
-    dialog->setFixedSize(QSize(up_width,up_height));
-    dialog->setWindowTitle(QString("Dezercja!!!"));
-
-    dialog_view->setFixedSize(QSize(dialog->width(), dialog->height()));
-    dialog_view->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    dialog_view->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-
-    dialog_scene->setSceneRect(0, 0, dialog_view->width(), dialog_view->height()-2);
-    dialog_view->setScene(dialog_scene);
-
-    QPixmap quit_image(":/img/img/uncle_sam.png");
-    quit_image = quit_image.scaled(dialog_view->size(), Qt::IgnoreAspectRatio);      //scale background image to window size
-    dialog_scene->setBackgroundBrush(QBrush(quit_image));
-
-    stay = new Button(300,80,"Wracam!");
-    int xsPos = 200 - stay->boundingRect().width()/2;
-    int ysPos = 250;
-    stay->setPos(xsPos,ysPos);
-    connect(stay, SIGNAL(clicked()), dialog, SLOT(close()));
-    dialog_scene->addItem(stay);
-
-    leave = new Button(300,80,"Uciekam!");
-    int xlPos = 600 - leave->boundingRect().width()/2;
-    int ylPos = 250;
-    leave->setPos(xlPos,ylPos);
-    connect(leave, SIGNAL(clicked()), this, SLOT(close()));
-    dialog_scene->addItem(leave);
-
-    dialog->exec();
+    quit = new QuitWindow(this,icon_path);
 }
 
 void Game::credits()
@@ -143,16 +106,11 @@ void Game::display_map()
 Game::~Game()
 {
     delete menu;
-    delete dialog;
-    delete dialog_view;
-    delete dialog_scene;
 
     delete load_game;
     delete quit_butt;
     delete new_game;
     delete info;
-    delete leave;
-    delete stay;
 
     delete title;
     delete ver_inf;
@@ -160,5 +118,6 @@ Game::~Game()
     delete intro;
     delete cr;
     delete mp;
+    delete quit;
 }
 

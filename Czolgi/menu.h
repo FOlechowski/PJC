@@ -8,6 +8,7 @@
 #include <QDialog>
 #include <QMediaPlayer>
 #include "credits.h"
+#include "quitwindow.h"
 #include "button.h"
 #include "map.h"
 
@@ -23,8 +24,10 @@ public:
 
     int win_width = 1360;
     int win_height = 800;
+    /*
     int up_width = 800;
     int up_height = 400;
+    */
     int font_size = 32;
 
     QString bckg_path = ":/img/img/background_02.png";
@@ -51,15 +54,8 @@ private:
     Button* load_game;
     Button* quit_butt;
     Button* info;
-    Button* leave;
-    Button* stay;
-
+    QuitWindow* quit;
     Credits* cr;
     Map* mp;
-
-    QDialog* dialog = new QDialog(this);
-    QGraphicsView* dialog_view = new QGraphicsView(dialog);
-    QGraphicsScene* dialog_scene = new QGraphicsScene;
-
 };
 #endif // MENU_H
