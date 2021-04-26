@@ -7,7 +7,7 @@
 #include <QGraphicsView>
 #include <QGraphicsScene>
 #include <QMediaPlayer>
-#include <QInputDialog>
+#include <QLineEdit>
 #include "button.h"
 #include "map.h"
 #include "player.h"
@@ -23,7 +23,7 @@ class Game: public QWidget
 public:
     Game(Menu* mn);
 
-    void create_player();
+    void create_player(QString name);
     void draw_interface();
 
 public slots:
@@ -39,6 +39,7 @@ private:
     Player* player;
 
     QGridLayout* layout;
+    QLineEdit* username;
 
     QGraphicsView* init_view;
     QGraphicsView* map_view;
