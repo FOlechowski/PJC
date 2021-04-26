@@ -5,6 +5,12 @@ Player::Player()
     //this->setPixmap(QPixmap(":/img/img/icon.png"));
 }
 
+void Player::setPlayerName(QString Pname)
+{
+    name = Pname;
+    qDebug()<<name;
+}
+
 void Player::keyPressEvent(QKeyEvent *event)
 {
     if(event->key() == Qt::Key_A)

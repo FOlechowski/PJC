@@ -7,6 +7,7 @@
 #include <QGraphicsView>
 #include <QGraphicsScene>
 #include <QMediaPlayer>
+#include <QInputDialog>
 #include "button.h"
 #include "map.h"
 #include "player.h"
@@ -35,6 +36,7 @@ private:
     int diffic = 0;
 
     Menu* menu;
+    Player* player;
 
     QGridLayout* layout;
 
@@ -47,7 +49,6 @@ private:
     Button* red_baron;
     Button* kabaczek;
     Button* fiolet;
-
 
 };
 

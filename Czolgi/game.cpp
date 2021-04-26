@@ -53,7 +53,16 @@ Game::Game(Menu* mn)
 
 void Game::create_player()
 {
+    player = new Player;
 
+    QString name = QInputDialog::getText(this,QString("Wprowadz nazwe gracza"),QString("Nazwa gracza:"), QLineEdit::Normal);
+
+    while(name.isEmpty())
+    {
+        name = QInputDialog::getText(this,QString("Wprowadz poprawną nazwe gracza"),QString("Nazwa gracza:"), QLineEdit::Normal);
+    }
+
+    player->setPlayerName(name);
 }
 
 void Game::draw_interface()
@@ -79,6 +88,7 @@ void Game::set_baron()
     diffic = easy;
     qDebug()<<diffic;
     qDebug()<<"Red Baron";
+    create_player();
 }
 
 void Game::set_kabaczek()
@@ -86,6 +96,7 @@ void Game::set_kabaczek()
     diffic = medium;
     qDebug()<<diffic;
     qDebug()<<"Kabaczek";
+    create_player();
 }
 
 void Game::set_fiolet()
@@ -93,4 +104,5 @@ void Game::set_fiolet()
     diffic = hard;
     qDebug()<<diffic;
     qDebug()<<"Fiolet";
+    create_player();
 }
