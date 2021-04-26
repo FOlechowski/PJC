@@ -1,9 +1,5 @@
 #include "button.h"
-#include <QGraphicsRectItem>
-#include <QGraphicsSceneMouseEvent>
-#include <QBrush>
-#include <QGraphicsTextItem>
-#include <QFont>
+
 
 
 Button::Button( int width, int height, QString name, QObject *parent) : QObject(parent)
@@ -27,6 +23,14 @@ Button::Button( int width, int height, QString name, QObject *parent) : QObject(
 
         //allow responding to hover events
         this->setAcceptHoverEvents(true);
+}
+
+void Button::change_color(Qt::GlobalColor color)
+{
+    QBrush brush;
+    brush.setStyle(Qt::SolidPattern);
+    brush.setColor(color);
+    setBrush(brush);
 }
 
 void Button::mousePressEvent(QGraphicsSceneMouseEvent *event)

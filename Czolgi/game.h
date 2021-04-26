@@ -11,6 +11,9 @@
 #include "map.h"
 #include "player.h"
 
+
+enum difficulty{easy, medium, hard};
+
 class Menu;
 
 class Game: public QWidget
@@ -18,16 +21,28 @@ class Game: public QWidget
     Q_OBJECT
 public:
     Game(Menu* mn);
-    int df_level();
+
     void create_player();
-    void draw_map();
+    void draw_interface();
+
+public slots:
+    void set_baron();
+    void set_kabaczek();
+    void set_fiolet();
 
 private:
+
+    int diffic = 0;
+
     Menu* menu;
 
     QGridLayout* layout;
+
+    QGraphicsView* init_view;
     QGraphicsView* map_view;
     QGraphicsView* game_interfece;
+
+    QGraphicsScene* init_scene;
 
     Button* red_baron;
     Button* kabaczek;

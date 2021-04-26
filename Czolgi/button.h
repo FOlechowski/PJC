@@ -4,6 +4,9 @@
 #include <QObject>
 #include <QGraphicsRectItem>
 #include <QGraphicsSceneMouseEvent>
+#include <QBrush>
+#include <QGraphicsTextItem>
+#include <QFont>
 
 class Button : public QObject, public QGraphicsRectItem
 {
@@ -11,7 +14,7 @@ class Button : public QObject, public QGraphicsRectItem
 public:
     explicit Button(int width, int height, QString name, QObject *parent = nullptr);
 
-    void change_style();
+    void change_color(Qt::GlobalColor color);
 
     void mousePressEvent(QGraphicsSceneMouseEvent *event);
     void hoverEnterEvent(QGraphicsSceneHoverEvent *event);
