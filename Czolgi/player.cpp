@@ -2,7 +2,7 @@
 
 Player::Player()
 {
-    //this->setPixmap(QPixmap(":/img/img/icon.png"));
+    this->setPixmap(QPixmap(":/img/img/icon.png"));
 }
 
 void Player::setPlayerName(QString Pname)

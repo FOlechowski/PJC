@@ -14,11 +14,8 @@ class Map: public QGraphicsScene
 {
 
 public:
-    Map();
+    Map(Player* player);
     ~Map();
-
-    int mv_width = 1000;
-    int mv_height = 800;
 
     int ms_width = 1000;
     int ms_height = 800;
@@ -27,8 +24,7 @@ public slots:
 
 private:
 
-    QGraphicsView* map;
-    Player* player;
+    Player* ply;
     QGraphicsRectItem* bridge;
     QGraphicsRectItem* wall1;
     QGraphicsRectItem* wall2;

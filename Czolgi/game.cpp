@@ -88,22 +88,24 @@ void Game::create_player(QString name)
     player->setPlayerName(name);
 }
 
-void Game::draw_interface()
+void Game::draw_interface(Player* player)
 {
-    layout = new QGridLayout(this);
-
-    map_view = new QGraphicsView;
+    map_view = new QGraphicsView(this);
     map_view->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     map_view->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     map_view->setFixedSize(QSize(this->width(), this->height()-100));
+    map_view->show();
 
-    game_interfece = new QGraphicsView;
+    game_interfece = new QGraphicsView(this);
     game_interfece->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     game_interfece->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     game_interfece->setFixedSize(QSize(this->width(), 100));
+    game_interfece->move(0,this->height()-100);
+    game_interfece->show();
 
-    layout->addWidget(map_view, 0, 0, 0, 2);
-    layout->addWidget(game_interfece, 1, 0, 1, 2);
+    map = new Map(player);
+
+    map_view->setScene(map);
 }
 
 void Game::set_baron()
@@ -117,6 +119,8 @@ void Game::set_baron()
     if(!name.isEmpty())
     {
         create_player(name);
+        init_view->close();
+        draw_interface(player);
     }
     else
     {
@@ -139,6 +143,8 @@ void Game::set_kabaczek()
     if(!name.isEmpty())
     {
         create_player(name);
+        init_view->close();
+        draw_interface(player);
     }
     else
     {
@@ -161,6 +167,8 @@ void Game::set_fiolet()
     if(!name.isEmpty())
     {
         create_player(name);
+        init_view->close();
+        draw_interface(player);
     }
     else
     {

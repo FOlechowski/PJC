@@ -3,7 +3,6 @@
 
 #include <QObject>
 #include <QWidget>
-#include <QGridLayout>
 #include <QGraphicsView>
 #include <QGraphicsScene>
 #include <QMediaPlayer>
@@ -24,7 +23,7 @@ public:
     Game(Menu* mn);
 
     void create_player(QString name);
-    void draw_interface();
+    void draw_interface(Player* player);
 
 public slots:
     void set_baron();
@@ -37,8 +36,8 @@ private:
 
     Menu* menu;
     Player* player;
+    Map* map;
 
-    QGridLayout* layout;
     QLineEdit* username;
 
     QGraphicsView* init_view;

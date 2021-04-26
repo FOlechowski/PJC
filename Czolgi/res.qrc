@@ -3,6 +3,10 @@
         <file>img/background_02.png</file>
         <file>img/icon.png</file>
         <file>img/uncle_sam.png</file>
+        <file>tex/tex_green_01.png</file>
+        <file>tex/tex_sand_01.png</file>
+        <file>tex/tex_water_01.png</file>
+        <file>tex/tex_wood_bridge_01.png</file>
     </qresource>
     <qresource prefix="/sound">
         <file>snd/Intro3.WAV</file>
