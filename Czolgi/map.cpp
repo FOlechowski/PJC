@@ -29,7 +29,7 @@ Map::Map(Player* player)
     ply->setFocus();
     ply->setPos(50,this->height()/2);
 
-    QPixmap bground_img(QString(":/img/tex/tex_green_01.png"));
+    QPixmap bground_img(QString(":/img/tex/tex_sand_01.png"));
 
     this->setBackgroundBrush(QBrush(bground_img));
 

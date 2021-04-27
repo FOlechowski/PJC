@@ -1,8 +1,10 @@
 #include "player.h"
+#include <math.h>
 
 Player::Player()
 {
     this->setPixmap(QPixmap(":/img/img/icon.png"));
+    this->setTransformOriginPoint(25,25);
 }
 
 void Player::setPlayerName(QString Pname)
@@ -15,19 +17,23 @@ void Player::keyPressEvent(QKeyEvent *event)
 {
     if(event->key() == Qt::Key_A)
     {
-        setPos(x()-10,y());
+        //setPos(x()-10,y());
+        angle -= 10;
+        setRotation(angle);
     }
     if(event->key() == Qt::Key_D)
     {
-        setPos(x()+10,y());
+        //setPos(x()+10,y());
+        angle += 10;
+        setRotation(angle);
     }
     if(event->key() == Qt::Key_W)
     {
-        setPos(x(),y()-10);
+        setPos(x()+(int)(cos(angle)*speed),y()-(int)(sin(angle)*speed));
     }
     if(event->key() == Qt::Key_S)
     {
-        setPos(x(),y()+10);
+        setPos(x()-(int)(cos(angle)*speed),y()+(int)(sin(angle)*speed));
     }
     qDebug()<<this->x()<<this->y();
 }
