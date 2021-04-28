@@ -91,12 +91,14 @@ void Game::create_player(QString name)
 void Game::draw_interface(Player* player)
 {
     map_view = new QGraphicsView(this);
+    map_view->setRenderHint(QPainter::HighQualityAntialiasing);
     map_view->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     map_view->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     map_view->setFixedSize(QSize(this->width(), this->height()-100));
     map_view->show();
 
     game_interfece = new QGraphicsView(this);
+    game_interfece->setRenderHint(QPainter::HighQualityAntialiasing);
     game_interfece->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     game_interfece->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     game_interfece->setFixedSize(QSize(this->width(), 100));

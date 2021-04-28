@@ -24,6 +24,9 @@ Map::Map(Player* player)
     QPixmap wt_tex(QString(":/img/tex/tex_water_01.png"));
     water->setBrush(QBrush(wt_tex));
 
+    Enemy *enemy = new Enemy();
+    enemy->setPos(enemy->initx,enemy->inity);
+
     ply = player;
     ply->setFlag(QGraphicsItem::ItemIsFocusable);
     ply->setFocus();
@@ -38,6 +41,7 @@ Map::Map(Player* player)
     this->addItem(wall1);
     this->addItem(player);
     this->addItem(wall2);
+    this->addItem(enemy);
 
     qDebug() << "cus sie popsulo, ale troche dziala";
 }

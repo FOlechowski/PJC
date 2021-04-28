@@ -27,13 +27,14 @@ void Player::keyPressEvent(QKeyEvent *event)
         angle += 10;
         setRotation(angle);
     }
+
     if(event->key() == Qt::Key_W)
     {
-        setPos(x()+(int)(cos(angle)*speed),y()-(int)(sin(angle)*speed));
+        setPos(x()+(qreal)(sin(angle)*speed),y()-(qreal)(cos(angle)*speed));
     }
     if(event->key() == Qt::Key_S)
     {
-        setPos(x()-(int)(cos(angle)*speed),y()+(int)(sin(angle)*speed));
+        setPos(x()-(qreal)(sin(angle)*speed),y()+(qreal)(cos(angle)*speed));
     }
     qDebug()<<this->x()<<this->y();
 }

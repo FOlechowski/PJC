@@ -9,6 +9,7 @@
 #include <QGraphicsRectItem>
 #include <QDebug>
 #include "player.h"
+#include "enemy.h"
 
 class Map: public QGraphicsScene
 {
