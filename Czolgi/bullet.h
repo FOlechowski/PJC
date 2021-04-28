@@ -3,7 +3,7 @@
 
 #include <QObject>
 
-class Bullet
+class Bullet: public QObject
 {
     Q_OBJECT
 public:

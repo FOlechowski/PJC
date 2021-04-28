@@ -19,7 +19,7 @@ public:
 private:
     QString name;
     int angle = 0;
-    int speed = 10;
+    int speed = 5;
 };
 
 #endif // PLAYER_H
