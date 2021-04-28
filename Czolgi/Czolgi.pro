@@ -12,6 +12,7 @@ CONFIG += c++11
 SOURCES += \
     button.cpp \
     credits.cpp \
+    enemy.cpp \
     game.cpp \
     main.cpp \
     map.cpp \
@@ -22,6 +23,7 @@ SOURCES += \
 HEADERS += \
     button.h \
     credits.h \
+    enemy.h \
     game.h \
     map.h \
     menu.h \
