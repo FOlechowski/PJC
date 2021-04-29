@@ -17,24 +17,24 @@ void Player::keyPressEvent(QKeyEvent *event)
 {
     if(event->key() == Qt::Key_A)
     {
-        //setPos(x()-10,y());
-        angle -= 10;
-        setRotation(angle);
+        setPos(x()-speed,y());
+        //angle -= 10;
+        //setRotation(angle);
     }
     if(event->key() == Qt::Key_D)
     {
-        //setPos(x()+10,y());
-        angle += 10;
-        setRotation(angle);
+        setPos(x()+speed,y());
+        //angle += 10;
+        //setRotation(angle);
     }
 
     if(event->key() == Qt::Key_W)
     {
-        setPos(x()+(qreal)(sin(angle)*speed),y()-(qreal)(cos(angle)*speed));
+        setPos(x(),y()-speed);
     }
     if(event->key() == Qt::Key_S)
     {
-        setPos(x()-(qreal)(sin(angle)*speed),y()+(qreal)(cos(angle)*speed));
+        setPos(x(),y()+speed);
     }
     qDebug()<<this->x()<<this->y();
 }

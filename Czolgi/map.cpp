@@ -24,13 +24,13 @@ Map::Map(Player* player)
     QPixmap wt_tex(QString(":/img/tex/tex_water_01.png"));
     water->setBrush(QBrush(wt_tex));
 
-    Enemy *enemy = new Enemy();
-    enemy->setPos(enemy->initx,enemy->inity);
-
     ply = player;
     ply->setFlag(QGraphicsItem::ItemIsFocusable);
     ply->setFocus();
-    ply->setPos(50,this->height()/2);
+    ply->setPos(50, this->height()/2);
+
+    Enemy *enemy = new Enemy(600,100, ply);
+    enemy->setPos(enemy->initx, enemy->inity);
 
     QPixmap bground_img(QString(":/img/tex/tex_sand_01.png"));
 
@@ -39,7 +39,7 @@ Map::Map(Player* player)
     this->addItem(water);
     this->addItem(bridge);
     this->addItem(wall1);
-    this->addItem(player);
+    this->addItem(ply);
     this->addItem(wall2);
     this->addItem(enemy);
 

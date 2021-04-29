@@ -1,15 +1,27 @@
 #include "enemy.h"
+#include <math.h>
 
-Enemy::Enemy()
+Enemy::Enemy(qreal x, qreal y,  Player* pl)
 {
+    initx = x;
+    inity = y;
+
+    player = pl;
+
     this->setPixmap(QPixmap(":/img/tex/tex_enemy_shadow_fd.png"));
     QTimer * timer = new QTimer();
     connect(timer, SIGNAL(timeout()),this,SLOT(move()));
-    timer->start(25);
+    timer->start(20);
 }
 
-void Enemy::patrol(qreal end)
+void Enemy::patrol_path(qreal end)
 {
+
+    bool is_inrange = check();
+
+    if(!is_inrange)
+    {
+
     if(y() >= end)
     {
         reverso = true;
@@ -27,10 +39,43 @@ void Enemy::patrol(qreal end)
 
     else
         setPos(x(),y()-speed);
+    }
+    else
+    {
+        hold_pos();
+    }
+}
 
+void Enemy::hold_pos()
+{
+
+}
+
+bool Enemy::check()
+{
+    int lenght = sqrt(pow(player->x() - this->x(),2)+pow(player->y() - this->y(),2));
+
+    if(lenght >= vrange)
+    {
+        return false;
+    }
+    else
+    {
+        return true;
+    }
+}
+
+void Enemy::set_command(char comm)
+{
+    command = comm;
 }
 
 void Enemy::move()
 {
-    patrol(500);
+    patrol_path(500);
+}
+
+void Enemy::attack()
+{
+
 }
