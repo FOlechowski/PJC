@@ -10,6 +10,8 @@
         <file>tex/tex_enemy_01.png</file>
         <file>tex/tex_enemy_shadow_bck.png</file>
         <file>tex/tex_enemy_shadow_fd.png</file>
+        <file>tex/tex_player_01.png</file>
+        <file>tex/tex_bullet_01.png</file>
     </qresource>
     <qresource prefix="/sound">
         <file>snd/Intro3.WAV</file>

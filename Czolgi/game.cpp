@@ -84,7 +84,7 @@ Game::Game(Menu* mn)
 
 void Game::create_player(QString name)
 {
-    player = new Player;
+    player = new Player();
     player->setPlayerName(name);
 }
 

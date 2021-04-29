@@ -10,15 +10,6 @@ Map::Map(Player* player)
     QPixmap br_tex(QString(":/img/tex/tex_wood_bridge_01.png"));
     bridge->setBrush(QBrush(br_tex));
 
-    wall1 = new QGraphicsRectItem;
-    wall1->setRect(this->width()/2-150, this->height()/2-30, 400, 30);
-    QPixmap w1_tex(QString(":/img/tex/tex_sand_01.png"));
-    wall1->setBrush(QBrush(w1_tex));
-
-    wall2 = new QGraphicsRectItem;
-    wall2->setRect(this->width()/2-150, this->height()/2+80, 400, 30);
-    wall2->setBrush(QBrush(w1_tex));
-
     water = new QGraphicsRectItem;
     water->setRect(this->width()/2, 0, 100,this->height());
     QPixmap wt_tex(QString(":/img/tex/tex_water_01.png"));
@@ -29,7 +20,7 @@ Map::Map(Player* player)
     ply->setFocus();
     ply->setPos(50, this->height()/2);
 
-    Enemy *enemy = new Enemy(600,100, ply);
+    Enemy *enemy = new Enemy(750,100, ply);
     enemy->setPos(enemy->initx, enemy->inity);
 
     QPixmap bground_img(QString(":/img/tex/tex_sand_01.png"));
@@ -38,10 +29,8 @@ Map::Map(Player* player)
 
     this->addItem(water);
     this->addItem(bridge);
-    this->addItem(wall1);
-    this->addItem(ply);
-    this->addItem(wall2);
     this->addItem(enemy);
+    this->addItem(ply);
 
     qDebug() << "cus sie popsulo, ale troche dziala";
 }
