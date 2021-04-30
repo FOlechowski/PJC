@@ -7,9 +7,13 @@
 #include <QKeyEvent>
 #include <QGraphicsScene>
 #include <QDebug>
+#include <QObject>
+#include <QTimer>
 
-class Player : public QGraphicsPixmapItem
+class Player : public QObject, public QGraphicsPixmapItem
 {
+    Q_OBJECT
+
 public:
     Player();
 
@@ -18,9 +22,16 @@ public:
 
     void keyPressEvent(QKeyEvent * event);
 
+public slots:
+    void reload();
+
 private:
 
+    QTimer *timer = new QTimer;
+
     int bullets = 50;
+
+    bool is_loading = false;
 
     QString name;
     qreal angle = 0;

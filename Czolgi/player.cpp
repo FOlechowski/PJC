@@ -2,6 +2,7 @@
 #include <math.h>
 #include "bullet.h"
 
+
 Player::Player()
 {
     //sc = scene;
@@ -17,8 +18,14 @@ void Player::setPlayerName(QString Pname)
 
 void Player::shot()
 {
-    if(bullets)
+    if(bullets && !is_loading)
+    {
+        connect(timer, SIGNAL(timeout()),this,SLOT(reload()));
+        timer->start(2000);
+
+        is_loading = true;
         bullets = bullets - 1;
+    }
 }
 
 void Player::keyPressEvent(QKeyEvent *event)
@@ -49,7 +56,7 @@ void Player::keyPressEvent(QKeyEvent *event)
 
     if(event->key() == Qt::Key_Space)
     {
-        if(bullets)
+        if(bullets && !is_loading)
         {
             Bullet *bullet = new Bullet();
             bullet->setPos(x()+50,y()+32);
@@ -63,4 +70,10 @@ void Player::keyPressEvent(QKeyEvent *event)
         }
     }
     qDebug()<<this->x()<<this->y();
+}
+
+void Player::reload()
+{
+    timer->stop();
+    is_loading = false;
 }
