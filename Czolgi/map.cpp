@@ -23,6 +23,9 @@ Map::Map(Player* player)
     Enemy *enemy = new Enemy(750,100, ply);
     enemy->setPos(enemy->initx, enemy->inity);
 
+    Enemy *enemy2 = new Enemy(850,100, ply);
+    enemy2->setPos(enemy2->initx, enemy2->inity);
+
     QPixmap bground_img(QString(":/img/tex/tex_sand_01.png"));
 
     this->setBackgroundBrush(QBrush(bground_img));
@@ -30,6 +33,7 @@ Map::Map(Player* player)
     this->addItem(water);
     this->addItem(bridge);
     this->addItem(enemy);
+    this->addItem(enemy2);
     this->addItem(ply);
 
     qDebug() << "cus sie popsulo, ale troche dziala";
