@@ -7,14 +7,14 @@ Tank::Tank()
 
 }
 
-void Tank::shot(qreal dx, qreal dy)
+void Tank::shot(float angle)
 {
     if(!is_loading)
     {
         timer_reload->start(2000);
         is_loading = true;
-        Bullet *bullet = new Bullet();
-        bullet->setPos(x()+100,y()+32);
+        Bullet *bullet = new Bullet(angle, this);
+        bullet->setPos(x()+50,y()+50);
         scene()->addItem(bullet);
 
     }

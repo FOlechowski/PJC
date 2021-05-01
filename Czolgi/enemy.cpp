@@ -1,5 +1,5 @@
 #include "enemy.h"
-#include <math.h>
+#include <cmath>
 
 Enemy::Enemy(qreal x, qreal y,  Player* pl)
 {
@@ -14,7 +14,7 @@ Enemy::Enemy(qreal x, qreal y,  Player* pl)
     connect(timer_reload, SIGNAL(timeout()),this,SLOT(reload()));
     timer_move->start(30);
 
-    speed = 1;
+    speed = 2;
     view_range = 300;
 }
 
@@ -49,7 +49,15 @@ void Enemy::patrol_path(qreal end)
     else
     {
         hold_pos();
-        shot(10,10);
+
+        int dx = (player->x()-50) - (this->x()-50);
+        int dy = (player->y()-50) - (this->y()-50);
+
+        float angle = atan2(dy,dx);
+
+        qDebug()<<angle;
+        //qDebug()<<dy;
+        shot(angle);
     }
 }
 

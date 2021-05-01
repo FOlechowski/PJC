@@ -1,5 +1,5 @@
 #include "player.h"
-#include <math.h>
+#include <cmath>
 #include "bullet.h"
 
 
@@ -61,8 +61,8 @@ void Player::keyPressEvent(QKeyEvent *event)
     {
         if(bullets && !is_loading)
         {
-            Bullet *bullet = new Bullet();
-            bullet->setPos(x()+100,y()+32);
+            Bullet *bullet = new Bullet(0, this);
+            bullet->setPos(x()+50,y()+35);
             scene()->addItem(bullet);
             shot();
         }

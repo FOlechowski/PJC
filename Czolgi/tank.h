@@ -15,7 +15,7 @@ public:
     QTimer *timer_reload = new QTimer;
     bool is_loading = false;
 
-    void shot(qreal dx, qreal dy);
+    void shot(float angle);
 
     qreal speed;
     qreal view_range;
