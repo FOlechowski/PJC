@@ -19,7 +19,8 @@ SOURCES += \
     map.cpp \
     menu.cpp \
     player.cpp \
-    quitwindow.cpp
+    quitwindow.cpp \
+    tank.cpp
 
 HEADERS += \
     bullet.h \
@@ -30,7 +31,8 @@ HEADERS += \
     map.h \
     menu.h \
     player.h \
-    quitwindow.h
+    quitwindow.h \
+    tank.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

@@ -23,7 +23,7 @@ Map::Map(Player* player)
     Enemy *enemy = new Enemy(750,100, ply);
     enemy->setPos(enemy->initx, enemy->inity);
 
-    Enemy *enemy2 = new Enemy(850,100, ply);
+    Enemy *enemy2 = new Enemy(350,200, ply);
     enemy2->setPos(enemy2->initx, enemy2->inity);
 
     QPixmap bground_img(QString(":/img/tex/tex_sand_01.png"));

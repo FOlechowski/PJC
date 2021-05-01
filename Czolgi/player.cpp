@@ -8,6 +8,10 @@ Player::Player()
     //sc = scene;
     this->setPixmap(QPixmap(":/img/tex/tex_player_01.png"));
     this->setTransformOriginPoint(25,25);
+
+    connect(timer_reload, SIGNAL(timeout()),this,SLOT(reload()));
+
+    speed = 5;
 }
 
 void Player::setPlayerName(QString Pname)
@@ -20,8 +24,7 @@ void Player::shot()
 {
     if(bullets && !is_loading)
     {
-        connect(timer, SIGNAL(timeout()),this,SLOT(reload()));
-        timer->start(2000);
+        timer_reload->start(2000);
 
         is_loading = true;
         bullets = bullets - 1;
@@ -59,7 +62,7 @@ void Player::keyPressEvent(QKeyEvent *event)
         if(bullets && !is_loading)
         {
             Bullet *bullet = new Bullet();
-            bullet->setPos(x()+50,y()+32);
+            bullet->setPos(x()+100,y()+32);
             scene()->addItem(bullet);
             shot();
         }
@@ -72,8 +75,3 @@ void Player::keyPressEvent(QKeyEvent *event)
     qDebug()<<this->x()<<this->y();
 }
 
-void Player::reload()
-{
-    timer->stop();
-    is_loading = false;
-}

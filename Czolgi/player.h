@@ -1,16 +1,12 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
-#include <QGraphicsPixmapItem>
-#include <QGraphicsRectItem>
-#include <QGraphicsItem>
 #include <QKeyEvent>
-#include <QGraphicsScene>
 #include <QDebug>
 #include <QObject>
-#include <QTimer>
+#include "tank.h"
 
-class Player : public QObject, public QGraphicsPixmapItem
+class Player : public Tank
 {
     Q_OBJECT
 
@@ -23,19 +19,13 @@ public:
     void keyPressEvent(QKeyEvent * event);
 
 public slots:
-    void reload();
 
 private:
 
-    QTimer *timer = new QTimer;
-
     int bullets = 50;
-
-    bool is_loading = false;
 
     QString name;
     qreal angle = 0;
-    qreal speed = 5;
 };
 
 #endif // PLAYER_H

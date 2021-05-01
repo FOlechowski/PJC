@@ -5,7 +5,8 @@
 #include <QGraphicsPixmapItem>
 #include <QTimer>
 #include <QDebug>
-#include <player.h>
+#include "player.h"
+#include "tank.h"
 
 #define HOLD 'h'
 #define GUARD 'g'
@@ -18,7 +19,7 @@ struct point
   point *next;
 };
 
-class Enemy : public QObject, public QGraphicsPixmapItem
+class Enemy : public Tank
 {
     Q_OBJECT
 public:
@@ -40,8 +41,6 @@ public slots:
     void attack();
 
 private:
-    qreal speed = 2;
-    qreal vrange = 250;
     Player *player;
     char command;
 

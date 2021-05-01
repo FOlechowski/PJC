@@ -9,9 +9,13 @@ Enemy::Enemy(qreal x, qreal y,  Player* pl)
     player = pl;
 
     this->setPixmap(QPixmap(":/img/tex/tex_enemy_shadow_fd.png"));
-    QTimer * timer = new QTimer();
-    connect(timer, SIGNAL(timeout()),this,SLOT(move()));
-    timer->start(20);
+    QTimer * timer_move = new QTimer();
+    connect(timer_move, SIGNAL(timeout()),this,SLOT(move()));
+    connect(timer_reload, SIGNAL(timeout()),this,SLOT(reload()));
+    timer_move->start(30);
+
+    speed = 1;
+    view_range = 300;
 }
 
 void Enemy::patrol_path(qreal end)
@@ -21,6 +25,7 @@ void Enemy::patrol_path(qreal end)
 
     if(!is_inrange)
     {
+
 
         if(y() >= end)
         {
@@ -44,6 +49,7 @@ void Enemy::patrol_path(qreal end)
     else
     {
         hold_pos();
+        shot(10,10);
     }
 }
 
@@ -56,7 +62,7 @@ bool Enemy::check()
 {
     int lenght = sqrt(pow(player->x() - this->x(),2)+pow(player->y() - this->y(),2));
 
-    if(lenght >= vrange)
+    if(lenght >= view_range)
     {
         return false;
     }
