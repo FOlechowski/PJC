@@ -1,7 +1,9 @@
 #include "map.h"
 
-Map::Map(Player* player)
+Map::Map(Player* player, int diff)
 {
+    difficult = diff;
+
     this->setSceneRect(0, 0, ms_width, ms_height);
 
     bridge = new QGraphicsRectItem;
@@ -20,11 +22,17 @@ Map::Map(Player* player)
     ply->setFocus();
     ply->setPos(50, this->height()/2);
 
-    Enemy *enemy = new Enemy(750,100, ply);
+    Medium *enemy = new Medium(750,100, difficult, ply);
     enemy->setPos(enemy->initx, enemy->inity);
+    enemy->setCommand(VERT);
 
-    Enemy *enemy2 = new Enemy(350,200, ply);
+    Medium *enemy2 = new Medium(350,200, difficult, ply);
     enemy2->setPos(enemy2->initx, enemy2->inity);
+    enemy2->setCommand(VERT);
+
+    Medium *enemy3= new Medium(50,600, difficult, ply);
+    enemy3->setPos(enemy3->initx, enemy3->inity);
+    enemy3->setCommand(HORIZON);
 
     QPixmap bground_img(QString(":/img/tex/tex_sand_01.png"));
 
@@ -34,9 +42,10 @@ Map::Map(Player* player)
     this->addItem(bridge);
     this->addItem(enemy);
     this->addItem(enemy2);
+    this->addItem(enemy3);
     this->addItem(ply);
 
-    qDebug() << "cus sie popsulo, ale troche dziala";
+    qDebug() << difficult;
 }
 
 Map::~Map()

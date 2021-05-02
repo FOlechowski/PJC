@@ -7,7 +7,7 @@
 #include <QGraphicsScene>
 #include <QDebug>
 #include <QList>
-#include "enemy.h"
+#include "medium.h"
 #include "cmath"
 
 Bullet::Bullet(float ang, Tank* tank)
@@ -25,7 +25,6 @@ Bullet::Bullet(float ang, Tank* tank)
     connect(timer, SIGNAL(timeout()),this,SLOT(move()));        //connect to the slot that will emitate the smooth movement
     timer->start(10);                                           //start timer
 
-
 }
 
 void Bullet::move()
@@ -35,13 +34,20 @@ void Bullet::move()
 
     for (int i = 0, n = colliding_items.size(); i < n; i++)                                     //check the whole list
     {
-        if(typeid (*(colliding_items[i])) == typeid (Enemy) && (colliding_items[i] != creator)) //if type id is matching and the bullet didn't hit the creators
+        bool enemy = false;
+
+        if(typeid (*(colliding_items[i])) == typeid (Medium))                                   //check if enemy was hitted
+        {
+            enemy = true;
+        }
+
+        if(enemy && (colliding_items[i] != creator))                                            //if type id is matching and the bullet didn't hit the creators
         {
             hitted = dynamic_cast<Tank*>(colliding_items[i]);                                   //safe pointer to the hitted element
 
-            hitted->hp = hitted->hp - creator->dmg * hitted->armor;                             //calculate damage
+            hitted->hp = hitted->hp - (creator->dmg - (hitted->armor*creator->dmg));            //calculate damage
 
-            if(!(hitted->hp))                                                                   //if hp is over
+            if(hitted->hp <= 0)                                                                   //if hp is over
             {
                 scene()->removeItem(hitted);                                                    //remove bullet and hited item
                 scene()->removeItem(this);

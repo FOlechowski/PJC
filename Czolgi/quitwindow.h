@@ -33,7 +33,6 @@ private:
     QGraphicsView* dialog_view;
     QGraphicsScene* dialog_scene;
     QGraphicsTextItem* text;
-
 };
 
 #endif // QUITWINDOW_H

@@ -6,35 +6,35 @@
 #include "player.h"
 #include "tank.h"
 
-#define HOLD 'h'
-#define GUARD 'g'
+#define VERT 'v'
+#define HORIZON 'h'
 
 class Enemy : public Tank
 {
     Q_OBJECT
 public:
-    Enemy(qreal x, qreal y, Player* pl = NULL);
 
-    void patrol_path(qreal end);
-    void hold_pos();
+    Enemy();
+
+    void patrolPathVerticaly(qreal end);
+    void patrolPathHorizontaly(qreal end);
     bool check();
-    void set_command(char comm);
+    void setCommand(char comm);
 
     qreal initx;
     qreal inity;
 
+public slots:
+
+protected:
+
     qreal player_x;
     qreal player_y;
 
-public slots:
-    void move();
-    void attack();
-
-private:
-    Player *player;
     char command;
-
+    Player *player;
     bool reverso = false;
+    bool aim = false;
 };
 
 #endif // ENEMY_H

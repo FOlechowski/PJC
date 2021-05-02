@@ -12,7 +12,11 @@
 #include "player.h"
 
 
-enum difficulty{easy, medium, hard};
+enum difficulty
+{easy,
+medium,
+hard};
+
 
 class Menu;
 
@@ -25,15 +29,14 @@ public:
     void create_player(QString name);
     void draw_interface(Player* player);
 
+    int diffic = 0;
+
 public slots:
     void set_baron();
     void set_kabaczek();
     void set_fiolet();
 
 private:
-
-    int diffic = 0;
-
     Menu* menu;
     Player* player;
     Map* map;

@@ -17,6 +17,7 @@ SOURCES += \
     game.cpp \
     main.cpp \
     map.cpp \
+    medium.cpp \
     menu.cpp \
     player.cpp \
     quitwindow.cpp \
@@ -29,6 +30,7 @@ HEADERS += \
     enemy.h \
     game.h \
     map.h \
+    medium.h \
     menu.h \
     player.h \
     quitwindow.h \

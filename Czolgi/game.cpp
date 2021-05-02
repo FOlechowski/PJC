@@ -86,7 +86,7 @@ void Game::create_player(QString name)
 {
     player = new Player();
     player->setPlayerName(name);
-    player->dmg = 100;                                  //remove it later only educational purposes
+    player->dmg = 120;                                  //remove it later only educational purposes
 }
 
 void Game::draw_interface(Player* player)
@@ -106,7 +106,7 @@ void Game::draw_interface(Player* player)
     game_interfece->move(0,this->height()-100);
     game_interfece->show();
 
-    map = new Map(player);
+    map = new Map(player,this->diffic);
 
     map_view->setScene(map);
 }

@@ -1,7 +1,6 @@
 #ifndef MAP_H
 #define MAP_H
 
-
 #include <QGraphicsView>
 #include <QGraphicsScene>
 #include <QMediaPlayer>
@@ -9,17 +8,19 @@
 #include <QGraphicsRectItem>
 #include <QDebug>
 #include "player.h"
-#include "enemy.h"
+#include "medium.h"
 
 class Map: public QGraphicsScene
 {
 
 public:
-    Map(Player* player);
+    Map(Player* player, int diff);
     ~Map();
 
     int ms_width = 1000;
     int ms_height = 800;
+
+    int difficult = 0;
 
 public slots:
 

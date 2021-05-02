@@ -15,7 +15,6 @@ public:
 
     void setPlayerName(QString Pname);
     void shot();
-
     void keyPressEvent(QKeyEvent * event);
 
 public slots:

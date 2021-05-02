@@ -20,7 +20,7 @@ Menu::Menu(QWidget *parent) :QGraphicsView(parent)
 void Menu::play_music()
 {
     //Intro sound
-    intro = new QMediaPlayer;
+    QMediaPlayer* intro = new QMediaPlayer;
     intro->setMedia(QUrl("qrc:/sound/snd/Intro3.WAV"));
     //intro->play();
 }
@@ -117,7 +117,6 @@ Menu::~Menu()
     delete title;
     delete ver_inf;
 
-    delete intro;
     delete cr;
     delete quit;
 }

@@ -43,11 +43,6 @@ public slots:
     void start_game();
 
 private:
-
-
-
-    QMediaPlayer* intro;
-
     QGraphicsScene* menu;
     QGraphicsTextItem* title;
     QGraphicsTextItem* ver_inf;
@@ -56,6 +51,7 @@ private:
     Button* load_game;
     Button* quit_butt;
     Button* info;
+
     QuitWindow* quit;
     Credits* cr;
     Game* game;
