@@ -10,11 +10,15 @@ CONFIG += c++11
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    boss.cpp \
     bullet.cpp \
     button.cpp \
     credits.cpp \
+    destroyer.cpp \
     enemy.cpp \
     game.cpp \
+    heavy.cpp \
+    light.cpp \
     main.cpp \
     map.cpp \
     medium.cpp \
@@ -24,11 +28,15 @@ SOURCES += \
     tank.cpp
 
 HEADERS += \
+    boss.h \
     bullet.h \
     button.h \
     credits.h \
+    destroyer.h \
     enemy.h \
     game.h \
+    heavy.h \
+    light.h \
     map.h \
     medium.h \
     menu.h \
