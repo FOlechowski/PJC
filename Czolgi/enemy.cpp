@@ -55,8 +55,6 @@ void Enemy::patrol_path(qreal end)
 
         float angle = atan2(dy,dx);
 
-        qDebug()<<angle;
-        //qDebug()<<dy;
         shot(angle);
     }
 }

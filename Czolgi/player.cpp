@@ -72,6 +72,6 @@ void Player::keyPressEvent(QKeyEvent *event)
             qDebug()<<"Koniec pocisków RAMBO!!!";
         }
     }
-    qDebug()<<this->x()<<this->y();
+    //qDebug()<<this->x()<<this->y();
 }
 

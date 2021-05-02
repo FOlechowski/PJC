@@ -11,14 +11,6 @@
 #define HOLD 'h'
 #define GUARD 'g'
 
-
-struct point
-{
-  qreal x;
-  qreal y;
-  point *next;
-};
-
 class Enemy : public Tank
 {
     Q_OBJECT
