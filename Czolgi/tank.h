@@ -16,9 +16,15 @@ public:
     bool is_loading = false;
 
     void shot(float angle);
+    void move();
 
     qreal speed;
     qreal view_range;
+
+    int hp;
+    int dmg;
+
+    double armor;
 
 public slots:
     void reload();

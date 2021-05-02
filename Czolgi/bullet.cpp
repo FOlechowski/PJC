@@ -10,7 +10,6 @@
 #include "enemy.h"
 #include "cmath"
 
-
 Bullet::Bullet(float ang, Tank* tank)
 {
     creator = tank;                                             //save the pointer of the object that created bullet
@@ -38,12 +37,23 @@ void Bullet::move()
     {
         if(typeid (*(colliding_items[i])) == typeid (Enemy) && (colliding_items[i] != creator)) //if type id is matching and the bullet didn't hit the creators
         {
-            scene()->removeItem(colliding_items[i]);                                            //remove bullet and hited item
-            scene()->removeItem(this);
+            hitted = dynamic_cast<Tank*>(colliding_items[i]);                                   //safe pointer to the hitted element
 
-            delete colliding_items[i];
-            delete this;
-            return;                                                                             //end the function
+            hitted->hp = hitted->hp - creator->dmg * hitted->armor;                             //calculate damage
+
+            if(!(hitted->hp))                                                                   //if hp is over
+            {
+                scene()->removeItem(hitted);                                                    //remove bullet and hited item
+                scene()->removeItem(this);
+
+                delete colliding_items[i];
+                delete this;
+                return;                                                                         //end the function
+            }
+             scene()->removeItem(this);                                                         //remove only bullet
+             delete this;
+             qDebug()<<hitted->hp;
+             return;                                                                            //end the function
         }
 
 
@@ -61,11 +71,11 @@ void Bullet::move()
         }
     }
 
-    setPos(x()+speed*cos(angle), y()+speed*sin(angle));                                             //set position depending on the angle between the player and enemy
+    setPos(x()+speed*cos(angle), y()+speed*sin(angle));                                                         //set position depending on the angle between the player and enemy
 
-    if(pos().x() > scene()->width() || pos().x()<0 || pos().y() > scene()->height() || pos().y() < 0 )                  //if bullet is out of the scene
+    if(pos().x() > scene()->width() || pos().x()<0 || pos().y() > scene()->height() || pos().y() < 0 )          //if bullet is out of the scene
     {
-        scene()->removeItem(this);                                                                                      //remove it from the scene and memory
+        scene()->removeItem(this);                                                                              //remove it from the scene and memory
         delete this;
     }
 

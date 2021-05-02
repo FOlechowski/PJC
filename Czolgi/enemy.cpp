@@ -16,6 +16,11 @@ Enemy::Enemy(qreal x, qreal y,  Player* pl)
 
     speed = 2;
     view_range = 300;
+
+    hp = 200;
+    armor = 0.5;
+    dmg = 50;
+
 }
 
 void Enemy::patrol_path(qreal end)

@@ -20,6 +20,11 @@ void Tank::shot(float angle)
     }
 }
 
+void Tank::move()
+{
+
+}
+
 void Tank::reload()
 {
     timer_reload->stop();

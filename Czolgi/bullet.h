@@ -19,6 +19,7 @@ private:
     qreal speed = 5;
     float angle;
     Tank* creator;
+    Tank* hitted;
 };
 
 #endif // BULLET_H

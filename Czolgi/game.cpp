@@ -86,6 +86,7 @@ void Game::create_player(QString name)
 {
     player = new Player();
     player->setPlayerName(name);
+    player->dmg = 100;                                  //remove it later only educational purposes
 }
 
 void Game::draw_interface(Player* player)

@@ -2,8 +2,6 @@
 #define ENEMY_H
 
 #include <QObject>
-#include <QGraphicsPixmapItem>
-#include <QTimer>
 #include <QDebug>
 #include "player.h"
 #include "tank.h"
