@@ -20,7 +20,7 @@ Map::Map(Player* player, int diff)
     ply = player;
     ply->setFlag(QGraphicsItem::ItemIsFocusable);
     ply->setFocus();
-    ply->setPos(50, this->height()/2);
+    ply->setPos(50, this->height()/2-200);
 
     Medium *enemy = new Medium(750,100, difficult, ply);
     enemy->setPos(enemy->initx, enemy->inity);
@@ -30,9 +30,9 @@ Map::Map(Player* player, int diff)
     enemy2->setPos(enemy2->initx, enemy2->inity);
     enemy2->setCommand(VERT);
 
-    Medium *enemy3= new Medium(50,600, difficult, ply);
-    enemy3->setPos(enemy3->initx, enemy3->inity);
-    enemy3->setCommand(HORIZON);
+    //Medium *enemy3= new Medium(50,600, difficult, ply);
+    //enemy3->setPos(enemy3->initx, enemy3->inity);
+    //enemy3->setCommand(HORIZON);
 
     QPixmap bground_img(QString(":/img/tex/tex_sand_01.png"));
 
@@ -42,7 +42,7 @@ Map::Map(Player* player, int diff)
     this->addItem(bridge);
     this->addItem(enemy);
     this->addItem(enemy2);
-    this->addItem(enemy3);
+    //this->addItem(enemy3);
     this->addItem(ply);
 
     qDebug() << difficult;

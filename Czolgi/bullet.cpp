@@ -56,7 +56,7 @@ void Bullet::move()
                 delete this;
                 return;                                                                         //end the function
             }
-             scene()->removeItem(this);                                                         //remove only bullet
+             scene()->removeItem(this);                                                         //remove only bullet if hp is not over
              delete this;
              qDebug()<<hitted->hp;
              return;                                                                            //end the function

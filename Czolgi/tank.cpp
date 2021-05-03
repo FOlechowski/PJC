@@ -1,15 +1,16 @@
 #include "tank.h"
 #include "bullet.h"
 #include <QGraphicsScene>
+#include <QDebug>
+#include <cmath>
 
 Tank::Tank()
 {
-
 }
 
 void Tank::shot(float angle)
 {
-    if(!is_loading)
+    if(!is_loading && !is_rotating)
     {
         timer_reload->start(reload_time);
         is_loading = true;
@@ -22,6 +23,11 @@ void Tank::shot(float angle)
 void Tank::move(qreal dx, qreal dy)
 {
     setPos(x()+dx,y()+dy);
+}
+
+void Tank::setTexture(int angle)
+{
+
 }
 
 void Tank::reload()

@@ -19,6 +19,7 @@ public:
     void patrolPathVerticaly(qreal end);
     void patrolPathHorizontaly(qreal end);
     bool check();
+    void aim(float angle);
     void setCommand(char comm);
 
     qreal initx;
@@ -34,7 +35,6 @@ protected:
     char command;
     Player *player;
     bool reverso = false;
-    bool aim = false;
 };
 
 #endif // ENEMY_H

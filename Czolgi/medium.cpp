@@ -8,7 +8,7 @@ Medium::Medium(qreal x, qreal y, int dif, Player* pl)
 
     player = pl;
 
-    this->setPixmap(QPixmap(":/img/tex/tex_enemy_shadow_fd.png"));
+    //this->setPixmap(QPixmap(":/img/tex/tex_enemy_shadow_fd.png"));
     QTimer * timer_move = new QTimer();
     connect(timer_move, SIGNAL(timeout()),this,SLOT(move()));
     connect(timer_reload, SIGNAL(timeout()),this,SLOT(reload()));
@@ -54,8 +54,10 @@ void Medium::move()
 
         float angle = atan2(dy,dx);
 
+        aim(angle);
         shot(angle);
     }
+
     else
     {
         switch(command)
@@ -70,6 +72,7 @@ void Medium::move()
 
             case HORIZON:
                 Enemy::patrolPathHorizontaly(initx+300);
+                this->setPixmap(QPixmap(":/img/tex/arrow_0.png"));
             break;
 
             default:
