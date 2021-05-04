@@ -9,11 +9,9 @@ class Medium : public Enemy
     Q_OBJECT
 public:
     Medium(qreal x, qreal y, int dif, Player* pl = NULL);
-
     void setPath();
-
 public slots:
-    void move();
+
 };
 
 #endif // MEDIUM_H

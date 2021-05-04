@@ -1,6 +1,6 @@
 #include "boss.h"
 
-Boss::Boss()
+Boss::Boss(qreal x, qreal y, int dif, Player* pl)
 {
 
 }

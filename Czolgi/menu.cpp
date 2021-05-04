@@ -13,7 +13,6 @@ Menu::Menu(QWidget *parent) :QGraphicsView(parent)
 
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);   
-
 }
 
 
