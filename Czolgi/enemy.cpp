@@ -23,7 +23,7 @@ void Enemy::patrolPathHorizontaly(qreal end)
 
     if(!is_rotating)
     {
-        if(!reverso)
+        if(reverso)
         {
             if(rotate_angle < 0)
                 rotate_angle = rotate_angle +15;
@@ -85,17 +85,26 @@ void Enemy::patrolPathVerticaly(qreal end)
     {
         if(reverso)
         {
-            if(rotate_angle < -90)
-                rotate_angle = rotate_angle +15;
-            else if(rotate_angle > -90)
+            if(rotate_angle > -90 && rotate_angle < 90)
                 rotate_angle = rotate_angle -15;
+
+            else if(rotate_angle < -90 || rotate_angle > 90)
+            {
+                rotate_angle = rotate_angle +15;
+                if(rotate_angle > 180)
+                    rotate_angle = -165;
+            }
         }
 
         else
         {
-            if(rotate_angle > 90)
+            if(rotate_angle > 90 || rotate_angle < -90)
+            {
                 rotate_angle = rotate_angle -15;
-            else if(rotate_angle < 90)
+                if(rotate_angle < -165)
+                    rotate_angle = 180;
+            }
+            else if(rotate_angle < 90 && rotate_angle > -90)
                 rotate_angle = rotate_angle +15;
         }
     }
