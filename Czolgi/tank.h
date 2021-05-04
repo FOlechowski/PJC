@@ -29,7 +29,6 @@ public:
     bool is_loading = false;
     bool is_rotating = false;
 
-    int init_angle = 0;
     int rotate_angle = 0;
 
 public slots:

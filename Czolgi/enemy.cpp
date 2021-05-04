@@ -12,9 +12,6 @@ Enemy::Enemy()                                              //empty default cons
 
 void Enemy::patrolPathHorizontaly(qreal end)
 {
-    init_angle = 0;                                         //set init angle
-    rotate_angle = init_angle;                              //store the init value
-
     if(x() >= end)                                          //check if the paths end
     {
         reverso = true;                                     //set the flag
@@ -34,9 +31,6 @@ void Enemy::patrolPathHorizontaly(qreal end)
 
 void Enemy::patrolPathVerticaly(qreal end)
 {
-    init_angle = 90;                                        //set init angle
-    rotate_angle = init_angle;                              //store the init value
-
     if(y() >= end)                                          //check if the paths end
     {
         reverso = true;                                     //set flag

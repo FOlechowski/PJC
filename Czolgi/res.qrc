@@ -13,18 +13,18 @@
         <file>tex/tex_player_01.png</file>
         <file>tex/tex_bullet_01.png</file>
         <file>tex/arrow_0.png</file>
-        <file>tex/arrow_15.png</file>
         <file>tex/arrow_-15.png</file>
-        <file>tex/arrow_30.png</file>
+        <file>tex/arrow_15.png</file>
         <file>tex/arrow_-30.png</file>
-        <file>tex/arrow_45.png</file>
+        <file>tex/arrow_30.png</file>
         <file>tex/arrow_-45.png</file>
-        <file>tex/arrow_60.png</file>
+        <file>tex/arrow_45.png</file>
         <file>tex/arrow_-60.png</file>
-        <file>tex/arrow_75.png</file>
+        <file>tex/arrow_60.png</file>
         <file>tex/arrow_-75.png</file>
-        <file>tex/arrow_90.png</file>
+        <file>tex/arrow_75.png</file>
         <file>tex/arrow_-90.png</file>
+        <file>tex/arrow_90.png</file>
     </qresource>
     <qresource prefix="/sound">
         <file>snd/Intro3.WAV</file>
