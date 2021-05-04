@@ -94,19 +94,11 @@ void Medium::move()
         switch(command)
         {
             case VERT:
-                rotate_angle = 90;
                 Enemy::patrolPathVerticaly(inity+300);
-                if(reverso)
-                {
-                    rotate_angle = -90;
-                }
-                else
-                {
-                    rotate_angle = 90;
-                }
             break;
 
             case HORIZON:
+
                 Enemy::patrolPathHorizontaly(initx+300);
             break;
 

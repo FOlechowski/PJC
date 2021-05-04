@@ -29,7 +29,7 @@ public:
     bool is_loading = false;
     bool is_rotating = false;
 
-    int rotate_angle = 0;
+    int rotate_angle = -1000;
 
 public slots:
     void reload();

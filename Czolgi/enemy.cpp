@@ -12,8 +12,8 @@ Enemy::Enemy()                                              //empty default cons
 
 void Enemy::patrolPathHorizontaly(qreal end)
 {
-
-    rotate_angle = 0;                                       //store the init value
+    if(rotate_angle == -1000)
+        rotate_angle = 0;
 
     if(x() >= end)                                          //check if the paths end
     {
@@ -34,24 +34,61 @@ void Enemy::patrolPathHorizontaly(qreal end)
 
 void Enemy::patrolPathVerticaly(qreal end)
 {
+    if(rotate_angle == -1000)
+        rotate_angle = 90;
 
-    rotate_angle = 90;                                      //store the init value
+    if(!is_rotating && (rotate_angle!=90 && rotate_angle!=-90))
+    {
+        if(reverso)
+        {
+            if(rotate_angle < -90)
+                rotate_angle = rotate_angle +15;
+            else
+                rotate_angle = rotate_angle -15;
+        }
 
+        else
+        {
+            if(rotate_angle > 90)
+                rotate_angle = rotate_angle -15;
+            else
+                rotate_angle = rotate_angle +15;
+        }
+    }
 
     if(y() >= end)                                          //check if the paths end
     {
-        reverso = true;                                     //set flag
+        is_rotating = true;
+
+        if(rotate_angle != (-90))
+        {
+            rotate_angle = rotate_angle - 15;
+        }
+        else
+        {
+            reverso = true;                                     //set flag
+            is_rotating = false;
+        }
     }
 
-    if((y()-speed)<= inity)                                 //check if start of the path
+    if((y()-speed)<= inity)                                     //check if start of the path
     {
-        reverso = false;                                    //reset flag
+        is_rotating = true;
+        if(rotate_angle != 90)
+        {
+            rotate_angle = rotate_angle + 15;
+        }
+        else
+        {
+            reverso = false;                                     //set flag
+            is_rotating = false;                                 //reset flag
+        }
     }
 
-    if(!reverso)                                            //determine the direction of movement
-        Tank::move(0,speed);                                //move tank to the next point
+    if(!reverso && !is_rotating)                                //determine the direction of movement
+        Tank::move(0,speed);                                    //move tank to the next point
 
-    else
+    else if(reverso && !is_rotating)
         Tank::move(0,-speed);
 }
 
