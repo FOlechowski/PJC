@@ -7,7 +7,6 @@ Player::Player()
 {
     //sc = scene;
     this->setPixmap(QPixmap(":/img/tex/tex_player_01.png"));
-    this->setTransformOriginPoint(25,25);
 
     connect(timer_reload, SIGNAL(timeout()),this,SLOT(reload()));
 

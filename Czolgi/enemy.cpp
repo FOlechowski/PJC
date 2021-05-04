@@ -34,7 +34,9 @@ void Enemy::patrolPathHorizontaly(qreal end)
 
 void Enemy::patrolPathVerticaly(qreal end)
 {
+
     rotate_angle = 90;                              //store the init value
+
 
     if(y() >= end)                                          //check if the paths end
     {
@@ -73,19 +75,19 @@ void Enemy::aim(float angle)
         {
             rotate_angle = rotate_angle + 15;
             is_rotating = true;                                                             //set the flag
-            //return;
+            return;
         }
         else if((deg_angle - rotate_angle) < -15)
         {
             rotate_angle = rotate_angle -15;
             is_rotating = true;
-            //return;
+            return;
         }
 
         else
         {
             is_rotating = false;                                                            //reset the flag
-            //return;
+            return;
         }
     }
 
@@ -95,23 +97,25 @@ void Enemy::aim(float angle)
         {
             rotate_angle = rotate_angle - 15;
             is_rotating = true;                                                             //set the flag
-            //return;
+            return;
         }
         else if((rotate_angle - deg_angle) < -15)
         {
             rotate_angle = rotate_angle +15;
             is_rotating = true;
-            //return;
+            return;
         }
 
         else
         {
             is_rotating = false;                                                            //reset the flag
-            //return;
+            return;
         }
     }
 
+
     //qDebug()<<"Wartosc kata obrotu pojazdu"<<rotate_angle;
+
 }
 
 void Enemy::setCommand(char comm)
