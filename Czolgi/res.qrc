@@ -25,6 +25,17 @@
         <file>tex/arrow_75.png</file>
         <file>tex/arrow_-90.png</file>
         <file>tex/arrow_90.png</file>
+        <file>tex/arrow_-105.png</file>
+        <file>tex/arrow_-120.png</file>
+        <file>tex/arrow_-135.png</file>
+        <file>tex/arrow_-150.png</file>
+        <file>tex/arrow_-165.png</file>
+        <file>tex/arrow_105.png</file>
+        <file>tex/arrow_120.png</file>
+        <file>tex/arrow_135.png</file>
+        <file>tex/arrow_150.png</file>
+        <file>tex/arrow_165.png</file>
+        <file>tex/arrow_180.png</file>
     </qresource>
     <qresource prefix="/sound">
         <file>snd/Intro3.WAV</file>

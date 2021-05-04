@@ -99,12 +99,10 @@ void Medium::move()
                 if(reverso)
                 {
                     rotate_angle = -90;
-                    this->setPixmap(QPixmap(":/img/tex/tex_enemy_shadow_bck.png"));
                 }
                 else
                 {
                     rotate_angle = 90;
-                    this->setPixmap(QPixmap(":/img/tex/tex_enemy_shadow_fd.png"));
                 }
             break;
 
