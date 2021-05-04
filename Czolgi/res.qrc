@@ -25,6 +25,31 @@
         <file>tex/arrow_-75.png</file>
         <file>tex/arrow_90.png</file>
         <file>tex/arrow_-90.png</file>
+        <file>tex/arrow_p0.png</file>
+        <file>tex/arrow_p15.png</file>
+        <file>tex/arrow_p-15.png</file>
+        <file>tex/arrow_p30.png</file>
+        <file>tex/arrow_p-30.png</file>
+        <file>tex/arrow_p45.png</file>
+        <file>tex/arrow_p-45.png</file>
+        <file>tex/arrow_p60.png</file>
+        <file>tex/arrow_p-60.png</file>
+        <file>tex/arrow_p75.png</file>
+        <file>tex/arrow_p-75.png</file>
+        <file>tex/arrow_p90.png</file>
+        <file>tex/arrow_p-90.png</file>
+        <file>tex/arrow_p105.png</file>
+        <file>tex/arrow_p-105.png</file>
+        <file>tex/arrow_p120.png</file>
+        <file>tex/arrow_p-120.png</file>
+        <file>tex/arrow_p135.png</file>
+        <file>tex/arrow_p-135.png</file>
+        <file>tex/arrow_p150.png</file>
+        <file>tex/arrow_p-150.png</file>
+        <file>tex/arrow_p165.png</file>
+        <file>tex/arrow_p-165.png</file>
+        <file>tex/arrow_p180.png</file>
+        <file>tex/arrow_p-180.png</file>
     </qresource>
     <qresource prefix="/sound">
         <file>snd/Intro3.WAV</file>
