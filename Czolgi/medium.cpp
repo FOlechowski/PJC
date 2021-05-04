@@ -72,44 +72,4 @@ void Medium::setPath()
     tex_path[23] = ":/img/tex/arrow_-165.png";
 }
 
-void Medium::move()
-{
-    setTexture(rotate_angle);
-
-    bool is_inrange = check();
-
-    if(is_inrange)
-    {
-        int dx = (player->x()-50) - (this->x()-50);
-        int dy = (player->y()-50) - (this->y()-50);
-
-        float angle = atan2(dy,dx);
-
-        aim(angle);
-        shot(angle);
-    }
-
-    else
-    {
-        switch(command)
-        {
-            case VERT:
-                Enemy::patrolPathVerticaly(inity+300);
-            break;
-
-            case HORIZON:
-
-                Enemy::patrolPathHorizontaly(initx+300);
-            break;
-
-            case GUARD:
-                Enemy::holdPos();
-            break;
-
-            default:
-            break;
-        }
-
-    }
-}
 

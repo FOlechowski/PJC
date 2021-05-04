@@ -1,6 +1,6 @@
 #include "light.h"
 
-Light::Light()
+Light::Light(qreal x, qreal y, int dif, Player* pl)
 {
 
 }

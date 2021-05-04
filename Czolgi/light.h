@@ -7,7 +7,8 @@ class Light : public Enemy
 {
     Q_OBJECT
 public:
-    Light();
+    Light(qreal x, qreal y, int dif, Player* pl = NULL);
+    void setPath();
 };
 
 #endif // LIGHT_H

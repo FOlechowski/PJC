@@ -28,6 +28,7 @@ public:
     qreal inity;
 
 public slots:
+    void move();
 
 protected:
 

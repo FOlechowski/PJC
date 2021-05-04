@@ -11,8 +11,6 @@ Player::Player()
     connect(timer_reload, SIGNAL(timeout()),this,SLOT(reload()));
 
     speed = 5;
-
-    this->installEventFilter(this);
 }
 
 void Player::setPlayerName(QString Pname)

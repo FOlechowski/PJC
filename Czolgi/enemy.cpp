@@ -223,4 +223,45 @@ void Enemy::setCommand(char comm)
     command = comm;                                                                         //set command
 }
 
+void Enemy::move()
+{
+    setTexture(rotate_angle);
+
+    bool is_inrange = check();
+
+    if(is_inrange)
+    {
+        int dx = (player->x()-50) - (this->x()-50);
+        int dy = (player->y()-50) - (this->y()-50);
+
+        float angle = atan2(dy,dx);
+
+        aim(angle);
+        shot(angle);
+    }
+
+    else
+    {
+        switch(command)
+        {
+            case VERT:
+                patrolPathVerticaly(inity+300);
+            break;
+
+            case HORIZON:
+
+                patrolPathHorizontaly(initx+300);
+            break;
+
+            case GUARD:
+                holdPos();
+            break;
+
+            default:
+            break;
+        }
+
+    }
+}
+
 

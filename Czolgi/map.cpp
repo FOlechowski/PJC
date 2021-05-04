@@ -1,4 +1,6 @@
 #include "map.h"
+#include "medium.h"
+#include "destroyer.h"
 
 Map::Map(Player* player, int diff)
 {
@@ -20,7 +22,7 @@ Map::Map(Player* player, int diff)
     ply = player;
     ply->setFlag(QGraphicsItem::ItemIsFocusable);
     ply->setFocus();
-    ply->setPos(50, this->height()/2-200);
+    ply->setPos(50, 50);
 
     Medium *enemy = new Medium(750,100, difficult, ply);
     enemy->setPos(enemy->initx, enemy->inity);
@@ -30,7 +32,7 @@ Map::Map(Player* player, int diff)
     enemy2->setPos(enemy2->initx, enemy2->inity);
     enemy2->setCommand(VERT);
 
-    Medium *enemy3= new Medium(50,550, difficult, ply);
+    Destroyer *enemy3= new Destroyer(50,550, difficult, ply);
     enemy3->setPos(enemy3->initx, enemy3->inity);
     enemy3->setCommand(GUARD);
 

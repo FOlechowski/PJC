@@ -8,7 +8,6 @@
 #include <QGraphicsRectItem>
 #include <QDebug>
 #include "player.h"
-#include "medium.h"
 
 class Map: public QGraphicsScene
 {

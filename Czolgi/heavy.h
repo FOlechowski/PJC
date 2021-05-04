@@ -7,7 +7,8 @@ class Heavy : public Enemy
 {
     Q_OBJECT
 public:
-    Heavy();
+    Heavy(qreal x, qreal y, int dif, Player* pl = NULL);
+    void setPath();
 };
 
 #endif // HEAVY_H
