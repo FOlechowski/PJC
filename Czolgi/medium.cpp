@@ -108,7 +108,6 @@ void Medium::move()
 
             case HORIZON:
                 Enemy::patrolPathHorizontaly(initx+300);
-                this->setPixmap(QPixmap(":/img/tex/arrow_0.png"));
             break;
 
             default:
