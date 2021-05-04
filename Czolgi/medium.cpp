@@ -102,6 +102,10 @@ void Medium::move()
                 Enemy::patrolPathHorizontaly(initx+300);
             break;
 
+            case GUARD:
+                Enemy::holdPos();
+            break;
+
             default:
             break;
         }

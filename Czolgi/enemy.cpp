@@ -10,25 +10,69 @@ Enemy::Enemy()                                              //empty default cons
 {
 }
 
+void Enemy::holdPos()
+{
+    if(rotate_angle == -1000)
+        rotate_angle = 180;
+}
+
 void Enemy::patrolPathHorizontaly(qreal end)
 {
     if(rotate_angle == -1000)
         rotate_angle = 0;
 
+    if(!is_rotating)
+    {
+        if(!reverso)
+        {
+            if(rotate_angle < 0)
+                rotate_angle = rotate_angle +15;
+            else if (rotate_angle > 0)
+                rotate_angle = rotate_angle -15;
+        }
+
+        else
+        {
+            if(rotate_angle > 180)
+                rotate_angle = rotate_angle -15;
+            else if(rotate_angle < 180)
+                rotate_angle = rotate_angle +15;
+        }
+    }
+
     if(x() >= end)                                          //check if the paths end
     {
-        reverso = true;                                     //set the flag
+        is_rotating = true;
+
+        if(rotate_angle != 180)
+        {
+            rotate_angle = rotate_angle + 15;
+        }
+        else
+        {
+            reverso = true;                                     //set flag
+            is_rotating = false;                                //set the flag
+        }
     }
 
-    if((x()-speed)<= initx)                                 //check if start of the path
+    if((x()-speed) < initx)                                 //check if start of the path
     {
-        reverso = false;                                    //reset the flag
+        is_rotating = true;
+        if(rotate_angle != 0)
+        {
+            rotate_angle = rotate_angle - 15;
+        }
+        else
+        {
+            reverso = false;                                     //set flag
+            is_rotating = false;                                 //reset flag
+        }
     }
 
-    if(!reverso)                                            //determine the direction of movement
+    if(!reverso && !is_rotating)                            //determine the direction of movement
         Tank::move(speed,0);                                //move tank to the next point
 
-    else
+    else if(reverso && !is_rotating)
         Tank::move(-speed,0);
 }
 
@@ -37,13 +81,13 @@ void Enemy::patrolPathVerticaly(qreal end)
     if(rotate_angle == -1000)
         rotate_angle = 90;
 
-    if(!is_rotating && (rotate_angle!=90 && rotate_angle!=-90))
+    if(!is_rotating)
     {
         if(reverso)
         {
             if(rotate_angle < -90)
                 rotate_angle = rotate_angle +15;
-            else
+            else if(rotate_angle > -90)
                 rotate_angle = rotate_angle -15;
         }
 
@@ -51,7 +95,7 @@ void Enemy::patrolPathVerticaly(qreal end)
         {
             if(rotate_angle > 90)
                 rotate_angle = rotate_angle -15;
-            else
+            else if(rotate_angle < 90)
                 rotate_angle = rotate_angle +15;
         }
     }
@@ -71,7 +115,7 @@ void Enemy::patrolPathVerticaly(qreal end)
         }
     }
 
-    if((y()-speed)<= inity)                                     //check if start of the path
+    if((y()-speed) < inity)                                     //check if start of the path
     {
         is_rotating = true;
         if(rotate_angle != 90)

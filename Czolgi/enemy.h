@@ -8,6 +8,7 @@
 
 #define VERT 'v'
 #define HORIZON 'h'
+#define GUARD 'g'
 
 class Enemy : public Tank
 {
@@ -16,6 +17,7 @@ public:
 
     Enemy();
 
+    void holdPos();
     void patrolPathVerticaly(qreal end);
     void patrolPathHorizontaly(qreal end);
     bool check();
