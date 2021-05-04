@@ -12,6 +12,8 @@ Player::Player()
     connect(timer_reload, SIGNAL(timeout()),this,SLOT(reload()));
 
     speed = 5;
+
+    this->installEventFilter(this);
 }
 
 void Player::setPlayerName(QString Pname)
@@ -35,26 +37,27 @@ void Player::keyPressEvent(QKeyEvent *event)
 {
     if(event->key() == Qt::Key_A)
     {
-        setPos(x()-speed,y());
-        //angle -= 10;
+
+        angle += 5;
         //setRotation(angle);
     }
 
     if(event->key() == Qt::Key_D)
     {
-        setPos(x()+speed,y());
-        //angle += 10;
+
+        angle -= 5;
         //setRotation(angle);
     }
 
     if(event->key() == Qt::Key_W)
     {
-        setPos(x(),y()-speed);
+        Tank::move(cos(angle*M_PI/180)*speed,-sin(angle*M_PI/180)*speed);
+
     }
 
     if(event->key() == Qt::Key_S)
     {
-        setPos(x(),y()+speed);
+        Tank::move(-cos(angle*M_PI/180)*speed,sin(angle*M_PI/180)*speed);
     }
 
     if(event->key() == Qt::Key_Space)
@@ -72,6 +75,6 @@ void Player::keyPressEvent(QKeyEvent *event)
             qDebug()<<"Koniec pocisków RAMBO!!!";
         }
     }
-    //qDebug()<<this->x()<<this->y();
+    qDebug()<<angle;
 }
 

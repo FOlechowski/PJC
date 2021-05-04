@@ -17,6 +17,7 @@ public:
     void shot();
     void keyPressEvent(QKeyEvent * event);
 
+
 public slots:
 
 private:

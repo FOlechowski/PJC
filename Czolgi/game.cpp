@@ -182,3 +182,5 @@ void Game::set_fiolet()
         box.exec();
     }
 }
+
+

@@ -53,6 +53,7 @@ private:
     Button* kabaczek;
     Button* fiolet;
 
+
 };
 
 #endif // GAME_H

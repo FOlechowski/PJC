@@ -22,6 +22,7 @@ public:
 
     int difficult = 0;
 
+
 public slots:
 
 private:
@@ -31,6 +32,7 @@ private:
     QGraphicsRectItem* wall1;
     QGraphicsRectItem* wall2;
     QGraphicsRectItem* water;
+
 };
 
 #endif // MAP_H
