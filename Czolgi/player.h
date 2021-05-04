@@ -5,6 +5,8 @@
 #include <QDebug>
 #include <QObject>
 #include "tank.h"
+#include <QString>
+
 
 class Player : public Tank
 {
@@ -16,16 +18,20 @@ public:
     void setPlayerName(QString Pname);
     void shot();
     void keyPressEvent(QKeyEvent * event);
-
+    void keyReleaseEvent(QKeyEvent *event);
 
 public slots:
 
 private:
-
+    void addPlayerTextures();
+    QString PlayerTextures[24];
     int bullets = 50;
 
     QString name;
-    qreal angle = 0;
+
+    //qreal angle = 0;
+
+
 };
 
 #endif // PLAYER_H

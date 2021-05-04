@@ -36,6 +36,7 @@ public slots:
 
 protected:
     QString tex_path[24];
+
 };
 
 #endif // TANK_H

@@ -17,6 +17,11 @@ Map::Map(Player* player, int diff)
     QPixmap wt_tex(QString(":/img/tex/tex_water_01.png"));
     water->setBrush(QBrush(wt_tex));
 
+    rock = new QGraphicsPixmapItem();
+    rock->setPixmap(QPixmap(":/img/tex/rock.png"));
+    rock->setOffset(40,500);
+
+
     ply = player;
     ply->setFlag(QGraphicsItem::ItemIsFocusable);
     ply->setFocus();
@@ -40,6 +45,7 @@ Map::Map(Player* player, int diff)
 
     this->addItem(water);
     this->addItem(bridge);
+    this->addItem(rock);
     this->addItem(enemy);
     this->addItem(enemy2);
     //this->addItem(enemy3);

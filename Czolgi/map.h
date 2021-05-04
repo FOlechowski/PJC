@@ -32,6 +32,7 @@ private:
     QGraphicsRectItem* wall1;
     QGraphicsRectItem* wall2;
     QGraphicsRectItem* water;
+    QGraphicsPixmapItem* rock;
 
 };
 
