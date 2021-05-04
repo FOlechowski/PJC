@@ -13,7 +13,7 @@ Enemy::Enemy()                                              //empty default cons
 void Enemy::patrolPathHorizontaly(qreal end)
 {
 
-    rotate_angle = 0;                              //store the init value
+    rotate_angle = 0;                                       //store the init value
 
     if(x() >= end)                                          //check if the paths end
     {
@@ -35,7 +35,7 @@ void Enemy::patrolPathHorizontaly(qreal end)
 void Enemy::patrolPathVerticaly(qreal end)
 {
 
-    rotate_angle = 90;                              //store the init value
+    rotate_angle = 90;                                      //store the init value
 
 
     if(y() >= end)                                          //check if the paths end
@@ -71,9 +71,16 @@ void Enemy::aim(float angle)
 
     if(deg_angle >= 0)                                                                      //check if player is above or belove the enemy
     {
-        if((deg_angle - rotate_angle) > 15)                                              //check if rotation is needed
+        if((deg_angle - rotate_angle) > 15)                                                 //check if rotation is needed
         {
-            rotate_angle = rotate_angle + 15;
+            if((deg_angle - rotate_angle)>180)                                              //check which rotation direction is more optimal
+                rotate_angle = rotate_angle - 15;                                           //rotate counterclockwise
+            else
+                rotate_angle = rotate_angle + 15;                                           //rotate clockwise
+
+            if(rotate_angle < -165)                                                         //if border
+                rotate_angle = 180;                                                         //set the maximum value
+
             is_rotating = true;                                                             //set the flag
             return;
         }
@@ -95,7 +102,14 @@ void Enemy::aim(float angle)
     {
         if((rotate_angle - deg_angle) > 15)
         {
-            rotate_angle = rotate_angle - 15;
+            if((rotate_angle - deg_angle)<180)
+                rotate_angle = rotate_angle - 15;
+            else
+                rotate_angle = rotate_angle + 15;
+
+            if(rotate_angle>180)
+                rotate_angle = -165;
+
             is_rotating = true;                                                             //set the flag
             return;
         }
@@ -112,10 +126,6 @@ void Enemy::aim(float angle)
             return;
         }
     }
-
-
-    //qDebug()<<"Wartosc kata obrotu pojazdu"<<rotate_angle;
-
 }
 
 void Enemy::setCommand(char comm)
