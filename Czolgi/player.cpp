@@ -1,6 +1,7 @@
 #include "player.h"
 #include <cmath>
 #include "bullet.h"
+#include "explosivebullet.h"
 
 
 Player::Player()
@@ -25,7 +26,7 @@ void Player::shot()
 {
     if(bullets && !is_loading)
     {
-        timer_reload->start(2000);
+        timer_reload->start(reload_time);
 
         is_loading = true;
         bullets = bullets - 1;
@@ -36,7 +37,7 @@ void Player::shot()
 void Player::keyPressEvent(QKeyEvent *event)
 {
     QList<QGraphicsItem*> colliding_items = collidingItems();
-    qDebug()<<colliding_items;
+    //qDebug()<<colliding_items;
     //grabKeyboard();
     if(event->key() == Qt::Key_A)
     {
@@ -88,7 +89,7 @@ void Player::keyPressEvent(QKeyEvent *event)
             qDebug()<<"Koniec pocisków RAMBO!!!";
         }
     }
-    //qDebug()<<(int(-rotate_angle)%360);
+    qDebug()<<this->pos();
 
 
         switch (int(-rotate_angle))

@@ -8,7 +8,7 @@ Destroyer::Destroyer(qreal x, qreal y, int dif, Player* pl)
 
     player = pl;
 
-    setPath();
+    setPathTextures();
 
     QTimer * timer_move = new QTimer();
     connect(timer_move, SIGNAL(timeout()),this,SLOT(move()));
@@ -44,7 +44,7 @@ Destroyer::Destroyer(qreal x, qreal y, int dif, Player* pl)
     }
 }
 
-void Destroyer::setPath()
+void Destroyer::setPathTextures()
 {
     tex_path[0] = ":/img/tex/arrow_0.png";
     tex_path[1] = ":/img/tex/arrow_15.png";

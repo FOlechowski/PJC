@@ -16,6 +16,7 @@ SOURCES += \
     credits.cpp \
     destroyer.cpp \
     enemy.cpp \
+    explosivebullet.cpp \
     game.cpp \
     heavy.cpp \
     light.cpp \
@@ -34,6 +35,7 @@ HEADERS += \
     credits.h \
     destroyer.h \
     enemy.h \
+    explosivebullet.h \
     game.h \
     heavy.h \
     light.h \

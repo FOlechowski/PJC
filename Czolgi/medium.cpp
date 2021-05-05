@@ -8,7 +8,7 @@ Medium::Medium(qreal x, qreal y, int dif, Player* pl)
 
     player = pl;
 
-    setPath();
+    setPathTextures();
 
     QTimer * timer_move = new QTimer();
     connect(timer_move, SIGNAL(timeout()),this,SLOT(move()));
@@ -44,7 +44,7 @@ Medium::Medium(qreal x, qreal y, int dif, Player* pl)
     }
 }
 
-void Medium::setPath()
+void Medium::setPathTextures()
 {
     tex_path[0] = ":/img/tex/arrow_0.png";
     tex_path[1] = ":/img/tex/arrow_15.png";

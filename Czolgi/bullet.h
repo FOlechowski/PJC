@@ -10,13 +10,19 @@ class Bullet: public QObject, public QGraphicsPixmapItem
 {
     Q_OBJECT
 public:
-    Bullet(float ang, Tank* tank );
+    Bullet(float ang, Tank* tank);
+    Bullet();
 
 public slots:
-    void move();
+    void moveBullet();
 
-private:
-    qreal speed = 5;
+protected:
+    bool checkIfEnemy(QGraphicsItem *colliding_item);
+    virtual bool bulletIsCollidig();
+    bool bounce(float armor, int penetration, qreal bullet_angle, int hitted_angle);
+
+    qreal speed = 8;
+    int penetration = 100;
     float angle;
     Tank* creator;
     Tank* hitted;

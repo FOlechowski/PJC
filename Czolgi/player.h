@@ -28,10 +28,6 @@ private:
     int bullets = 50;
 
     QString name;
-
-    //qreal angle = 0;
-
-
 };
 
 #endif // PLAYER_H

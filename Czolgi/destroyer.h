@@ -8,7 +8,7 @@ class Destroyer : public Enemy
     Q_OBJECT
 public:
     Destroyer(qreal x, qreal y, int dif, Player* pl = NULL);
-    void setPath();
+    void setPathTextures();
 
 public slots:
 

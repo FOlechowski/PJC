@@ -249,7 +249,6 @@ void Enemy::move()
             break;
 
             case HORIZON:
-
                 patrolPathHorizontaly(initx+300);
             break;
 

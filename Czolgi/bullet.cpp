@@ -8,7 +8,12 @@
 #include <QDebug>
 #include <QList>
 #include "medium.h"
+#include "destroyer.h"
+#include "boss.h"
+#include "heavy.h"
+#include "light.h"
 #include "cmath"
+#include "ctime"
 
 Bullet::Bullet(float ang, Tank* tank)
 {
@@ -22,30 +27,64 @@ Bullet::Bullet(float ang, Tank* tank)
     this->setRotation(deg_angle);                               //rotate the texture to be parallel to the movement vector
 
     QTimer * timer = new QTimer();                              //start timer for it
-    connect(timer, SIGNAL(timeout()),this,SLOT(move()));        //connect to the slot that will emitate the smooth movement
+    connect(timer, SIGNAL(timeout()),this,SLOT(moveBullet()));        //connect to the slot that will emitate the smooth movement
     timer->start(10);                                           //start timer
 
 }
 
-void Bullet::move()
+Bullet::Bullet()
 {
+    ;
+}
 
+void Bullet::moveBullet()
+{
+    bool is_something_hitted = bulletIsCollidig();
+
+    if(!is_something_hitted)
+    {
+        setPos(x()+speed*cos(angle), y()+speed*sin(angle));                                                         //set position depending on the angle between the player and enemy
+
+        if(pos().x() > scene()->width() || pos().x()<0 || pos().y() > scene()->height() || pos().y() < 0 )          //if bullet is out of the scene
+        {
+            scene()->removeItem(this);                                                                              //remove it from the scene and memory
+            delete this;
+        }
+    }
+}
+
+bool Bullet::checkIfEnemy(QGraphicsItem *colliding_item)
+{
+    if(typeid(*(colliding_item)) == typeid(Medium))
+        return true;
+    if(typeid(*(colliding_item)) == typeid(Destroyer))
+        return true;
+    if(typeid(*(colliding_item)) == typeid(Heavy))
+        return true;
+    if(typeid(*(colliding_item)) == typeid(Light))
+        return true;
+    if(typeid(*(colliding_item)) == typeid(Boss))
+        return true;
+    else
+        return false;
+}
+
+bool Bullet::bulletIsCollidig()
+{
     QList<QGraphicsItem*> colliding_items = collidingItems();                                   //create Qlist of colliding items
 
     for (int i = 0, n = colliding_items.size(); i < n; i++)                                     //check the whole list
     {
-        bool enemy = false;
-
-        if(typeid (*(colliding_items[i])) == typeid (Medium))                                   //check if enemy was hitted
-        {
-            enemy = true;
-        }
+        bool enemy = checkIfEnemy(colliding_items[i]);
 
         if(enemy && (colliding_items[i] != creator))                                            //if type id is matching and the bullet didn't hit the creators
         {
             hitted = dynamic_cast<Tank*>(colliding_items[i]);                                   //safe pointer to the hitted element
 
-            hitted->hp = hitted->hp - (creator->dmg - (hitted->armor*creator->dmg));            //calculate damage
+            bool is_bouncing = bounce(hitted->armor, penetration, (angle*180)/M_PI, hitted->rotate_angle);
+
+            if(!is_bouncing)
+                hitted->hp = hitted->hp - (creator->dmg - (hitted->armor*creator->dmg));            //calculate damage
 
             if(hitted->hp <= 0)                                                                   //if hp is over
             {
@@ -54,35 +93,50 @@ void Bullet::move()
 
                 delete colliding_items[i];
                 delete this;
-                return;                                                                         //end the function
+                return true;                                                                         //end the function
             }
              scene()->removeItem(this);                                                         //remove only bullet if hp is not over
              delete this;
-             qDebug()<<hitted->hp;
-             return;                                                                            //end the function
+             //qDebug()<<hitted->hp;
+             return true;                                                                            //end the function
         }
 
-
-        //add ability do decrease the player hp
+        //add ability to decrease the player hp
         if(typeid (*(colliding_items[i])) == typeid (Player) && (colliding_items[i] != creator))    //same as above
         {
-
             scene()->removeItem(this);
-
-            //qDebug()<<colliding_items[i];
-            //qDebug()<<"Trafiono gracza!!!";
-
             delete this;
-            return;
+            return true;
+        }
+    }
+    return false;
+}
+
+bool Bullet::bounce(float armor, int penetration, qreal bullet_angle, int hitted_angle)
+{
+    qreal angle_to_normal = abs(180-abs(hitted_angle - bullet_angle));
+
+    if(angle_to_normal>90)
+        angle_to_normal = 180-angle_to_normal;
+
+    if((angle_to_normal<= 75 && angle_to_normal >= 60) || angle_to_normal <= 30)
+    {
+        float chance = (rand()% 2) - armor + penetration*0.004 + 1;
+
+        qDebug()<<chance;
+
+        if(chance > 1.5)
+        {
+            qDebug()<<"Odbił sie!!!";
+            return true;
+        }
+        else
+        {
+            qDebug()<<"Nie odbił sie!!!";
+            return false;
         }
     }
 
-    setPos(x()+speed*cos(angle), y()+speed*sin(angle));                                                         //set position depending on the angle between the player and enemy
-
-    if(pos().x() > scene()->width() || pos().x()<0 || pos().y() > scene()->height() || pos().y() < 0 )          //if bullet is out of the scene
-    {
-        scene()->removeItem(this);                                                                              //remove it from the scene and memory
-        delete this;
-    }
-
+    qDebug()<<"Nie odbił sie!!!";
+    return false;
 }

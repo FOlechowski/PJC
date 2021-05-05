@@ -62,6 +62,7 @@
         <file>tex/arrow_165.png</file>
         <file>tex/arrow_180.png</file>
         <file>tex/rock.png</file>
+        <file>tex/explosion.png</file>
     </qresource>
     <qresource prefix="/sound">
         <file>snd/Intro3.WAV</file>

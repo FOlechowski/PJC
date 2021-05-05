@@ -23,7 +23,7 @@ public:
 
     int hp;
     int dmg;
-    double armor;
+    float armor;
     int reload_time = 2000;
 
     bool is_loading = false;
@@ -36,7 +36,6 @@ public slots:
 
 protected:
     QString tex_path[24];
-
 };
 
 #endif // TANK_H
