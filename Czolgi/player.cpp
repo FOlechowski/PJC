@@ -117,14 +117,14 @@ void Player::keyPressEvent(QKeyEvent *event)
             qDebug()<<"Koniec pocisków RAMBO!!!";
         }
     }
-<<<<<<< HEAD
+
     qDebug()<<this->pos();
     //qDebug()<<rotate_angle;
-=======
+
     //qDebug()<<this->pos();
     //qDebug()<<rotate_angle;
 
->>>>>>> dc2c38c7e66095620ec8d044f32c9ac9fbf0952f
+
 
 
 }
