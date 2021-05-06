@@ -19,7 +19,7 @@ ExplosiveBullet::ExplosiveBullet(float ang, Tank* tank)
     this->setRotation(deg_angle);                                               //rotate the texture to be parallel to the movement vector
 
     QTimer * timer = new QTimer();                                              //start timer for it
-    connect(timer, SIGNAL(timeout()),this,SLOT(moveBullet()));        //connect to the slot that will emitate the smooth movement
+    connect(timer, SIGNAL(timeout()),this,SLOT(moveBullet()));                  //connect to the slot that will emitate the smooth movement
     timer->start(10);
 }
 
@@ -41,7 +41,7 @@ void ExplosiveBullet::Explode()
     {
         explosion = new QGraphicsPixmapItem();
         explosion->setPixmap(QPixmap(":/img/tex/explosion.png"));
-        explosion->setPos(this->x(),this->y());
+        explosion->setPos(this->x()-35,this->y()-50);
         scene()->addItem(explosion);
 
 

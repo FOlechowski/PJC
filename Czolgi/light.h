@@ -8,7 +8,7 @@ class Light : public Enemy
     Q_OBJECT
 public:
     Light(qreal x, qreal y, int dif, Player* pl = NULL);
-    void setPath();
+    void setPathTextures();
 };
 
 #endif // LIGHT_H
