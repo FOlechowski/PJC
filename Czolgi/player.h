@@ -24,10 +24,14 @@ public slots:
 
 private:
     void addPlayerTextures();
-    QString PlayerTextures[24];
-    int bullets = 50;
+    void moveForward(qreal m_distance, int m_angle);
+    void moveBackward(qreal m_distance, int m_angle);
+    void turnLeft(int &m_angle);
+    void turnRight(int &m_angle);
 
+    int bullets = 50;
     QString name;
+    bool keyA, keyW, keyD, keyS;
 };
 
 #endif // PLAYER_H

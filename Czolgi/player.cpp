@@ -13,6 +13,7 @@ Player::Player()
     speed = 5;
     addPlayerTextures();
     rotate_angle = 0;
+    keyA = keyW = keyD = keyS = false;
 
 
 }
@@ -34,6 +35,38 @@ void Player::shot()
     }
 }
 
+void Player::moveForward(qreal m_distance, int m_angle)
+{
+    keyW = true;
+    Tank::move(cos(m_angle*M_PI/180)*m_distance,-sin(m_angle*M_PI/180)*m_distance);
+}
+
+void Player::moveBackward(qreal m_distance, int m_angle)
+{
+    keyS = true;
+    Tank::move(-cos(m_angle*M_PI/180)*m_distance,sin(m_angle*M_PI/180)*m_distance);
+}
+
+void Player::turnLeft(int &m_angle)
+{
+    keyA = true;
+    m_angle += 5;
+    if(m_angle>180)
+    {
+        m_angle=-175;
+    }
+}
+
+void Player::turnRight(int &m_angle)
+{
+    keyD = true;
+    m_angle -= 5;
+    if(m_angle<-180)
+    {
+        m_angle=175;
+    }
+}
+
 
 void Player::keyPressEvent(QKeyEvent *event)
 {
@@ -42,35 +75,58 @@ void Player::keyPressEvent(QKeyEvent *event)
     //grabKeyboard();
     if(event->key() == Qt::Key_A)
     {
+        if(keyW){
+            turnLeft(rotate_angle);
+            moveForward(speed,rotate_angle);
 
-        rotate_angle += 15;
-        if(rotate_angle>180)
-        {
-            rotate_angle=-165;
+        }else if(keyS){
+            turnLeft(rotate_angle);
+            moveBackward(speed,rotate_angle);
+
+        }else{
+        turnLeft(rotate_angle);
         }
-
     }
 
     if(event->key() == Qt::Key_D)
     {
+        if(keyW){
+            turnRight(rotate_angle);
+            moveForward(speed,rotate_angle);
 
-        rotate_angle -= 15;
-        if(rotate_angle<-180)
-        {
-            rotate_angle=165;
+        }else if(keyS){
+            turnRight(rotate_angle);
+            moveBackward(speed,rotate_angle);
+
+        }else{
+        turnRight(rotate_angle);
         }
-
     }
 
     if(event->key() == Qt::Key_W)
     {
-        Tank::move(cos(rotate_angle*M_PI/180)*speed,-sin(rotate_angle*M_PI/180)*speed);
-
+        if(keyA){
+            moveForward(speed,rotate_angle);
+            turnLeft(rotate_angle);
+        }else if(keyD){
+            moveForward(speed,rotate_angle);
+            turnRight(rotate_angle);
+        }else{
+        moveForward(speed,rotate_angle);
+        }
     }
 
     if(event->key() == Qt::Key_S)
     {
-        Tank::move(-cos(rotate_angle*M_PI/180)*speed,sin(rotate_angle*M_PI/180)*speed);
+        if(keyA){
+            moveBackward(speed,rotate_angle);
+            turnLeft(rotate_angle);
+        }else if(keyD){
+            moveBackward(speed,rotate_angle);
+            turnRight(rotate_angle);
+        }else{
+        moveBackward(speed,rotate_angle);
+        }
     }
 
 
@@ -91,13 +147,29 @@ void Player::keyPressEvent(QKeyEvent *event)
         }
     }
     //qDebug()<<this->pos();
-      qDebug()<<rotate_angle;
+    qDebug()<<rotate_angle;
+
 Tank::setTexture(-rotate_angle);
 
 }
 void Player::keyReleaseEvent(QKeyEvent *event)
 {
-
+    if(event->key() == Qt::Key_W){
+        keyW = false;
+        //qDebug()<<"released W";
+    }
+    if(event->key() == Qt::Key_D){
+        keyD = false;
+        //qDebug()<<"released D";
+    }
+    if(event->key() == Qt::Key_A){
+        keyA = false;
+        //qDebug()<<"released A";
+    }
+    if(event->key() == Qt::Key_S){
+        keyS = false;
+        //qDebug()<<"released S";
+    }
 }
 
 void Player::addPlayerTextures(){
