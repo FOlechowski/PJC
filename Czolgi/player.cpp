@@ -7,7 +7,7 @@
 Player::Player()
 {
     this->setPixmap(QPixmap(":/img/tex/arrow_p0.png"));
-
+    this->setTransformOriginPoint(50,50);
     connect(timer_reload, SIGNAL(timeout()),this,SLOT(reload()));
 
     speed = 5;
@@ -54,6 +54,7 @@ void Player::turnLeft(int &m_angle)
 {
 
     m_angle += 5;
+    this->setRotation(-m_angle);
     if(m_angle>180)
     {
         m_angle=-175;
@@ -64,6 +65,7 @@ void Player::turnRight(int &m_angle)
 {
 
     m_angle -= 5;
+    this->setRotation(-m_angle);
     if(m_angle<-180)
     {
         m_angle=175;
@@ -222,12 +224,12 @@ void Player::movePlayer()
         }
 
         if(front_hit&&keyS){
-            moveBackward(4*speed,rotate_angle);
+            moveBackward(5*speed,rotate_angle);
             front_hit=false;
 
         }
         if(back_hit&&keyW){
-            moveForward(2*speed,rotate_angle);
+            moveForward(3*speed,rotate_angle);
             back_hit=false;
         }
         if(right_hit&&keyA){
@@ -241,7 +243,9 @@ void Player::movePlayer()
 
     }
 
+    if(!rotate_angle%15){
     Tank::setTexture(-rotate_angle);
+    }
 }
 
 void Player::addPlayerTextures(){
