@@ -141,7 +141,7 @@ void Menu::credits()
 
     cr_dialog->setModal(true);
     cr_dialog->setWindowIcon(QIcon(game->icon_path));
-    this->setWindowTitle(QString("O autorach..."));
+    cr_dialog->setWindowTitle(QString("O autorach..."));
 
     cr_dialog->setFixedSize(QSize(800, 500));
 
