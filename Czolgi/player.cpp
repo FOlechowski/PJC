@@ -225,20 +225,31 @@ void Player::movePlayer()
 
         if(front_hit&&keyS){
             moveBackward(5*speed,rotate_angle);
+            QList<QGraphicsItem*> colliding_items = collidingItems();
+            if (colliding_items.size()==0){
             front_hit=false;
-
+            }
         }
         if(back_hit&&keyW){
             moveForward(3*speed,rotate_angle);
+            QList<QGraphicsItem*> colliding_items = collidingItems();
+            if (colliding_items.size()==0){
             back_hit=false;
+            }
         }
         if(right_hit&&keyA){
             turnLeft(rotate_angle);
+            QList<QGraphicsItem*> colliding_items = collidingItems();
+            if (colliding_items.size()==0){
             right_hit=false;
+            }
         }
         if(left_hit&&keyD){
             turnRight(rotate_angle);
+            QList<QGraphicsItem*> colliding_items = collidingItems();
+            if (colliding_items.size()==0){
             left_hit=false;
+            }
         }
 
     }
