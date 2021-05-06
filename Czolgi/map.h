@@ -16,8 +16,8 @@ public:
     Map(Player* player, int diff);
     ~Map();
 
-    int ms_width = 1000;
-    int ms_height = 800;
+    int ms_width = 1200;
+    int ms_height = 1000;
 
     int difficult = 0;
 

@@ -3,7 +3,6 @@
 #include <QIcon>
 
 QuitWindow::QuitWindow(QGraphicsView* window, QString ic_path)
-//QuitWindow::QuitWindow(QString ic_path)
 {
 
     this->setModal(true);

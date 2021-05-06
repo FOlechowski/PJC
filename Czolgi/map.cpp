@@ -1,12 +1,13 @@
 #include "map.h"
 #include "medium.h"
 #include "destroyer.h"
+#include "light.h"
 
 Map::Map(Player* player, int diff)
 {
     difficult = diff;
 
-    this->setSceneRect(0, 0, ms_width, ms_height);
+    this->setSceneRect(-50, 0, ms_width, ms_height);
 
     bridge = new QGraphicsRectItem;
 

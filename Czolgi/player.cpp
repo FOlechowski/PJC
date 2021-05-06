@@ -146,8 +146,8 @@ void Player::keyPressEvent(QKeyEvent *event)
             qDebug()<<"Koniec pocisków RAMBO!!!";
         }
     }
-    //qDebug()<<this->pos();
-    qDebug()<<rotate_angle;
+    qDebug()<<this->pos();
+    //qDebug()<<rotate_angle;
 
 Tank::setTexture(-rotate_angle);
 

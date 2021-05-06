@@ -13,7 +13,6 @@ SOURCES += \
     boss.cpp \
     bullet.cpp \
     button.cpp \
-    credits.cpp \
     destroyer.cpp \
     enemy.cpp \
     explosivebullet.cpp \
@@ -25,14 +24,12 @@ SOURCES += \
     medium.cpp \
     menu.cpp \
     player.cpp \
-    quitwindow.cpp \
     tank.cpp
 
 HEADERS += \
     boss.h \
     bullet.h \
     button.h \
-    credits.h \
     destroyer.h \
     enemy.h \
     explosivebullet.h \
@@ -43,7 +40,6 @@ HEADERS += \
     medium.h \
     menu.h \
     player.h \
-    quitwindow.h \
     tank.h
 
 # Default rules for deployment.
