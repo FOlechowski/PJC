@@ -14,21 +14,17 @@ class Button : public QObject, public QGraphicsRectItem
 public:
     explicit Button(int width, int height, QString name, QObject *parent = nullptr);
 
-    void change_color(Qt::GlobalColor color);
-
-    void mousePressEvent(QGraphicsSceneMouseEvent *event);
-    void hoverEnterEvent(QGraphicsSceneHoverEvent *event);
-    void hoverLeaveEvent(QGraphicsSceneHoverEvent *event);
-
     ~Button();
-
-    QGraphicsTextItem* text;
 
 signals:
     void clicked();
 
 private:
+    void mousePressEvent(QGraphicsSceneMouseEvent *event);
+    void hoverEnterEvent(QGraphicsSceneHoverEvent *event);
+    void hoverLeaveEvent(QGraphicsSceneHoverEvent *event);
 
+    QGraphicsTextItem* text;
 };
 
 #endif // BUTTON_H
