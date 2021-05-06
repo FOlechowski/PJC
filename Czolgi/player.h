@@ -32,6 +32,7 @@ private:
     int bullets = 50;
     QString name;
     bool keyA, keyW, keyD, keyS;
+    bool front_hit, back_hit, right_hit, left_hit = false;
 private slots:
     void movePlayer();
 };

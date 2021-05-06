@@ -73,35 +73,31 @@ void Player::turnRight(int &m_angle)
 
 void Player::keyPressEvent(QKeyEvent *event)
 {
-    QList<QGraphicsItem*> colliding_items = collidingItems();
+
     //qDebug()<<colliding_items;
     //grabKeyboard();
     if(event->key() == Qt::Key_A)
     {
         keyA = true;
-        qDebug()<<"pressed A";
-
+        //qDebug()<<"pressed A";
     }
 
     if(event->key() == Qt::Key_D)
     {
         keyD = true;
-        qDebug()<<"pressed D";
-
+        //qDebug()<<"pressed D";
     }
 
     if(event->key() == Qt::Key_W)
     {
         keyW = true;
-        qDebug()<<"pressed W";
-
+        //qDebug()<<"pressed W";
     }
 
     if(event->key() == Qt::Key_S)
     {
         keyS = true;
-        qDebug()<<"pressed S";
-
+        //qDebug()<<"pressed S";
     }
 
 
@@ -131,84 +127,115 @@ void Player::keyReleaseEvent(QKeyEvent *event)
 {
     if(event->key() == Qt::Key_W){
         keyW = false;
-        qDebug()<<"released W";
+        //qDebug()<<"released W";
     }
     if(event->key() == Qt::Key_D){
         keyD = false;
-        qDebug()<<"released D";
+        //qDebug()<<"released D";
     }
     if(event->key() == Qt::Key_A){
         keyA = false;
-        qDebug()<<"released A";
+        //qDebug()<<"released A";
     }
     if(event->key() == Qt::Key_S){
         keyS = false;
-        qDebug()<<"released S";
+        //qDebug()<<"released S";
     }
 }
 
 void Player::movePlayer()
 {
+    QList<QGraphicsItem*> colliding_items = collidingItems();
 
-    if(keyA){
-        if(keyW){
-            turnLeft(rotate_angle);
-            moveForward(speed,rotate_angle);
-
-        }else if(keyS){
-            turnLeft(rotate_angle);
-            moveBackward(speed,rotate_angle);
-
-        }else{
-        turnLeft(rotate_angle);
-        turnLeft(rotate_angle);
-        }
-    }
-
-    if(keyD){
-        if(keyW){
-            turnRight(rotate_angle);
-            moveForward(speed,rotate_angle);
-
-        }else if(keyS){
-            turnRight(rotate_angle);
-            moveBackward(speed,rotate_angle);
-
-        }else{
-        turnRight(rotate_angle);
-        turnRight(rotate_angle);
-        }
-    }
-
-    if(keyW){
+    if (colliding_items.size()==0){
         if(keyA){
-            moveForward(speed,rotate_angle);
+            if(keyW){
+                turnLeft(rotate_angle);
+                moveForward(speed,rotate_angle);
+
+            }else if(keyS){
+                turnLeft(rotate_angle);
+                moveBackward(speed,rotate_angle);
+
+            }else{
             turnLeft(rotate_angle);
-
-
-        }else if(keyD){
-            moveForward(speed,rotate_angle);
-
-            turnRight(rotate_angle);
-
-        }else{
-        moveForward(2*speed,rotate_angle);
+            turnLeft(rotate_angle);
+            }
         }
+
+        if(keyD){
+            if(keyW){
+                turnRight(rotate_angle);
+                moveForward(speed,rotate_angle);
+
+            }else if(keyS){
+                turnRight(rotate_angle);
+                moveBackward(speed,rotate_angle);
+
+            }else{
+            turnRight(rotate_angle);
+            turnRight(rotate_angle);
+            }
+        }
+
+        if(keyW){
+            if(keyA){
+                moveForward(speed,rotate_angle);
+                turnLeft(rotate_angle);
+
+
+            }else if(keyD){
+                moveForward(speed,rotate_angle);
+
+                turnRight(rotate_angle);
+
+            }else{
+            moveForward(2*speed,rotate_angle);
+            }
+        }
+
+        if(keyS){
+            if(keyA){
+                moveBackward(speed,rotate_angle);
+                turnLeft(rotate_angle);
+            }else if(keyD){
+                moveBackward(speed,rotate_angle);
+                turnRight(rotate_angle);
+            }else{
+            moveBackward(2*speed,rotate_angle);
+            }
+        }
+    }else{
+        if(keyW&&!front_hit&&!back_hit&&!right_hit&&!left_hit){
+            front_hit = true;
+        }else if(keyS&&!front_hit&&!back_hit&&!right_hit&&!left_hit){
+            back_hit = true;
+        }else if(keyA&&!front_hit&&!back_hit&&!right_hit&&!left_hit){
+            left_hit = true;
+        }else if(keyD&&!front_hit&&!back_hit&&!right_hit&&!left_hit){
+            right_hit = true;
+        }
+
+        if(front_hit&&keyS){
+            moveBackward(4*speed,rotate_angle);
+            front_hit=false;
+
+        }
+        if(back_hit&&keyW){
+            moveForward(2*speed,rotate_angle);
+            back_hit=false;
+        }
+        if(right_hit&&keyA){
+            turnLeft(rotate_angle);
+            right_hit=false;
+        }
+        if(left_hit&&keyD){
+            turnRight(rotate_angle);
+            left_hit=false;
+        }
+
     }
 
-
-
-    if(keyS){
-        if(keyA){
-            moveBackward(speed,rotate_angle);
-            turnLeft(rotate_angle);
-        }else if(keyD){
-            moveBackward(speed,rotate_angle);
-            turnRight(rotate_angle);
-        }else{
-        moveBackward(2*speed,rotate_angle);
-        }
-    }
     Tank::setTexture(-rotate_angle);
 }
 
