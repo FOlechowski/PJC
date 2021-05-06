@@ -32,6 +32,8 @@ private:
     int bullets = 50;
     QString name;
     bool keyA, keyW, keyD, keyS;
+private slots:
+    void movePlayer();
 };
 
 #endif // PLAYER_H
