@@ -5,6 +5,7 @@
 
 #include "bullet.h"
 #include <QGraphicsScene>
+#include <QRandomGenerator>
 #include <QDebug>
 #include <QList>
 #include "medium.h"
@@ -39,7 +40,7 @@ Bullet::Bullet()
 
 void Bullet::moveBullet()
 {
-    bool is_something_hitted = bulletIsCollidig();
+    bool is_something_hitted = bulletIsCollidig();                                                                  //check if something was hitted
 
     if(!is_something_hitted)
     {
@@ -53,7 +54,7 @@ void Bullet::moveBullet()
     }
 }
 
-bool Bullet::checkIfEnemy(QGraphicsItem *colliding_item)
+bool Bullet::checkIfEnemy(QGraphicsItem *colliding_item)                                                            //check if typeid matches the enemies id
 {
     if(typeid(*(colliding_item)) == typeid(Medium))
         return true;
@@ -71,38 +72,38 @@ bool Bullet::checkIfEnemy(QGraphicsItem *colliding_item)
 
 bool Bullet::bulletIsCollidig()
 {
-    QList<QGraphicsItem*> colliding_items = collidingItems();                                   //create Qlist of colliding items
+    QList<QGraphicsItem*> colliding_items = collidingItems();                                               //create Qlist of colliding items
 
-    for (int i = 0, n = colliding_items.size(); i < n; i++)                                     //check the whole list
+    for (int i = 0, n = colliding_items.size(); i < n; i++)                                                 //check the whole list
     {
-        bool enemy = checkIfEnemy(colliding_items[i]);
+        bool enemy = checkIfEnemy(colliding_items[i]);                                                      //check if enemy
 
-        if(enemy && (colliding_items[i] != creator))                                            //if type id is matching and the bullet didn't hit the creators
+        if(enemy && (colliding_items[i] != creator))                                                        //if enemy and the bullet didn't hit the creators
         {
-            hitted = dynamic_cast<Tank*>(colliding_items[i]);                                   //safe pointer to the hitted element
+            hitted = dynamic_cast<Tank*>(colliding_items[i]);                                               //safe pointer to the hitted element as Tank
 
-            bool is_bouncing = bounce(hitted->armor, penetration, (angle*180)/M_PI, hitted->rotate_angle);
+            bool is_bouncing = bounce(hitted->armor, penetration, (angle*180)/M_PI, hitted->rotate_angle);  //check if bullet has been bounced
 
-            if(!is_bouncing)
-                hitted->hp = hitted->hp - (creator->dmg - (hitted->armor*creator->dmg));            //calculate damage
+            if(!is_bouncing)                                                                                //calculate damage
+                hitted->hp = hitted->hp - (creator->dmg - (hitted->armor*creator->dmg));                    //calculate damage
 
-            if(hitted->hp <= 0)                                                                   //if hp is over
+            if(hitted->hp <= 0)                                                                             //if hp is over
             {
-                scene()->removeItem(hitted);                                                    //remove bullet and hited item
+                scene()->removeItem(hitted);                                                                //remove bullet and hited item
                 scene()->removeItem(this);
 
                 delete colliding_items[i];
                 delete this;
-                return true;                                                                         //end the function
+                return true;                                                                                //end the function
             }
-             scene()->removeItem(this);                                                         //remove only bullet if hp is not over
+             scene()->removeItem(this);                                                                     //remove only bullet if hp is not over
              delete this;
              //qDebug()<<hitted->hp;
-             return true;                                                                            //end the function
+             return true;                                                                                   //end the function
         }
 
         //add ability to decrease the player hp
-        if(typeid (*(colliding_items[i])) == typeid (Player) && (colliding_items[i] != creator))    //same as above
+        if(typeid (*(colliding_items[i])) == typeid (Player) && (colliding_items[i] != creator))            //same as above
         {
             scene()->removeItem(this);
             delete this;
@@ -114,29 +115,25 @@ bool Bullet::bulletIsCollidig()
 
 bool Bullet::bounce(float armor, int penetration, qreal bullet_angle, int hitted_angle)
 {
-    qreal angle_to_normal = abs(180-abs(hitted_angle - bullet_angle));
+    qreal angle_to_normal = abs(180-abs(hitted_angle - bullet_angle));                                      //calculate the angle
 
-    if(angle_to_normal>90)
+    if(angle_to_normal>90)                                                                                  //check if it is in range 0-90
         angle_to_normal = 180-angle_to_normal;
 
-    if((angle_to_normal<= 75 && angle_to_normal >= 60) || angle_to_normal <= 30)
+    quint32 chance = QRandomGenerator::global()->bounded(10,20)-(armor*10)+penetration/(angle_to_normal+1); //generate the chance to bounce
+
+    qDebug()<<chance;
+
+    if(chance < 11)
     {
-        float chance = (rand()% 2) - armor + penetration*0.004 + 1;
-
-        qDebug()<<chance;
-
-        if(chance > 1.5)
-        {
-            qDebug()<<"Odbił sie!!!";
-            return true;
-        }
-        else
-        {
-            qDebug()<<"Nie odbił sie!!!";
-            return false;
-        }
+       qDebug()<<"Odbił sie!!!";
+       return true;
     }
-
+    else
+    {
+       qDebug()<<"Nie odbił sie!!!";
+       return false;
+    }
     qDebug()<<"Nie odbił sie!!!";
     return false;
 }
