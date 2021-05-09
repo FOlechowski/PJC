@@ -8,6 +8,8 @@
 #include <QGraphicsRectItem>
 #include <QDebug>
 #include "player.h"
+#include "obstacles.h"
+class Player;
 
 class Map: public QGraphicsScene
 {
@@ -20,19 +22,15 @@ public:
     int ms_height = 1000;
 
     int difficult = 0;
-
+    //bool isonbridge();
 
 public slots:
 
 private:
 
     Player* ply;
-    QGraphicsRectItem* bridge;
     QGraphicsRectItem* wall1;
     QGraphicsRectItem* wall2;
-    QGraphicsRectItem* water;
-    QGraphicsPixmapItem* rock;
-
 };
 
 #endif // MAP_H

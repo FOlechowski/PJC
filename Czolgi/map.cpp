@@ -9,21 +9,17 @@ Map::Map(Player* player, int diff)
 
     this->setSceneRect(-50, 0, ms_width, ms_height);
 
-    bridge = new QGraphicsRectItem;
+    bridge* bridge_1 = new bridge;
+    bridge_1->setPos(525,150);
 
-    bridge->setRect(this->width()/2-150,this->height()/2,400,80);
-    QPixmap br_tex(QString(":/img/tex/tex_wood_bridge_01.png"));
-    bridge->setBrush(QBrush(br_tex));
+    water* water_1 = new water;
+    water* water_2 = new water;
+    water_1->setRect(this->width()/2, 0, 100,150);
+    water_2->setRect(this->width()/2, 270, 100,this->width()-270);
 
-    water = new QGraphicsRectItem;
-    water->setRect(this->width()/2, 0, 100,this->height());
-    QPixmap wt_tex(QString(":/img/tex/tex_water_01.png"));
-    water->setBrush(QBrush(wt_tex));
-
-    rock = new QGraphicsPixmapItem();
-    rock->setPixmap(QPixmap(":/img/tex/rock.png"));
-    rock->setOffset(40,500);
-
+    //qDebug()<<bridge->data(bridge->type());
+    rock* rock_1 = new rock;
+    rock_1->setPos(50,400);
 
     ply = player;
     ply->setFlag(QGraphicsItem::ItemIsFocusable);
@@ -46,9 +42,10 @@ Map::Map(Player* player, int diff)
 
     this->setBackgroundBrush(QBrush(bground_img));
 
-    this->addItem(water);
-    this->addItem(bridge);
-    this->addItem(rock);
+    this->addItem(water_1);
+    this->addItem(water_2);
+    this->addItem(bridge_1);
+    this->addItem(rock_1);
     this->addItem(enemy);
     this->addItem(enemy2);
     this->addItem(enemy3);
@@ -59,8 +56,6 @@ Map::Map(Player* player, int diff)
 
 Map::~Map()
 {
-    delete bridge;
-    delete water;
     delete wall1;
     delete wall2;
 }

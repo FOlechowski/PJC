@@ -16,6 +16,13 @@ enum difficulty
 medium,
 hard};
 
+<<<<<<< Updated upstream
+=======
+class Map;
+
+class Player;
+
+>>>>>>> Stashed changes
 class Menu;
 
 class Game: public QWidget

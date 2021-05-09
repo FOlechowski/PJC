@@ -23,6 +23,7 @@ SOURCES += \
     map.cpp \
     medium.cpp \
     menu.cpp \
+    obstacles.cpp \
     player.cpp \
     tank.cpp
 
@@ -39,6 +40,7 @@ HEADERS += \
     map.h \
     medium.h \
     menu.h \
+    obstacles.h \
     player.h \
     tank.h
 

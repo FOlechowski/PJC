@@ -102,8 +102,6 @@ void Player::keyPressEvent(QKeyEvent *event)
         //qDebug()<<"pressed S";
     }
 
-
-
     if(event->key() == Qt::Key_Space)
     {
         if(bullets && !is_loading)
@@ -113,7 +111,6 @@ void Player::keyPressEvent(QKeyEvent *event)
             scene()->addItem(bullet);
             shot();
         }
-
         else
         {
             qDebug()<<"Koniec pocisków RAMBO!!!";
@@ -124,9 +121,6 @@ void Player::keyPressEvent(QKeyEvent *event)
 
     //qDebug()<<this->pos();
     //qDebug()<<rotate_angle;
-
-
-
 
 }
 void Player::keyReleaseEvent(QKeyEvent *event)
@@ -148,12 +142,34 @@ void Player::keyReleaseEvent(QKeyEvent *event)
         //qDebug()<<"released S";
     }
 }
-
-void Player::movePlayer()
+bool Player::checkCol()
 {
     QList<QGraphicsItem*> colliding_items = collidingItems();
+    bool isonbridge,isonwater = false;
+    foreach(QGraphicsItem * i , colliding_items)
+    {
+        bridge* b_item = dynamic_cast<bridge *>(i);
+        if (b_item)
+        {
+            isonbridge = true;
+        }
+        water* w_item = dynamic_cast<water *>(i);
+        if (w_item)
+        {
+            isonwater = true;
+        }
+    }
+    if(colliding_items.size()==0||(isonbridge&&!isonwater)){
+        return true;
+    }else if(colliding_items.size()!=0){
+        return false;
+    }
 
-    if (colliding_items.size()==0){
+}
+void Player::movePlayer()
+{
+    if (checkCol()){
+
         if(keyA){
             if(keyW){
                 turnLeft(rotate_angle);
@@ -212,6 +228,7 @@ void Player::movePlayer()
             }
         }
     }else{
+
         if(keyW&&!front_hit&&!back_hit&&!right_hit&&!left_hit){
             front_hit = true;
         }else if(keyS&&!front_hit&&!back_hit&&!right_hit&&!left_hit){
@@ -224,29 +241,25 @@ void Player::movePlayer()
 
         if(front_hit&&keyS){
             moveBackward(5*speed,rotate_angle);
-            QList<QGraphicsItem*> colliding_items = collidingItems();
-            if (colliding_items.size()==0){
+            if (checkCol()){
             front_hit=false;
             }
         }
         if(back_hit&&keyW){
             moveForward(3*speed,rotate_angle);
-            QList<QGraphicsItem*> colliding_items = collidingItems();
-            if (colliding_items.size()==0){
+            if (checkCol()){
             back_hit=false;
             }
         }
         if(right_hit&&keyA){
             turnLeft(rotate_angle);
-            QList<QGraphicsItem*> colliding_items = collidingItems();
-            if (colliding_items.size()==0){
+            if (checkCol()){
             right_hit=false;
             }
         }
         if(left_hit&&keyD){
             turnRight(rotate_angle);
-            QList<QGraphicsItem*> colliding_items = collidingItems();
-            if (colliding_items.size()==0){
+            if (checkCol()){
             left_hit=false;
             }
         }
@@ -255,6 +268,10 @@ void Player::movePlayer()
 
     if(!rotate_angle%15){
     Tank::setTexture(-rotate_angle);
+    }
+
+    if((this->pos()).y()>=450){
+
     }
 }
 

@@ -45,6 +45,8 @@ void Game::draw_interface(Player* player)
     map = new Map(player,this->diffic);
 
     map_view->setScene(map);
+    //qDebug()<<game_interfece->verticalScrollBar();
+    //game_interfece->setVerticalScrollBar()->setValue(600,100,50,10);
 }
 
 void Game::newGame()

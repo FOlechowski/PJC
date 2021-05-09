@@ -6,6 +6,8 @@
 #include <QObject>
 #include "tank.h"
 #include <QString>
+#include "obstacles.h"
+
 
 
 class Player : public Tank
@@ -28,7 +30,7 @@ private:
     void moveBackward(qreal m_distance, int m_angle);
     void turnLeft(int &m_angle);
     void turnRight(int &m_angle);
-
+    bool checkCol();
     int bullets = 50;
     QString name;
     bool keyA, keyW, keyD, keyS;
