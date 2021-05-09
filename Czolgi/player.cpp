@@ -120,7 +120,6 @@ void Player::keyPressEvent(QKeyEvent *event)
         }
     }
 
-    qDebug()<<this->pos();
     //qDebug()<<rotate_angle;
 
     //qDebug()<<this->pos();

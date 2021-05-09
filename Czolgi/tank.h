@@ -12,7 +12,7 @@ class Tank : public QObject, public QGraphicsPixmapItem
 public:
     Tank();
 
-    QTimer *timer_reload = new QTimer;
+    QTimer *timer_reload = new QTimer(this);
 
     void shot(float angle);
     void move(qreal dx, qreal dy);

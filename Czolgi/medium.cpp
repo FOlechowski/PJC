@@ -10,6 +10,9 @@ Medium::Medium(qreal x, qreal y, int dif, Player* pl)
 
     setPathTextures();
 
+    if(rotate_angle == -1000)
+        rotate_angle = 180;
+
     QTimer * timer_move = new QTimer();
     connect(timer_move, SIGNAL(timeout()),this,SLOT(move()));
     connect(timer_reload, SIGNAL(timeout()),this,SLOT(reload()));

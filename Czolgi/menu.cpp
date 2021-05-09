@@ -8,12 +8,12 @@ Menu::Menu(Game *parent) : QGraphicsView(parent)
 {
     game = parent;
 
-    setFixedSize(QSize(game->width(), game->height()));
+    this->setFixedSize(QSize(game->width(), game->height()));
 
-    setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    this->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    this->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
-    display();
+    this->display();
 }
 
 
@@ -22,7 +22,7 @@ void Menu::play_music()
     //Intro sound
     QMediaPlayer* intro = new QMediaPlayer;
     intro->setMedia(QUrl("qrc:/sound/snd/Intro3.WAV"));
-    //intro->play();
+    intro->play();
 }
 
 void  Menu::display()
@@ -180,7 +180,6 @@ void Menu::quit_all()
 {
     dialog->close();
     delete dialog;
-
     game->close();
 }
 

@@ -8,6 +8,7 @@
 
 Enemy::Enemy()                                              //empty default constructor
 {
+
 }
 
 void Enemy::holdPos()
@@ -18,9 +19,6 @@ void Enemy::holdPos()
 
 void Enemy::patrolPathHorizontaly(qreal end)
 {
-    if(rotate_angle == -1000)
-        rotate_angle = 0;
-
     if(!is_rotating)
     {
         if(reverso)
@@ -78,30 +76,27 @@ void Enemy::patrolPathHorizontaly(qreal end)
 
 void Enemy::patrolPathVerticaly(qreal end)
 {
-    if(rotate_angle == -1000)
-        rotate_angle = 90;
-
     if(!is_rotating)
     {
         if(reverso)
         {
-            if(rotate_angle > -90 && rotate_angle < 90)
+            if(rotate_angle > -90 && rotate_angle <= 90)
                 rotate_angle = rotate_angle -15;
 
             else if(rotate_angle < -90 || rotate_angle > 90)
             {
                 rotate_angle = rotate_angle +15;
-                if(rotate_angle > 180)
+                if(rotate_angle >= 180)
                     rotate_angle = -165;
             }
         }
 
         else
         {
-            if(rotate_angle > 90 || rotate_angle < -90)
+            if(rotate_angle > 90 || rotate_angle <= -90)
             {
                 rotate_angle = rotate_angle -15;
-                if(rotate_angle < -165)
+                if(rotate_angle <= -165)
                     rotate_angle = 180;
             }
             else if(rotate_angle < 90 && rotate_angle > -90)
@@ -115,7 +110,14 @@ void Enemy::patrolPathVerticaly(qreal end)
 
         if(rotate_angle != (-90))
         {
-            rotate_angle = rotate_angle - 15;
+            if(rotate_angle > -90 && rotate_angle <= 90)
+                rotate_angle = rotate_angle - 15;
+            else if(rotate_angle < -90 || rotate_angle > 90)
+            {
+                rotate_angle = rotate_angle +15;
+                if(rotate_angle > 180)
+                    rotate_angle = -165;
+            }
         }
         else
         {
@@ -129,7 +131,14 @@ void Enemy::patrolPathVerticaly(qreal end)
         is_rotating = true;
         if(rotate_angle != 90)
         {
-            rotate_angle = rotate_angle + 15;
+            if(rotate_angle < 90 && rotate_angle >= -90)
+                rotate_angle = rotate_angle + 15;
+            else if(rotate_angle > 90 || rotate_angle < -90)
+            {
+                rotate_angle = rotate_angle -15;
+                if(rotate_angle < -165)
+                    rotate_angle = 180;
+            }
         }
         else
         {
@@ -223,6 +232,30 @@ void Enemy::setCommand(char comm)
     command = comm;                                                                         //set command
 }
 
+void Enemy::followPlayer()
+{
+    qreal radian_angle = rotate_angle*M_PI/180;
+
+    bool is_in_pos = false;
+
+    if(abs(x()-player_lastx)<100 && abs(y()-player_lasty)<100)
+    {
+        is_in_pos = true;
+    }
+
+    if(!is_in_pos)
+    {
+        Tank::move(speed*cos(radian_angle), speed*sin(radian_angle));
+    }
+
+    if(!watchdog->isActive() && is_in_pos && !timer_was_set)
+    {
+        connect(watchdog,SIGNAL(timeout()),this,SLOT(comeBack()));
+        watchdog->start(1000);
+        timer_was_set = true;
+    }
+}
+
 void Enemy::move()
 {
     setTexture(rotate_angle);
@@ -234,7 +267,14 @@ void Enemy::move()
         int dx = (player->x()-50) - (this->x()-50);
         int dy = (player->y()-50) - (this->y()-50);
 
+        player_lastx = player->x();
+        player_lasty = player->y();
+
         float angle = atan2(dy,dx);
+
+        was_spotted = true;
+
+        timer_was_set = false;
 
         aim(angle);
         shot(angle);
@@ -242,6 +282,15 @@ void Enemy::move()
 
     else
     {
+        if(!was_spotted)
+        {
+            lastPosx = x();
+            lastPosy = y();
+        }
+
+        if(was_spotted && !(command== GUARD || command==VERT || command==HORIZON))
+            followPlayer();
+
         switch(command)
         {
             case VERT:
@@ -259,7 +308,58 @@ void Enemy::move()
             default:
             break;
         }
+    }
+}
 
+void Enemy::comeBack()
+{
+    watchdog->stop();
+    watchdog->start(50);
+
+    qreal dx = x()-lastPosx;
+    qreal dy = y()-lastPosy;
+
+    float angle = atan2(dy,dx)*180/M_PI;
+
+    if(angle <= 0)
+        angle = angle + 180;
+    else
+        angle = angle - 180;
+
+    if(abs(angle - rotate_angle) > 10)
+    {
+        is_rotating = true;
+
+        if(rotate_angle < angle)
+        {
+            rotate_angle = rotate_angle + 15;
+        }
+
+        else if(rotate_angle > angle)
+        {
+            rotate_angle = rotate_angle -15;
+        }
+    }
+    else
+    {
+        is_rotating = false;
+    }
+
+    if(!is_rotating)
+    {
+        if( abs(lastPosx-x()) < 20 && abs(lastPosy-y()) < 20)
+        {
+            was_spotted = false;
+            watchdog->start(1000);
+            watchdog->stop();
+            watchdog->disconnect(watchdog,SIGNAL(timeout()),this,SLOT(comeBack()));
+            timer_was_set = false;
+            return;
+        }
+        else
+        {
+            Tank::move(speed*cos(angle*M_PI/180), speed*sin(angle*M_PI/180));
+        }
     }
 }
 

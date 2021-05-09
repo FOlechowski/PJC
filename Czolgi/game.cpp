@@ -16,6 +16,8 @@ void Game::create_player(QString name)
     player = new Player();
     player->setPlayerName(name);
     player->dmg = 120;
+    player->hp = 300;
+    player->armor = 0.5;
 }
 
 void Game::displayMenu()
@@ -47,8 +49,8 @@ void Game::draw_interface(Player* player)
 
 void Game::newGame()
 {
-        menu->close();
-        delete menu;
+        menu->hide();
+        menu->close();    
 
         init_view = new QGraphicsView(this);
         init_view->setFixedSize(this->width(),this->height());
@@ -112,6 +114,8 @@ void Game::newGame()
         init_scene->addItem(text);
 
         init_view->show();
+
+        delete menu;
 }
 
 void Game::set_baron()

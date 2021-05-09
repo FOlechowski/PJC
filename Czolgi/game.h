@@ -16,7 +16,6 @@ enum difficulty
 medium,
 hard};
 
-
 class Menu;
 
 class Game: public QWidget

@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <QDebug>
+#include <QTimer>
 #include "player.h"
 #include "tank.h"
 
@@ -23,21 +24,32 @@ public:
     bool check();
     void aim(float angle);
     void setCommand(char comm);
+    void followPlayer();
 
     qreal initx;
     qreal inity;
 
+    bool timer_was_set = false;
+
 public slots:
     void move();
+    void comeBack();
 
 protected:
-
-    qreal player_x;
-    qreal player_y;
-
     char command;
     Player *player;
+
+private:
+    QTimer *watchdog = new QTimer(this);
+
+    qreal lastPosx = 0;
+    qreal lastPosy = 0;
+
+    qreal player_lastx;
+    qreal player_lasty;
+
     bool reverso = false;
+    bool was_spotted = false;
 };
 
 #endif // ENEMY_H

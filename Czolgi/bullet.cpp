@@ -27,7 +27,7 @@ Bullet::Bullet(float ang, Tank* tank)
     this->setTransformOriginPoint(20,5);                        //set the rotating point at the middle of the Pixmap
     this->setRotation(deg_angle);                               //rotate the texture to be parallel to the movement vector
 
-    QTimer * timer = new QTimer();                              //start timer for it
+    QTimer * timer = new QTimer(this);                              //start timer for it
     connect(timer, SIGNAL(timeout()),this,SLOT(moveBullet()));        //connect to the slot that will emitate the smooth movement
     timer->start(10);                                           //start timer
 
@@ -78,7 +78,7 @@ bool Bullet::bulletIsCollidig()
     {
         bool enemy = checkIfEnemy(colliding_items[i]);                                                      //check if enemy
 
-        if(enemy && (colliding_items[i] != creator))                                                        //if enemy and the bullet didn't hit the creators
+        if((enemy || typeid (*(colliding_items[i])) == typeid (Player)) && (colliding_items[i] != creator))                                                        //if enemy and the bullet didn't hit the creators
         {
             hitted = dynamic_cast<Tank*>(colliding_items[i]);                                               //safe pointer to the hitted element as Tank
 
@@ -87,7 +87,7 @@ bool Bullet::bulletIsCollidig()
             if(!is_bouncing)                                                                                //calculate damage
                 hitted->hp = hitted->hp - (creator->dmg - (hitted->armor*creator->dmg));                    //calculate damage
 
-            if(hitted->hp <= 0)                                                                             //if hp is over
+            if(hitted->hp <= 0 && enemy)                                                                             //if hp is over
             {
                 scene()->removeItem(hitted);                                                                //remove bullet and hited item
                 scene()->removeItem(this);
@@ -96,18 +96,11 @@ bool Bullet::bulletIsCollidig()
                 delete this;
                 return true;                                                                                //end the function
             }
+
              scene()->removeItem(this);                                                                     //remove only bullet if hp is not over
              delete this;
-             //qDebug()<<hitted->hp;
+             qDebug()<<hitted->hp;
              return true;                                                                                   //end the function
-        }
-
-        //add ability to decrease the player hp
-        if(typeid (*(colliding_items[i])) == typeid (Player) && (colliding_items[i] != creator))            //same as above
-        {
-            scene()->removeItem(this);
-            delete this;
-            return true;
         }
     }
     return false;
