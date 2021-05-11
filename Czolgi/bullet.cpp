@@ -8,11 +8,14 @@
 #include <QRandomGenerator>
 #include <QDebug>
 #include <QList>
+
 #include "medium.h"
 #include "destroyer.h"
 #include "boss.h"
 #include "heavy.h"
 #include "light.h"
+#include "obstacles.h"
+
 #include "cmath"
 #include "ctime"
 
@@ -76,31 +79,48 @@ bool Bullet::bulletIsCollidig()
 
     for (int i = 0, n = colliding_items.size(); i < n; i++)                                                 //check the whole list
     {
-        bool enemy = checkIfEnemy(colliding_items[i]);                                                      //check if enemy
-
-        if((enemy || typeid (*(colliding_items[i])) == typeid (Player)) && (colliding_items[i] != creator))                                                        //if enemy and the bullet didn't hit the creators
+        if(colliding_items[i] != creator)
         {
-            hitted = dynamic_cast<Tank*>(colliding_items[i]);                                               //safe pointer to the hitted element as Tank
+            bool enemy = checkIfEnemy(colliding_items[i]);                                                      //check if enemy
 
-            bool is_bouncing = bounce(hitted->armor, penetration, (angle*180)/M_PI, hitted->rotate_angle);  //check if bullet has been bounced
-
-            if(!is_bouncing)                                                                                //calculate damage
-                hitted->hp = hitted->hp - (creator->dmg - (hitted->armor*creator->dmg));                    //calculate damage
-
-            if(hitted->hp <= 0 && enemy)                                                                             //if hp is over
+            if((enemy || typeid (*(colliding_items[i])) == typeid (Player)))                                                        //if enemy and the bullet didn't hit the creators
             {
-                scene()->removeItem(hitted);                                                                //remove bullet and hited item
-                scene()->removeItem(this);
+                hitted = dynamic_cast<Tank*>(colliding_items[i]);                                               //safe pointer to the hitted element as Tank
 
-                delete colliding_items[i];
+                bool is_bouncing = bounce(hitted->armor, penetration, (angle*180)/M_PI, hitted->rotate_angle);  //check if bullet has been bounced
+
+                if(!is_bouncing)                                                                                //calculate damage
+                    hitted->hp = hitted->hp - (creator->dmg - (hitted->armor*creator->dmg));                    //calculate damage
+
+                if(hitted->hp <= 0 && enemy)                                                                             //if hp is over
+                {
+                    scene()->removeItem(hitted);                                                                //remove bullet and hited item
+                    scene()->removeItem(this);
+
+                    delete colliding_items[i];
+                    delete this;
+                    return true;                                                                                //end the function
+                }
+
+                else if(hitted->hp <=0 && !enemy)
+                {
+                    qDebug()<<"Game Over!!!";
+                    hitted->hp = 0;
+                }
+
+                scene()->removeItem(this);                                                                     //remove only bullet if hp is not over
                 delete this;
-                return true;                                                                                //end the function
+                qDebug()<<hitted->hp;
+                return true;                                                                                   //end the function
             }
 
-             scene()->removeItem(this);                                                                     //remove only bullet if hp is not over
-             delete this;
-             qDebug()<<hitted->hp;
-             return true;                                                                                   //end the function
+            if(typeid (*(colliding_items[i])) != typeid (Water) && typeid(*(colliding_items[i])) != typeid (Bridge))
+            {
+                scene()->removeItem(this);
+                delete this;
+                qDebug()<<(colliding_items[i]);
+                return true;
+            }
         }
     }
     return false;
@@ -119,14 +139,7 @@ bool Bullet::bounce(float armor, int penetration, qreal bullet_angle, int hitted
 
     if(chance < 11)
     {
-       qDebug()<<"Odbił sie!!!";
        return true;
     }
-    else
-    {
-       qDebug()<<"Nie odbił sie!!!";
-       return false;
-    }
-    qDebug()<<"Nie odbił sie!!!";
     return false;
 }

@@ -148,12 +148,12 @@ bool Player::checkCol()
     bool isonbridge,isonwater = false;
     foreach(QGraphicsItem * i , colliding_items)
     {
-        bridge* b_item = dynamic_cast<bridge *>(i);
+        Bridge* b_item = dynamic_cast<Bridge *>(i);
         if (b_item)
         {
             isonbridge = true;
         }
-        water* w_item = dynamic_cast<water *>(i);
+        Water* w_item = dynamic_cast<Water *>(i);
         if (w_item)
         {
             isonwater = true;

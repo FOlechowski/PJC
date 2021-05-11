@@ -116,8 +116,6 @@ void Game::newGame()
         init_scene->addItem(text);
 
         init_view->show();
-
-        delete menu;
 }
 
 void Game::set_baron()

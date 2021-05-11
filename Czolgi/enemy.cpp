@@ -313,6 +313,8 @@ void Enemy::move()
 
 void Enemy::comeBack()
 {
+    bool is_back = false;
+
     watchdog->stop();
     watchdog->start(50);
 
@@ -326,7 +328,7 @@ void Enemy::comeBack()
     else
         angle = angle - 180;
 
-    if(abs(angle - rotate_angle) > 10)
+    if(abs(angle - rotate_angle) > 10 && !(abs(lastPosx-x()) < 40 && abs(lastPosy-y()) < 40))
     {
         is_rotating = true;
 
@@ -349,17 +351,31 @@ void Enemy::comeBack()
     {
         if( abs(lastPosx-x()) < 20 && abs(lastPosy-y()) < 20)
         {
-            was_spotted = false;
-            watchdog->start(1000);
-            watchdog->stop();
-            watchdog->disconnect(watchdog,SIGNAL(timeout()),this,SLOT(comeBack()));
-            timer_was_set = false;
-            return;
+            if(rotate_angle != 180)
+            {
+                if(rotate_angle>=0)
+                    rotate_angle = rotate_angle +15;
+                else
+                    rotate_angle = rotate_angle -15;
+            }
+            else
+                is_back = true;
         }
+
         else
         {
             Tank::move(speed*cos(angle*M_PI/180), speed*sin(angle*M_PI/180));
         }
+    }
+
+    if(is_back)
+    {
+        was_spotted = false;
+        watchdog->start(1000);
+        watchdog->stop();
+        watchdog->disconnect(watchdog,SIGNAL(timeout()),this,SLOT(comeBack()));
+        timer_was_set = false;
+        return;
     }
 }
 

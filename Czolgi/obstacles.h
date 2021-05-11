@@ -5,28 +5,28 @@
 #include <QGraphicsRectItem>
 #include <QBrush>
 
-class obstacles : public QGraphicsPixmapItem
+class Obstacles : public QGraphicsPixmapItem
 {
 public:
-    obstacles();
+    Obstacles();
 };
 
-class water : public QGraphicsRectItem
+class Water : public QGraphicsRectItem
 {
 public:
-    water();
+    Water();
 };
 
-class bridge : public QGraphicsPixmapItem
+class Bridge : public QGraphicsPixmapItem
 {
 public:
-    bridge();
+    Bridge();
 };
 
-class rock : public QGraphicsPixmapItem
+class Rock : public QGraphicsPixmapItem
 {
 public:
-    rock();
+    Rock();
 
 };
 
