@@ -190,4 +190,60 @@ void Game::set_fiolet()
     }
 }
 
+void Game::keyReleaseEvent(QKeyEvent *event)
+{
+    if(event->key() == Qt::Key_W){
+        player->keyW = false;
+        //qDebug()<<"released W";
+    }
+    if(event->key() == Qt::Key_D){
+        player->keyD = false;
+        //qDebug()<<"released D";
+    }
+    if(event->key() == Qt::Key_A){
+        player->keyA = false;
+        //qDebug()<<"released A";
+    }
+    if(event->key() == Qt::Key_S){
+        player->keyS = false;
+        //qDebug()<<"released S";
+    }
+    if(event->key() == Qt::Key_Space)
+    {
+        player->keySpace = false;
 
+    }
+}
+
+void Game::keyPressEvent(QKeyEvent *event){
+//qDebug()<<colliding_items;
+//grabKeyboard();
+    if(event->key() == Qt::Key_A)
+    {
+        player->keyA = true;
+        //qDebug()<<"pressed A";
+    }
+
+    if(event->key() == Qt::Key_D)
+    {
+        player->keyD = true;
+        //qDebug()<<"pressed D";
+    }
+
+    if(event->key() == Qt::Key_W)
+    {
+        player->keyW = true;
+        //qDebug()<<"pressed W";
+    }
+
+    if(event->key() == Qt::Key_S)
+    {
+        player->keyS = true;
+        //qDebug()<<"pressed S";
+    }
+    if(event->key() == Qt::Key_Space)
+    {
+        player->keySpace = true;
+
+    }
+}

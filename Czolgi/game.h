@@ -7,6 +7,7 @@
 #include <QGraphicsScene>
 #include <QMediaPlayer>
 #include <QLineEdit>
+#include <QKeyEvent>
 #include "button.h"
 #include "map.h"
 #include "player.h"
@@ -33,7 +34,8 @@ public:
     void displayMenu();
     void draw_interface(Player* player);
     void newGame();
-
+    void keyPressEvent(QKeyEvent * event);
+    void keyReleaseEvent(QKeyEvent *event);
     int diffic = 0;
 
     QString bckg_path = ":/img/img/background_02.png";

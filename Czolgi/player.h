@@ -19,9 +19,7 @@ public:
 
     void setPlayerName(QString Pname);
     void shot();
-    void keyPressEvent(QKeyEvent * event);
-    void keyReleaseEvent(QKeyEvent *event);
-
+    bool keyA, keyW, keyD, keyS,keySpace = false;
 public slots:
 
 private:
@@ -33,7 +31,7 @@ private:
     bool checkCol();
     int bullets = 50;
     QString name;
-    bool keyA, keyW, keyD, keyS;
+
     bool front_hit, back_hit, right_hit, left_hit = false;
 private slots:
     void movePlayer();

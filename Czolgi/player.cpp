@@ -72,96 +72,33 @@ void Player::turnRight(int &m_angle)
     }
 }
 
-
-void Player::keyPressEvent(QKeyEvent *event)
-{
-
-    //qDebug()<<colliding_items;
-    //grabKeyboard();
-    if(event->key() == Qt::Key_A)
-    {
-        keyA = true;
-        //qDebug()<<"pressed A";
-    }
-
-    if(event->key() == Qt::Key_D)
-    {
-        keyD = true;
-        //qDebug()<<"pressed D";
-    }
-
-    if(event->key() == Qt::Key_W)
-    {
-        keyW = true;
-        //qDebug()<<"pressed W";
-    }
-
-    if(event->key() == Qt::Key_S)
-    {
-        keyS = true;
-        //qDebug()<<"pressed S";
-    }
-
-    if(event->key() == Qt::Key_Space)
-    {
-        if(bullets && !is_loading)
-        {
-            Bullet *bullet = new Bullet(-rotate_angle*M_PI/180, this);
-            bullet->setPos(x()+50,y()+35);
-            scene()->addItem(bullet);
-            shot();
-        }
-        else
-        {
-            qDebug()<<"Koniec pocisków RAMBO!!!";
-        }
-    }
-
-    //qDebug()<<rotate_angle;
-
-    //qDebug()<<this->pos();
-    //qDebug()<<rotate_angle;
-
-}
-void Player::keyReleaseEvent(QKeyEvent *event)
-{
-    if(event->key() == Qt::Key_W){
-        keyW = false;
-        //qDebug()<<"released W";
-    }
-    if(event->key() == Qt::Key_D){
-        keyD = false;
-        //qDebug()<<"released D";
-    }
-    if(event->key() == Qt::Key_A){
-        keyA = false;
-        //qDebug()<<"released A";
-    }
-    if(event->key() == Qt::Key_S){
-        keyS = false;
-        //qDebug()<<"released S";
-    }
-}
 bool Player::checkCol()
 {
     QList<QGraphicsItem*> colliding_items = collidingItems();
+    //qDebug()<<colliding_items;
     bool isonbridge,isonwater = false;
     foreach(QGraphicsItem * i , colliding_items)
     {
+
         Bridge* b_item = dynamic_cast<Bridge *>(i);
         if (b_item)
         {
             isonbridge = true;
+        }else{
+            isonbridge = false;
         }
         Water* w_item = dynamic_cast<Water *>(i);
         if (w_item)
         {
             isonwater = true;
+        }else{
+            isonwater = false;
         }
     }
     if(colliding_items.size()==0||(isonbridge&&!isonwater)){
         return true;
     }else if(colliding_items.size()!=0){
+        qDebug()<<"kabaczek";
         return false;
     }
 
@@ -264,6 +201,21 @@ void Player::movePlayer()
             }
         }
 
+    }
+
+    if(keySpace)
+    {
+        if(bullets && !is_loading)
+        {
+            Bullet *bullet = new Bullet(-rotate_angle*M_PI/180, this);
+            bullet->setPos(x()+50,y()+35);
+            scene()->addItem(bullet);
+            shot();
+        }
+        else
+        {
+            qDebug()<<"Koniec pocisków RAMBO!!!";
+        }
     }
 
     if(!rotate_angle%15){
