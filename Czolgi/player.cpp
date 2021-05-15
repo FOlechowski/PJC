@@ -75,30 +75,28 @@ void Player::turnRight(int &m_angle)
 bool Player::checkCol()
 {
     QList<QGraphicsItem*> colliding_items = collidingItems();
-    //qDebug()<<colliding_items;
+    //qDebug()<<typeid(Bridge);
     bool isonbridge,isonwater = false;
-    foreach(QGraphicsItem * i , colliding_items)
-    {
 
-        Bridge* b_item = dynamic_cast<Bridge *>(i);
-        if (b_item)
-        {
+    for (int i = 0, n = colliding_items.size(); i < n; i++){
+
+        if(typeid((*colliding_items[i])) == typeid(Bridge)){
             isonbridge = true;
         }else{
             isonbridge = false;
         }
-        Water* w_item = dynamic_cast<Water *>(i);
-        if (w_item)
+        if (typeid((*colliding_items[i])) == typeid(Water))
         {
             isonwater = true;
         }else{
             isonwater = false;
         }
+
     }
+
     if(colliding_items.size()==0||(isonbridge&&!isonwater)){
         return true;
     }else if(colliding_items.size()!=0){
-        qDebug()<<"kabaczek";
         return false;
     }
 
