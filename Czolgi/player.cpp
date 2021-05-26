@@ -76,7 +76,7 @@ bool Player::checkCol()
 {
     QList<QGraphicsItem*> colliding_items = collidingItems();
     //qDebug()<<typeid(Bridge);
-    bool isonbridge,isonwater = false;
+    bool isonbridge,isonwater,stick = false;
 
     for (int i = 0, n = colliding_items.size(); i < n; i++){
 
@@ -91,10 +91,16 @@ bool Player::checkCol()
         }else{
             isonwater = false;
         }
+        if (typeid((*colliding_items[i])) == typeid(QGraphicsRectItem)){
+            stick = true;
+            qDebug()<<"patykuje";
+        }else{
+            stick = false;
+        }
 
     }
 
-    if(colliding_items.size()==0||(isonbridge&&!isonwater)){
+    if(colliding_items.size()==0||(isonbridge&&!isonwater)||(stick&&colliding_items.size()==1)||(stick&&!isonwater&&colliding_items.size()==2)||(stick&&!isonwater&&isonbridge&&colliding_items.size()==3)){
         return true;
     }else if(colliding_items.size()!=0){
         return false;

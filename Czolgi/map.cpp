@@ -27,19 +27,21 @@ Map::Map(Player* player, int diff)
     ply->setPos(50, 50);
 
     Medium *enemy = new Medium(750,100, difficult, ply);
-    enemy->setPos(enemy->initx, enemy->inity);
+    enemy->setPos(enemy->pointList[0].x(), enemy->pointList[0].y());
     enemy->setCommand(VERT);
+    enemy->addPointToPath(800,750);
+    this->addItem(enemy);
+    enemy->addStick();
+//    Medium *enemy2 = new Medium(350,200, difficult, ply);
+//    enemy2->setPos(enemy2->initx, enemy2->inity);
+//    enemy2->setCommand(VERT);
 
-    Medium *enemy2 = new Medium(350,200, difficult, ply);
-    enemy2->setPos(enemy2->initx, enemy2->inity);
-    enemy2->setCommand(VERT);
+//    Destroyer *enemy3= new Destroyer(50,550, difficult, ply);
+//    enemy3->setPos(enemy3->initx, enemy3->inity);
+//    enemy3->setCommand(GUARD);
 
-    Destroyer *enemy3= new Destroyer(50,550, difficult, ply);
-    enemy3->setPos(enemy3->initx, enemy3->inity);
-    enemy3->setCommand(GUARD);
-
-    Medium *enemy4 = new Medium(800,600, difficult, ply);
-    enemy4->setPos(enemy4->initx, enemy4->inity);
+//    Medium *enemy4 = new Medium(800,600, difficult, ply);
+//    enemy4->setPos(enemy4->initx, enemy4->inity);
 
     QPixmap bground_img(QString(":/img/tex/tex_sand_01.png"));
 
@@ -49,10 +51,10 @@ Map::Map(Player* player, int diff)
     this->addItem(water_2);
     this->addItem(bridge_1);
     this->addItem(rock_1);
-    this->addItem(enemy);
-    this->addItem(enemy2);
-    this->addItem(enemy3);
-    this->addItem(enemy4);
+
+//    this->addItem(enemy2);
+//    this->addItem(enemy3);
+//    this->addItem(enemy4);
     this->addItem(ply);
 
     qDebug() << difficult;
