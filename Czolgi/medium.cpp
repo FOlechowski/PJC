@@ -3,8 +3,7 @@
 
 Medium::Medium(qreal x, qreal y, int dif, Player* pl)
 {
-    initx = x;
-    inity = y;
+    addPointToPath(x,y);
 
     player = pl;
 

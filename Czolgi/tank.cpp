@@ -15,7 +15,7 @@ void Tank::shot(float angle)
         timer_reload->start(reload_time);
         is_loading = true;
         Bullet *bullet = new Bullet(angle, this);
-        bullet->setPos(x()+50,y()+50);
+        bullet->setPos(x()+35,y()+50);
         scene()->addItem(bullet);
     }
 }

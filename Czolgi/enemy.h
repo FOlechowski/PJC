@@ -7,9 +7,14 @@
 #include "player.h"
 #include "tank.h"
 
+#include <QGraphicsRectItem>
+#include <QGraphicsScene>
+#include <QList>
+
 #define VERT 'v'
 #define HORIZON 'h'
 #define GUARD 'g'
+#define PATROL 'p'
 
 class Enemy : public Tank
 {
@@ -25,11 +30,16 @@ public:
     void aim(float angle);
     void setCommand(char comm);
     void followPlayer();
+    void addStick();
+    bool obstacleInLine();
+    void avoidObstacle();
 
-    qreal initx;
-    qreal inity;
+    void addPointToPath(int x, int y);
+
+    void goTo();
 
     bool timer_was_set = false;
+    QList<QPoint> pointList;
 
 public slots:
     void move();
@@ -41,12 +51,15 @@ protected:
 
 private:
     QTimer *watchdog = new QTimer(this);
+    QGraphicsRectItem *stick = NULL;
 
-    qreal lastPosx = 0;
-    qreal lastPosy = 0;
+    int lastPosx = 0;
+    int lastPosy = 0;
 
-    qreal player_lastx;
-    qreal player_lasty;
+    int player_lastx;
+    int player_lasty;
+
+    int pointer = 0;
 
     bool reverso = false;
     bool was_spotted = false;

@@ -4,11 +4,11 @@
  */
 
 #include "enemy.h"
+#include "obstacles.h"
 #include <cmath>
 
 Enemy::Enemy()                                              //empty default constructor
 {
-
 }
 
 void Enemy::holdPos()
@@ -53,7 +53,7 @@ void Enemy::patrolPathHorizontaly(qreal end)
         }
     }
 
-    if((x()-speed) < initx)                                 //check if start of the path
+    if((x()-speed) < pointList[0].x())                                 //check if start of the path
     {
         is_rotating = true;
         if(rotate_angle != 0)
@@ -126,7 +126,7 @@ void Enemy::patrolPathVerticaly(qreal end)
         }
     }
 
-    if((y()-speed) < inity)                                     //check if start of the path
+    if((y()-speed) < pointList[0].y())                                     //check if start of the path
     {
         is_rotating = true;
         if(rotate_angle != 90)
@@ -170,7 +170,7 @@ void Enemy::aim(float angle)
 
     if(deg_angle >= 0)                                                                      //check if player is above or belove the enemy
     {
-        if((deg_angle - rotate_angle) > 15)                                                 //check if rotation is needed
+        if((deg_angle - rotate_angle) > 10)                                                 //check if rotation is needed
         {
             if((deg_angle - rotate_angle)>180)                                              //check which rotation direction is more optimal
                 rotate_angle = rotate_angle - 15;                                           //rotate counterclockwise
@@ -183,7 +183,7 @@ void Enemy::aim(float angle)
             is_rotating = true;                                                             //set the flag
             return;
         }
-        else if((deg_angle - rotate_angle) < -15)
+        else if((deg_angle - rotate_angle) < -10)
         {
             rotate_angle = rotate_angle -15;
             is_rotating = true;
@@ -199,7 +199,7 @@ void Enemy::aim(float angle)
 
     else
     {
-        if((rotate_angle - deg_angle) > 15)
+        if((rotate_angle - deg_angle) > 10)
         {
             if((rotate_angle - deg_angle)<180)
                 rotate_angle = rotate_angle - 15;
@@ -212,7 +212,7 @@ void Enemy::aim(float angle)
             is_rotating = true;                                                             //set the flag
             return;
         }
-        else if((rotate_angle - deg_angle) < -15)
+        else if((rotate_angle - deg_angle) < -10)
         {
             rotate_angle = rotate_angle +15;
             is_rotating = true;
@@ -256,6 +256,66 @@ void Enemy::followPlayer()
     }
 }
 
+void Enemy::addStick()
+{
+    stick = new QGraphicsRectItem(this);
+    stick->setRect(50,50,2,(view_range-120));
+    stick->setTransformOriginPoint(50,50);
+    stick->setVisible(true);
+}
+
+bool Enemy::obstacleInLine()
+{
+    QList<QGraphicsItem*> colliding_items = stick->collidingItems();
+    for (int i = 0, n = colliding_items.size(); i < n; i++)
+    {
+        if(typeid(*(colliding_items[i])) != typeid(Water) && typeid(*(colliding_items[i])) != typeid(Bridge) && colliding_items[i] != this)
+            return true;
+    }
+
+    return false;
+}
+
+void Enemy::avoidObstacle()
+{
+    QList<QGraphicsItem*> colliding_items = stick->collidingItems();
+
+    for (int i = 0, n = colliding_items.size(); i < n; i++)
+    {
+
+    }
+}
+
+void Enemy::addPointToPath(int x, int y)
+{
+    QPoint point;
+    point.setX(x);
+    point.setY(y);
+
+    pointList.append(point);
+}
+
+void Enemy::goTo()
+{
+    int next = pointer + 1;
+
+    int dx = pointList[pointer].x()-pointList[next].x();
+    int dy = pointList[pointer].y()-pointList[next].y();
+
+    float angle = atan2(dy,dx);
+    if(angle >= 0)
+    {
+        angle = angle - M_PI;
+    }
+    else
+    {
+        angle = angle + M_PI;
+    }
+
+    aim(angle);
+    qDebug()<<angle;
+}
+
 void Enemy::move()
 {
     setTexture(rotate_angle);
@@ -277,7 +337,10 @@ void Enemy::move()
         timer_was_set = false;
 
         aim(angle);
-        shot(angle);
+        bool obstacle_in_line = obstacleInLine();
+
+        if(!obstacle_in_line)
+            shot(angle);
     }
 
     else
@@ -294,11 +357,11 @@ void Enemy::move()
         switch(command)
         {
             case VERT:
-                patrolPathVerticaly(inity+300);
+                goTo();
             break;
 
             case HORIZON:
-                patrolPathHorizontaly(initx+300);
+                goTo();
             break;
 
             case GUARD:
@@ -308,6 +371,11 @@ void Enemy::move()
             default:
             break;
         }
+    }
+
+    if(stick != NULL)
+    {
+        stick->setRotation(rotate_angle-90);
     }
 }
 

@@ -21,18 +21,18 @@
 
 Bullet::Bullet(float ang, Tank* tank)
 {
-    creator = tank;                                             //save the pointer of the object that created bullet
-    angle = ang;                                                //set the value of the vector movement angle
+    creator = tank;                                                     //save the pointer of the object that created bullet
+    angle = ang;                                                        //set the value of the vector movement angle
 
-    qreal deg_angle = (angle*180)/M_PI;                         //calculate angle in degrees
+    qreal deg_angle = (angle*180)/M_PI;                                 //calculate angle in degrees
 
-    this->setPixmap(QPixmap(":/img/tex/tex_bullet_01.png"));    //set the texture for the bullet
-    this->setTransformOriginPoint(20,5);                        //set the rotating point at the middle of the Pixmap
-    this->setRotation(deg_angle);                               //rotate the texture to be parallel to the movement vector
+    this->setPixmap(QPixmap(":/img/tex/tex_bullet_01.png"));            //set the texture for the bullet
+    this->setTransformOriginPoint(20,5);                                //set the rotating point at the middle of the Pixmap
+    this->setRotation(deg_angle);                                       //rotate the texture to be parallel to the movement vector
 
-    QTimer * timer = new QTimer(this);                              //start timer for it
-    connect(timer, SIGNAL(timeout()),this,SLOT(moveBullet()));        //connect to the slot that will emitate the smooth movement
-    timer->start(10);                                           //start timer
+    QTimer * timer = new QTimer(this);                                  //start timer for it
+    connect(timer, SIGNAL(timeout()),this,SLOT(moveBullet()));          //connect to the slot that will emitate the smooth movement
+    timer->start(10);                                                   //start timer
 
 }
 
@@ -79,7 +79,7 @@ bool Bullet::bulletIsCollidig()
 
     for (int i = 0, n = colliding_items.size(); i < n; i++)                                                 //check the whole list
     {
-        if(colliding_items[i] != creator)
+        if(colliding_items[i] != creator && typeid(*(colliding_items[i])) != typeid(QGraphicsRectItem))
         {
             bool enemy = checkIfEnemy(colliding_items[i]);                                                      //check if enemy
 
