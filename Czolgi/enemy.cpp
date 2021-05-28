@@ -17,143 +17,6 @@ void Enemy::holdPos()
         rotate_angle = 180;
 }
 
-void Enemy::patrolPathHorizontaly(qreal end)
-{
-    if(!is_rotating)
-    {
-        if(reverso)
-        {
-            if(rotate_angle < 0)
-                rotate_angle = rotate_angle +15;
-            else if (rotate_angle > 0)
-                rotate_angle = rotate_angle -15;
-        }
-
-        else
-        {
-            if(rotate_angle > 180)
-                rotate_angle = rotate_angle -15;
-            else if(rotate_angle < 180)
-                rotate_angle = rotate_angle +15;
-        }
-    }
-
-    if(x() >= end)                                          //check if the paths end
-    {
-        is_rotating = true;
-
-        if(rotate_angle != 180)
-        {
-            rotate_angle = rotate_angle + 15;
-        }
-        else
-        {
-            reverso = true;                                     //set flag
-            is_rotating = false;                                //set the flag
-        }
-    }
-
-    if((x()-speed) < pointList[0].x())                                 //check if start of the path
-    {
-        is_rotating = true;
-        if(rotate_angle != 0)
-        {
-            rotate_angle = rotate_angle - 15;
-        }
-        else
-        {
-            reverso = false;                                     //set flag
-            is_rotating = false;                                 //reset flag
-        }
-    }
-
-    if(!reverso && !is_rotating)                            //determine the direction of movement
-        Tank::move(speed,0);                                //move tank to the next point
-
-    else if(reverso && !is_rotating)
-        Tank::move(-speed,0);
-}
-
-void Enemy::patrolPathVerticaly(qreal end)
-{
-    if(!is_rotating)
-    {
-        if(reverso)
-        {
-            if(rotate_angle > -90 && rotate_angle <= 90)
-                rotate_angle = rotate_angle -15;
-
-            else if(rotate_angle < -90 || rotate_angle > 90)
-            {
-                rotate_angle = rotate_angle +15;
-                if(rotate_angle >= 180)
-                    rotate_angle = -165;
-            }
-        }
-
-        else
-        {
-            if(rotate_angle > 90 || rotate_angle <= -90)
-            {
-                rotate_angle = rotate_angle -15;
-                if(rotate_angle <= -165)
-                    rotate_angle = 180;
-            }
-            else if(rotate_angle < 90 && rotate_angle > -90)
-                rotate_angle = rotate_angle +15;
-        }
-    }
-
-    if(y() >= end)                                          //check if the paths end
-    {
-        is_rotating = true;
-
-        if(rotate_angle != (-90))
-        {
-            if(rotate_angle > -90 && rotate_angle <= 90)
-                rotate_angle = rotate_angle - 15;
-            else if(rotate_angle < -90 || rotate_angle > 90)
-            {
-                rotate_angle = rotate_angle +15;
-                if(rotate_angle > 180)
-                    rotate_angle = -165;
-            }
-        }
-        else
-        {
-            reverso = true;                                     //set flag
-            is_rotating = false;
-        }
-    }
-
-    if((y()-speed) < pointList[0].y())                                     //check if start of the path
-    {
-        is_rotating = true;
-        if(rotate_angle != 90)
-        {
-            if(rotate_angle < 90 && rotate_angle >= -90)
-                rotate_angle = rotate_angle + 15;
-            else if(rotate_angle > 90 || rotate_angle < -90)
-            {
-                rotate_angle = rotate_angle -15;
-                if(rotate_angle < -165)
-                    rotate_angle = 180;
-            }
-        }
-        else
-        {
-            reverso = false;                                     //set flag
-            is_rotating = false;                                 //reset flag
-        }
-    }
-
-    if(!reverso && !is_rotating)                                //determine the direction of movement
-        Tank::move(0,speed);                                    //move tank to the next point
-
-    else if(reverso && !is_rotating)
-        Tank::move(0,-speed);
-}
-
 bool Enemy::check()
 {
     int lenght = sqrt(pow(player->x() - this->x(),2)+pow(player->y() - this->y(),2));      //calculate the lenght between enemy and player
@@ -229,7 +92,7 @@ void Enemy::aim(float angle)
 
 void Enemy::setCommand(char comm)
 {
-    command = comm;                                                                         //set command
+    command = comm;                                         //set command
 }
 
 void Enemy::followPlayer()
@@ -238,14 +101,16 @@ void Enemy::followPlayer()
 
     bool is_in_pos = false;
 
-    if(abs(x()-player_lastx)<100 && abs(y()-player_lasty)<100)
+    if(abs(x()-player_lastx)<50 && abs(y()-player_lasty)<50)
     {
         is_in_pos = true;
+        qDebug()<<"Dotarłem na miejsce gracza";
     }
 
-    if(!is_in_pos)
+    if(!is_in_pos && !come_back)
     {
         Tank::move(speed*cos(radian_angle), speed*sin(radian_angle));
+        qDebug()<<"Jade za graczem";
     }
 
     if(!watchdog->isActive() && is_in_pos && !timer_was_set)
@@ -298,22 +163,42 @@ void Enemy::addPointToPath(int x, int y)
 void Enemy::goTo()
 {
     int next = pointer + 1;
+    if(pointer == pointList.size()-1)
+    {
+       next = 0;
+    }
 
     int dx = pointList[pointer].x()-pointList[next].x();
     int dy = pointList[pointer].y()-pointList[next].y();
 
     float angle = atan2(dy,dx);
+
     if(angle >= 0)
     {
         angle = angle - M_PI;
     }
+
     else
     {
         angle = angle + M_PI;
     }
 
     aim(angle);
-    qDebug()<<angle;
+
+    if(!is_rotating)
+    {
+        Tank::move(speed*cos(angle),speed*sin(angle));
+        qDebug()<<"Jade normalnie";
+        if(abs(pointList[next].x() - this->x())<30 && abs(pointList[next].y() - this->y())<30)
+        {
+            qDebug()<<"Jestem w punkcie kontrolnym";
+            pointer = pointer+1;
+            if(pointer >= pointList.size())
+            {
+                pointer = 0;
+            }
+        }
+    }
 }
 
 void Enemy::move()
@@ -333,8 +218,12 @@ void Enemy::move()
         float angle = atan2(dy,dx);
 
         was_spotted = true;
-
+        come_back = false;
         timer_was_set = false;
+
+        watchdog->start(1000);
+        watchdog->stop();
+        watchdog->disconnect(watchdog,SIGNAL(timeout()),this,SLOT(comeBack()));
 
         aim(angle);
         bool obstacle_in_line = obstacleInLine();
@@ -349,19 +238,17 @@ void Enemy::move()
         {
             lastPosx = x();
             lastPosy = y();
+            lastAngle = rotate_angle;
         }
 
-        if(was_spotted && !(command== GUARD || command==VERT || command==HORIZON))
+        if(was_spotted && !(command == GUARD))
             followPlayer();
 
         switch(command)
         {
-            case VERT:
-                goTo();
-            break;
-
-            case HORIZON:
-                goTo();
+            case PATROL:
+                    if(!was_spotted)
+                        goTo();
             break;
 
             case GUARD:
@@ -382,6 +269,7 @@ void Enemy::move()
 void Enemy::comeBack()
 {
     bool is_back = false;
+    come_back = true;
 
     watchdog->stop();
     watchdog->start(50);
@@ -419,20 +307,32 @@ void Enemy::comeBack()
     {
         if( abs(lastPosx-x()) < 20 && abs(lastPosy-y()) < 20)
         {
-            if(rotate_angle != 180)
-            {
-                if(rotate_angle>=0)
-                    rotate_angle = rotate_angle +15;
-                else
+            if(rotate_angle != lastAngle)
+            { 
+                if(rotate_angle > lastAngle)
+                {
                     rotate_angle = rotate_angle -15;
+                    if(rotate_angle < -165)
+                        rotate_angle = 180;
+                }
+                else
+                {
+                    rotate_angle = rotate_angle +15;
+                    if(rotate_angle > 180)
+                        rotate_angle = -165;
+                }
             }
             else
+            {
                 is_back = true;
+                come_back = false;
+            }
         }
 
         else
         {
             Tank::move(speed*cos(angle*M_PI/180), speed*sin(angle*M_PI/180));
+            qDebug()<<"Wracam na pozycje";
         }
     }
 

@@ -11,8 +11,6 @@
 #include <QGraphicsScene>
 #include <QList>
 
-#define VERT 'v'
-#define HORIZON 'h'
 #define GUARD 'g'
 #define PATROL 'p'
 
@@ -24,8 +22,6 @@ public:
     Enemy();
 
     void holdPos();
-    void patrolPathVerticaly(qreal end);
-    void patrolPathHorizontaly(qreal end);
     bool check();
     void aim(float angle);
     void setCommand(char comm);
@@ -55,13 +51,14 @@ private:
 
     int lastPosx = 0;
     int lastPosy = 0;
+    int lastAngle = 0;
 
     int player_lastx;
     int player_lasty;
 
     int pointer = 0;
 
-    bool reverso = false;
+    bool come_back = false;
     bool was_spotted = false;
 };
 
