@@ -27,38 +27,38 @@ public:
     void setCommand(char comm);
     void followPlayer();
     void addStick();
+
     bool obstacleInLine();
-    void avoidObstacle();
+    bool avoidObstacle();
 
-    void addPointToPath(int x, int y);
+    void addPointToPath(int x, int y, QList<QPoint> &list);
 
-    void goTo();
+    void goTo(int &pointer, QList<QPoint> &list);
 
-    bool timer_was_set = false;
     QList<QPoint> pointList;
 
 public slots:
     void move();
-    void comeBack();
 
 protected:
     char command;
     Player *player;
 
 private:
-    QTimer *watchdog = new QTimer(this);
     QGraphicsRectItem *stick = NULL;
+    QGraphicsTextItem *txt;
 
     int lastPosx = 0;
     int lastPosy = 0;
-    int lastAngle = 0;
 
     int player_lastx;
     int player_lasty;
 
     int pointer = 0;
+    int pr_pointer = 0;
 
-    bool come_back = false;
+    QList<QPoint> pursuitList;
+
     bool was_spotted = false;
 };
 

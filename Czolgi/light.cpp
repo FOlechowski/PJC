@@ -2,7 +2,7 @@
 
 Light::Light(qreal x, qreal y, int dif, Player* pl)
 {
-    addPointToPath(x,y);
+    addPointToPath(x,y,pointList);
     player = pl;
 
     setPathTextures();

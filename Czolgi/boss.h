@@ -8,7 +8,7 @@ class Boss : public Enemy
     Q_OBJECT
 public:
     Boss(qreal x, qreal y, int dif, Player* pl = NULL);
-    void setPath();
+    void setPathTextures();
 };
 
 #endif // BOSS_H

@@ -13,15 +13,10 @@
 #include "player.h"
 
 enum difficulty
-{easy,
-medium,
-hard};
-
+{easy,medium,hard};
 
 class Map;
-
 class Player;
-
 class Menu;
 
 class Game: public QWidget
@@ -42,7 +37,7 @@ public:
     QString icon_path = ":/img/img/icon.png";
     QString win_title = "CZOLGI WARS";
 
-public slots:
+private slots:
     void set_baron();
     void set_kabaczek();
     void set_fiolet();

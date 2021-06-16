@@ -3,7 +3,7 @@
 
 Destroyer::Destroyer(qreal x, qreal y, int dif, Player* pl)
 {
-    addPointToPath(x,y);
+    addPointToPath(x,y,pointList);
 
     player = pl;
 
@@ -26,7 +26,7 @@ Destroyer::Destroyer(qreal x, qreal y, int dif, Player* pl)
             break;
         case 1:
             speed = 2;
-            view_range = 500;
+            view_range = 450;
             hp = 350;
             armor = 0.35;
             dmg = 150;
@@ -34,8 +34,8 @@ Destroyer::Destroyer(qreal x, qreal y, int dif, Player* pl)
             break;
         case 2:
             speed = 2;
-            view_range = 600;
-            hp = 500;
+            view_range = 450;
+            hp = 400;
             armor = 0.45;
             dmg = 200;
             reload_time = 4000;

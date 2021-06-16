@@ -18,20 +18,32 @@ Map::Map(Player* player, int diff)
 //    water_2->setRect(this->width()/2, 270, 100,this->width()-270);
 
     //qDebug()<<bridge->data(bridge->type());
-//    Rock* rock_1 = new Rock;
-//    rock_1->setPos(50,400);
+    for(int i=0; i<450; i=i+50)
+    {
+        Rock* rock_1 = new Rock;
+        rock_1->setPos(400,100+i);
+        this->addItem(rock_1);
+    }
+
+    Rock* rock_1 = new Rock;
+    rock_1->setPos(750,100);
+    this->addItem(rock_1);
+
+    Rock* rock_2 = new Rock;
+    rock_2->setPos(750,200);
+    this->addItem(rock_2);
 
     ply = player;
     ply->setFlag(QGraphicsItem::ItemIsFocusable);
     ply->setFocus();
-    ply->setPos(50, 50);
+    ply->setPos(0, 0);
 
-    Medium *enemy = new Medium(300,350, difficult, ply);
+    Medium *enemy = new Medium(500,50, difficult, ply);
     enemy->setPos(enemy->pointList[0].x(), enemy->pointList[0].y());
     enemy->setCommand(PATROL);
     this->addItem(enemy);
     enemy->addStick();
-    enemy->addPointToPath(800,350);
+    enemy->addPointToPath(500,600, enemy->pointList);
 //    Medium *enemy2 = new Medium(350,200, difficult, ply);
 //    enemy2->setPos(enemy2->pointList[0].x(), enemy2->pointList[0].y());
 //    enemy2->setCommand(VERT);
@@ -50,8 +62,6 @@ Map::Map(Player* player, int diff)
 //    this->addItem(water_1);
 //    this->addItem(water_2);
 //    this->addItem(bridge_1);
-//    this->addItem(rock_1);
-
 //    this->addItem(enemy2);
 //    this->addItem(enemy3);
 //    this->addItem(enemy4);

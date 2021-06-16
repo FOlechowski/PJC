@@ -27,7 +27,6 @@ public:
 public slots:
 
 private:
-
     Player* ply;
     QGraphicsRectItem* wall1;
     QGraphicsRectItem* wall2;

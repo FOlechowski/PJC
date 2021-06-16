@@ -9,7 +9,7 @@ class ExplosiveBullet : public Bullet
 public:
     ExplosiveBullet(float ang, Tank* tank);
 
-public slots:
+private slots:
     void removeExplosion();
 
 protected:

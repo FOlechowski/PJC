@@ -13,7 +13,7 @@ public:
     Bullet(float ang, Tank* tank);
     Bullet();
 
-public slots:
+private slots:
     void moveBullet();
 
 protected:

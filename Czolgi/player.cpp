@@ -93,7 +93,7 @@ bool Player::checkCol()
         }
         if (typeid((*colliding_items[i])) == typeid(QGraphicsRectItem)){
             stick = true;
-            qDebug()<<"patykuje";
+            //qDebug()<<"patykuje";
         }else{
             stick = false;
         }
