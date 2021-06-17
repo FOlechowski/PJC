@@ -15,23 +15,23 @@ Game::Game()
 Game::~Game()
 {
     delete menu;
-    qDebug()<<"Usuwam menu";
+
     delete player;
-    qDebug()<<"Usuwam player";
+
     delete map;
-    qDebug()<<"Usuwam map";
+
     delete username;
-    qDebug()<<"Usuwam username";
+
     delete init_view;
-    qDebug()<<"Usuwam init_view";
+
     delete map_view;
-    qDebug()<<"Usuwam map_view";
-    delete game_interfece;
-    qDebug()<<"Usuwam game_interface";
+
+    delete game_interface;
+
     delete init_scene;
-    qDebug()<<"Usuwam init_scene";
+
     delete text;
-    qDebug()<<"Destruktor wywołany pomyślnie";
+
 }
 
 void Game::create_player(QString name)
@@ -52,16 +52,16 @@ void Game::draw_interface(Player* player)
     map_view->setRenderHint(QPainter::HighQualityAntialiasing);
     map_view->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     map_view->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    map_view->setFixedSize(QSize(this->width(), this->height()-100));
+    map_view->setFixedSize(QSize(this->width(), this->height()-150));
     map_view->show();
 
-    game_interfece = new QGraphicsView(this);
-    game_interfece->setRenderHint(QPainter::HighQualityAntialiasing);
-    game_interfece->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    game_interfece->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    game_interfece->setFixedSize(QSize(this->width(), 100));
-    game_interfece->move(0,this->height()-100);
-    game_interfece->show();
+    game_interface = new QGraphicsView(this);
+    game_interface->setRenderHint(QPainter::HighQualityAntialiasing);
+    game_interface->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    game_interface->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    game_interface->setFixedSize(QSize(this->width(), 150));
+    game_interface->move(0,this->height()-150);
+
 
     map = new Map(player,this->diffic);
 
@@ -69,6 +69,30 @@ void Game::draw_interface(Player* player)
     player->setPointerToView(map_view);
     //qDebug()<<game_interfece->verticalScrollBar();
     //game_interfece->setVerticalScrollBar()->setValue(600,100,50,10);
+
+    interface_scene = new QGraphicsScene;
+    interface_scene->setSceneRect(0, 0, this->width(), 150);
+
+    //game_interface->setScene(interface_scene);
+
+    QPixmap intreface_bckg(this->interface_background);
+    interface_scene->setBackgroundBrush(QBrush(intreface_bckg));
+
+    QString name = username->text();
+    QFont font("Calibri", 18);
+    //qDebug()<<name;
+    player_name = new QGraphicsTextItem();
+    player_name->setPlainText(QString("Gracz: " + name));
+    player_name->setDefaultTextColor(Qt::white);
+    player_name->setFont(font);
+    player_name->setPos(5, 0);
+
+
+    interface_scene->addItem(player_name);
+
+    game_interface->setScene(interface_scene);
+    game_interface->show();
+
 }
 
 void Game::newGame()

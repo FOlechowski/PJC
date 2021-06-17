@@ -232,7 +232,7 @@ void Player::movePlayer()
         }
     }
 
-    qDebug()<<rotate_angle;
+   // qDebug()<<rotate_angle;
     Tank::setTexture(-rotate_angle);
 
 
