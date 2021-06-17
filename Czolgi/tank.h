@@ -40,7 +40,7 @@ protected:
     bool is_loading = false;
     bool is_rotating = false;
 
-    double rotate_angle = -1000;
+    int rotate_angle = -1000;
 
     QTimer *timer_reload = new QTimer(this);
 };

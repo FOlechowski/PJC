@@ -6,7 +6,7 @@
 
 Player::Player()
 {
-    this->setPixmap(QPixmap(":/img/tex/p0.png"));
+    this->setPixmap(QPixmap(":/img/tex/arrow_p0.png"));
     this->setTransformOriginPoint(50,50);
     connect(timer_reload, SIGNAL(timeout()),this,SLOT(reload()));
 
@@ -18,10 +18,6 @@ Player::Player()
     QTimer * player_timer = new QTimer();                              //start timer for it
     connect(player_timer, SIGNAL(timeout()),this,SLOT(movePlayer()));        //connect to the slot that will emitate the smooth movement
     player_timer->start(40);
-
-
-
-
 
 }
 
@@ -42,52 +38,38 @@ void Player::shot()
     }
 }
 
-void Player::setPointerToView(QGraphicsView *view)
-{
-    this->view = view;
-}
-
-void Player::moveForward(qreal m_distance, double m_angle)
+void Player::moveForward(qreal m_distance, int m_angle)
 {
 
     Tank::move(cos(m_angle*M_PI/180)*m_distance,-sin(m_angle*M_PI/180)*m_distance);
-
-
 }
 
-void Player::moveBackward(qreal m_distance, double m_angle)
+void Player::moveBackward(qreal m_distance, int m_angle)
 {
 
     Tank::move(-cos(m_angle*M_PI/180)*m_distance/2,sin(m_angle*M_PI/180)*m_distance/2);
-
-
 }
 
-void Player::turnLeft(double &m_angle)
+void Player::turnLeft(int &m_angle)
 {
 
-    m_angle += 2.5;
-    //this->setRotation(-m_angle);
+    m_angle += 5;
+    this->setRotation(-m_angle);
     if(m_angle>180)
     {
-        m_angle=-177.5;
+        m_angle=-175;
     }
-
-
 }
 
-void Player::turnRight(double &m_angle)
+void Player::turnRight(int &m_angle)
 {
 
-    m_angle -= 2.5;
-    //this->setRotation(-m_angle);
+    m_angle -= 5;
+    this->setRotation(-m_angle);
     if(m_angle<-180)
     {
-        m_angle=177.5;
+        m_angle=175;
     }
-
-
-
 }
 
 bool Player::checkCol()
@@ -127,12 +109,7 @@ bool Player::checkCol()
 }
 void Player::movePlayer()
 {
-    if (checkCol()&&!(keyA&&keyD)){
-
-        if(view!=nullptr){
-        view->centerOn(this);
-        view->show();
-        }
+    if (checkCol()){
 
         if(keyA){
             if(keyW){
@@ -241,12 +218,9 @@ void Player::movePlayer()
         }
     }
 
-
-
-    //if(!rotate_angle%15){
+    if(!rotate_angle%15){
     Tank::setTexture(-rotate_angle);
-    //qDebug()<<-rotate_angle;
-    //}
+    }
 
     if((this->pos()).y()>=450){
 
@@ -254,30 +228,30 @@ void Player::movePlayer()
 }
 
 void Player::addPlayerTextures(){
-    tex_path[0] = ":/img/tex/p0.png";
-    tex_path[1] = ":/img/tex/p15.png";
-    tex_path[2] = ":/img/tex/p30.png";
-    tex_path[3] = ":/img/tex/p45.png";
-    tex_path[4] = ":/img/tex/p60.png";
-    tex_path[5] = ":/img/tex/p75.png";
-    tex_path[6] = ":/img/tex/p90.png";
-    tex_path[7] = ":/img/tex/p105.png";
-    tex_path[8] = ":/img/tex/p120.png";
-    tex_path[9] = ":/img/tex/p135.png";
-    tex_path[10] = ":/img/tex/p150.png";
-    tex_path[11] = ":/img/tex/p165.png";
-    tex_path[12] = ":/img/tex/p180.png";
-    tex_path[13] = ":/img/tex/p-15.png";
-    tex_path[14] = ":/img/tex/p-30.png";
-    tex_path[15] = ":/img/tex/p-45.png";
-    tex_path[16] = ":/img/tex/p-60.png";
-    tex_path[17] = ":/img/tex/p-75.png";
-    tex_path[18] = ":/img/tex/p-90.png";
-    tex_path[19] = ":/img/tex/p-105.png";
-    tex_path[20] = ":/img/tex/p-120.png";
-    tex_path[21] = ":/img/tex/p-135.png";
-    tex_path[22] = ":/img/tex/p-150.png";
-    tex_path[23] = ":/img/tex/p-165.png";
+    tex_path[0] = ":/img/tex/arrow_p0.png";
+    tex_path[1] = ":/img/tex/arrow_p15.png";
+    tex_path[2] = ":/img/tex/arrow_p30.png";
+    tex_path[3] = ":/img/tex/arrow_p45.png";
+    tex_path[4] = ":/img/tex/arrow_p60.png";
+    tex_path[5] = ":/img/tex/arrow_p75.png";
+    tex_path[6] = ":/img/tex/arrow_p90.png";
+    tex_path[7] = ":/img/tex/arrow_p105.png";
+    tex_path[8] = ":/img/tex/arrow_p120.png";
+    tex_path[9] = ":/img/tex/arrow_p135.png";
+    tex_path[10] = ":/img/tex/arrow_p150.png";
+    tex_path[11] = ":/img/tex/arrow_p165.png";
+    tex_path[12] = ":/img/tex/arrow_p180.png";
+    tex_path[13] = ":/img/tex/arrow_p-15.png";
+    tex_path[14] = ":/img/tex/arrow_p-30.png";
+    tex_path[15] = ":/img/tex/arrow_p-45.png";
+    tex_path[16] = ":/img/tex/arrow_p-60.png";
+    tex_path[17] = ":/img/tex/arrow_p-75.png";
+    tex_path[18] = ":/img/tex/arrow_p-90.png";
+    tex_path[19] = ":/img/tex/arrow_p-105.png";
+    tex_path[20] = ":/img/tex/arrow_p-120.png";
+    tex_path[21] = ":/img/tex/arrow_p-135.png";
+    tex_path[22] = ":/img/tex/arrow_p-150.png";
+    tex_path[23] = ":/img/tex/arrow_p-165.png";
 
 }
 
