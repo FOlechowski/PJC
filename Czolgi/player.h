@@ -25,10 +25,10 @@ public slots:
 
 private:
     void addPlayerTextures();
-    void moveForward(qreal m_distance, int m_angle);
-    void moveBackward(qreal m_distance, int m_angle);
-    void turnLeft(int &m_angle);
-    void turnRight(int &m_angle);
+    void moveForward(qreal m_distance, double m_angle);
+    void moveBackward(qreal m_distance, double m_angle);
+    void turnLeft(double &m_angle);
+    void turnRight(double &m_angle);
     bool checkCol();
     int bullets = 50;
     QString name;

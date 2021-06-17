@@ -27,6 +27,7 @@ void Tank::move(qreal dx, qreal dy)
 
 void Tank::setTexture(int angle )
 {
+    qDebug()<<"jest";
     switch (angle)
     {
         case 0:

@@ -64,6 +64,31 @@
         <file>tex/rock.png</file>
         <file>tex/explosion.png</file>
         <file>tex/tex_bridge_1.png</file>
+        <file>tex/p0.png</file>
+        <file>tex/p15.png</file>
+        <file>tex/p-15.png</file>
+        <file>tex/p30.png</file>
+        <file>tex/p-30.png</file>
+        <file>tex/p45.png</file>
+        <file>tex/p-45.png</file>
+        <file>tex/p60.png</file>
+        <file>tex/p-60.png</file>
+        <file>tex/p75.png</file>
+        <file>tex/p-75.png</file>
+        <file>tex/p90.png</file>
+        <file>tex/p-90.png</file>
+        <file>tex/p105.png</file>
+        <file>tex/p-105.png</file>
+        <file>tex/p120.png</file>
+        <file>tex/p-120.png</file>
+        <file>tex/p135.png</file>
+        <file>tex/p-135.png</file>
+        <file>tex/p150.png</file>
+        <file>tex/p-150.png</file>
+        <file>tex/p165.png</file>
+        <file>tex/p-165.png</file>
+        <file>tex/p-180 .png</file>
+        <file>tex/p180.png</file>
     </qresource>
     <qresource prefix="/sound">
         <file>snd/Intro3.WAV</file>
