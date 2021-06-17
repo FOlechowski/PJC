@@ -83,26 +83,16 @@ bool Bullet::bulletIsCollidig()
         {
             bool enemy = checkIfEnemy(colliding_items[i]);                                                      //check if enemy
 
-            if((enemy || typeid (*(colliding_items[i])) == typeid (Player)))                                    //if enemy and the bullet didn't hit the creators
+            if((enemy || typeid (*(colliding_items[i])) == typeid (Player)))                                                        //if enemy and the bullet didn't hit the creators
             {
                 hitted = dynamic_cast<Tank*>(colliding_items[i]);                                               //safe pointer to the hitted element as Tank
 
-                int hp = hitted->getHP();
-                float armor;
-                int rotate_angle;
-                int dmg = creator->getDMG();
-
-                hitted->getParameters(&armor, &rotate_angle);
-
-                bool is_bouncing = bounce(armor, penetration, (angle*180)/M_PI, rotate_angle);                  //check if bullet has been bounced
+                bool is_bouncing = bounce(hitted->armor, penetration, (angle*180)/M_PI, hitted->rotate_angle);  //check if bullet has been bounced
 
                 if(!is_bouncing)                                                                                //calculate damage
-                {
-                    hp = hp - (dmg - (armor*dmg));                                                              //calculate damage
-                    hitted->setHP(hp);
-                }
+                    hitted->hp = hitted->hp - (creator->dmg - (hitted->armor*creator->dmg));                    //calculate damage
 
-                if(hp <= 0 && enemy)                                                                             //if hp is over
+                if(hitted->hp <= 0 && enemy)                                                                             //if hp is over
                 {
                     scene()->removeItem(hitted);                                                                //remove bullet and hited item
                     scene()->removeItem(this);
@@ -112,15 +102,15 @@ bool Bullet::bulletIsCollidig()
                     return true;                                                                                //end the function
                 }
 
-                else if(hp <=0 && !enemy)
+                else if(hitted->hp <=0 && !enemy)
                 {
                     qDebug()<<"Game Over!!!";
-                    hitted->setHP(0);
+                    hitted->hp = 0;
                 }
 
                 scene()->removeItem(this);                                                                     //remove only bullet if hp is not over
                 delete this;
-                qDebug()<<hp;
+                qDebug()<<hitted->hp;
                 return true;                                                                                   //end the function
             }
 
@@ -128,6 +118,7 @@ bool Bullet::bulletIsCollidig()
             {
                 scene()->removeItem(this);
                 delete this;
+                qDebug()<<(colliding_items[i]);
                 return true;
             }
         }

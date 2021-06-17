@@ -216,6 +216,10 @@ void Player::movePlayer()
             scene()->addItem(bullet);
             shot();
         }
+        else
+        {
+            qDebug()<<"Koniec pocisków RAMBO!!!";
+        }
     }
 
     if(!rotate_angle%15){

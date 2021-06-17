@@ -11,23 +11,12 @@ class Tank : public QObject, public QGraphicsPixmapItem
     Q_OBJECT
 public:
     Tank();
-    ~Tank();
+
+    QTimer *timer_reload = new QTimer(this);
+
     void shot(float angle);
     void move(qreal dx, qreal dy);
     void setTexture(int angle);
-
-    void modifyHP(int dmg, int penetration);
-    int getDMG();
-    int getHP();
-    void setHP(int hp);
-    void setInitialParameters(int hp, int dmg, float armor);
-    void getParameters(float *armor, int *rotation_angle);
-
-public slots:
-    void reload();
-
-protected:
-    QString tex_path[24];
 
     qreal speed;
     qreal view_range;
@@ -42,7 +31,11 @@ protected:
 
     int rotate_angle = -1000;
 
-    QTimer *timer_reload = new QTimer(this);
+public slots:
+    void reload();
+
+protected:
+    QString tex_path[24];
 };
 
 #endif // TANK_H

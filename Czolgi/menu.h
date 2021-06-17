@@ -17,10 +17,11 @@ class Menu : public QGraphicsView
 
 public:
     Menu(Game *parent = nullptr);
-    ~Menu();
 
     void display();
     void play_music();
+
+    int font_size = 32;
 
 public slots:
     void quit_ask();
@@ -29,24 +30,13 @@ public slots:
     void quit_all();
 
 private:
-    QGraphicsScene* menu = nullptr;
-    QGraphicsView* dialog_view = nullptr;
-    QGraphicsView* cr_dialog_view = nullptr;
-    QMediaPlayer* intro = nullptr;
+    QGraphicsScene* menu;
+    QGraphicsView* dialog_view;
+    QGraphicsView* cr_dialog_view;
 
-    QDialog* dialog = nullptr;
-    QDialog* cr_dialog = nullptr;
-    QGraphicsTextItem *ver_inf = nullptr;
-    QGraphicsTextItem *title = nullptr;
-    Game* game = nullptr;
+    QDialog* dialog;
+    QDialog* cr_dialog;
 
-    Button *new_game = nullptr;
-    Button *load_game = nullptr;
-    Button *info = nullptr;
-    Button *quit_butt = nullptr;
-    Button *stay = nullptr;
-    Button *leave = nullptr;
-
-    int font_size = 32;
+    Game* game;
 };
 #endif // MENU_H

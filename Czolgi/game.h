@@ -15,9 +15,6 @@
 enum difficulty
 {easy,medium,hard};
 
-enum path_type
-{bck,ico,tl};
-
 class Map;
 class Player;
 class Menu;
@@ -27,46 +24,40 @@ class Game: public QWidget
     Q_OBJECT
 public:
     Game();
-    ~Game();
 
     void create_player(QString name);
     void displayMenu();
     void draw_interface(Player* player);
     void newGame();
-
-    QString getPath(int path_type);
-
-private slots:
-    void set_baron();
-    void set_kabaczek();
-    void set_fiolet();
     void keyPressEvent(QKeyEvent * event);
     void keyReleaseEvent(QKeyEvent *event);
-
-private:
-    Menu* menu = nullptr;
-    Player* player = nullptr;
-    Map* map = nullptr;
-
-    QLineEdit* username = nullptr;
-
-    QGraphicsView* init_view = nullptr;
-    QGraphicsView* map_view = nullptr;
-    QGraphicsView* game_interfece = nullptr;
-
-    QGraphicsScene* init_scene = nullptr;
-
-    Button* red_baron = nullptr;
-    Button* kabaczek = nullptr;
-    Button* fiolet = nullptr;
-
-    QGraphicsTextItem *text = nullptr;
-
     int diffic = 0;
 
     QString bckg_path = ":/img/img/background_02.png";
     QString icon_path = ":/img/img/icon.png";
     QString win_title = "CZOLGI WARS";
+
+private slots:
+    void set_baron();
+    void set_kabaczek();
+    void set_fiolet();
+
+private:
+    Menu* menu;
+    Player* player;
+    Map* map;
+
+    QLineEdit* username;
+
+    QGraphicsView* init_view;
+    QGraphicsView* map_view;
+    QGraphicsView* game_interfece;
+
+    QGraphicsScene* init_scene;
+
+    Button* red_baron;
+    Button* kabaczek;
+    Button* fiolet;
 
 protected:
 

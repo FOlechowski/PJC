@@ -8,11 +8,6 @@ Tank::Tank()
 {
 }
 
-Tank::~Tank()
-{
-    delete timer_reload;
-}
-
 void Tank::shot(float angle)
 {
     if(!is_loading && !is_rotating)
@@ -130,39 +125,6 @@ void Tank::setTexture(int angle )
         this->setPixmap(QPixmap(tex_path[23]));
         break;
     }
-}
-
-void Tank::modifyHP(int dmg, int penetration)
-{
-    this->hp = this->hp - (penetration/200)*(dmg - (this->armor*dmg));
-}
-
-int Tank::getDMG()
-{
-    return dmg;
-}
-
-int Tank::getHP()
-{
-    return hp;
-}
-
-void Tank::setHP(int hp)
-{
-    this->hp = hp;
-}
-
-void Tank::setInitialParameters(int hp, int dmg, float armor)
-{
-    this->dmg = dmg;
-    this->hp = hp;
-    this->armor = armor;
-}
-
-void Tank::getParameters(float *armor, int *rotation_angle)
-{
-    armor = &(this->armor);
-    rotation_angle = &(this->rotate_angle);
 }
 
 void Tank::reload()
