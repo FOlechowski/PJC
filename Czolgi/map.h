@@ -25,8 +25,8 @@ private:
     QGraphicsRectItem* wall1;
     QGraphicsRectItem* wall2;
 
-    int ms_width = 1200;
-    int ms_height = 1000;
+    int ms_width = 1800;
+    int ms_height = 1500;
 
     int difficult = 0;
 };

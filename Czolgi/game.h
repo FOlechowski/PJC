@@ -33,7 +33,7 @@ public:
     void displayMenu();
     void draw_interface(Player* player);
     void newGame();
-
+    QGraphicsView* map_view = nullptr;
     QString getPath(int path_type);
 
 private slots:
@@ -51,7 +51,7 @@ private:
     QLineEdit* username = nullptr;
 
     QGraphicsView* init_view = nullptr;
-    QGraphicsView* map_view = nullptr;
+
     QGraphicsView* game_interfece = nullptr;
 
     QGraphicsScene* init_scene = nullptr;

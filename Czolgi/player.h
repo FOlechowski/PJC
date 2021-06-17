@@ -7,9 +7,9 @@
 #include "tank.h"
 #include <QString>
 #include "obstacles.h"
+#include "game.h"
 
-
-
+class Game;
 
 class Player : public Tank
 {
@@ -21,6 +21,7 @@ public:
     void setPlayerName(QString Pname);
     void shot();
     bool keyA, keyW, keyD, keyS,keySpace = false;
+    void setPointerToView(QGraphicsView *view);
 public slots:
 
 private:
@@ -31,6 +32,7 @@ private:
     void turnRight(int &m_angle);
     bool checkCol();
     int bullets = 50;
+    QGraphicsView *view = nullptr;
     QString name;
 
     bool front_hit, back_hit, right_hit, left_hit = false;
