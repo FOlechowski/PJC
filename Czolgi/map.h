@@ -18,14 +18,15 @@ public:
     Map(Player* player, int diff);
     ~Map();
 
-
+<<<<<<< HEAD
+=======
     int ms_width = 1800;
     int ms_height = 1500;
 
     int difficult = 0;
     //bool isonbridge();
 
-
+>>>>>>> b374597b2e53b398723b4e0e096749c24b8ac731
 public slots:
 
 private:

@@ -33,10 +33,10 @@ public:
     void displayMenu();
     void draw_interface(Player* player);
     void newGame();
-
+<<<<<<< HEAD
 
     QString getPath(int path_type);
-
+=======
     void keyPressEvent(QKeyEvent * event);
     void keyReleaseEvent(QKeyEvent *event);
 
@@ -46,7 +46,7 @@ public:
     QString icon_path = ":/img/img/icon.png";
     QString win_title = "CZOLGI WARS";
     QGraphicsView* map_view;
-
+>>>>>>> b374597b2e53b398723b4e0e096749c24b8ac731
 
 private slots:
     void set_baron();
@@ -72,13 +72,13 @@ private:
     Button* kabaczek = nullptr;
     Button* fiolet = nullptr;
 
-
+<<<<<<< HEAD
     QGraphicsTextItem *text = nullptr;
-
+=======
     QGraphicsView* init_view;
 
     QGraphicsView* game_interfece;
-
+>>>>>>> b374597b2e53b398723b4e0e096749c24b8ac731
 
     int diffic = 0;
 
