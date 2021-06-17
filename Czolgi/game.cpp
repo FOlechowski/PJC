@@ -11,13 +11,33 @@ Game::Game()
     setWindowIcon(QIcon(icon_path));
 }
 
+Game::~Game()
+{
+    delete menu;
+    qDebug()<<"Usuwam menu";
+    delete player;
+    qDebug()<<"Usuwam player";
+    delete map;
+    qDebug()<<"Usuwam map";
+    delete username;
+    qDebug()<<"Usuwam username";
+    delete init_view;
+    qDebug()<<"Usuwam init_view";
+    delete map_view;
+    qDebug()<<"Usuwam map_view";
+    delete game_interfece;
+    qDebug()<<"Usuwam game_interface";
+    delete init_scene;
+    qDebug()<<"Usuwam init_scene";
+    delete text;
+    qDebug()<<"Destruktor wywołany pomyślnie";
+}
+
 void Game::create_player(QString name)
 {
     player = new Player();
     player->setPlayerName(name);
-    player->dmg = 120;
-    player->hp = 300;
-    player->armor = 0.5;
+    player->setInitialParameters(300, 120, 0.5);
 }
 
 void Game::displayMenu()
@@ -51,7 +71,6 @@ void Game::draw_interface(Player* player)
 
 void Game::newGame()
 {
-        menu->hide();
         menu->close();    
 
         init_view = new QGraphicsView(this);
@@ -116,6 +135,31 @@ void Game::newGame()
         init_scene->addItem(text);
 
         init_view->show();
+
+        menu->deleteLater();
+        menu = nullptr;
+}
+
+QString Game::getPath(int path_type)
+{
+    QString path = "";
+
+    switch (path_type)
+    {
+        case 0:
+        path = bckg_path;
+        break;
+
+        case 1:
+        path = icon_path;
+        break;
+
+        case 2:
+        path = win_title;
+        break;
+    }
+
+    return path;
 }
 
 void Game::set_baron()
@@ -130,6 +174,8 @@ void Game::set_baron()
     {
         create_player(name);
         init_view->close();
+        init_view->deleteLater();
+        init_view = nullptr;
         draw_interface(player);
     }
     else
@@ -138,7 +184,6 @@ void Game::set_baron()
         box.setWindowIcon(QIcon(this->icon_path));
         box.setFixedSize(QSize(300,100));
         box.setText(QString("Wprowadź nazwę gracza!!!"));
-        box.exec();
     }
 }
 
@@ -154,6 +199,8 @@ void Game::set_kabaczek()
     {
         create_player(name);
         init_view->close();
+        init_view->deleteLater();
+        init_view = nullptr;
         draw_interface(player);
     }
     else
@@ -162,7 +209,6 @@ void Game::set_kabaczek()
         box.setWindowIcon(QIcon(this->icon_path));
         box.setFixedSize(QSize(300,100));
         box.setText(QString("Wprowadź nazwę gracza!!!"));
-        box.exec();
     }
 }
 
@@ -178,6 +224,8 @@ void Game::set_fiolet()
     {
         create_player(name);
         init_view->close();
+        init_view->deleteLater();
+        init_view = nullptr;
         draw_interface(player);
     }
     else
@@ -186,64 +234,67 @@ void Game::set_fiolet()
         box.setWindowIcon(QIcon(this->icon_path));
         box.setFixedSize(QSize(300,100));
         box.setText(QString("Wprowadź nazwę gracza!!!"));
-        box.exec();
     }
 }
 
 void Game::keyReleaseEvent(QKeyEvent *event)
 {
-    if(event->key() == Qt::Key_W){
-        player->keyW = false;
-        //qDebug()<<"released W";
-    }
-    if(event->key() == Qt::Key_D){
-        player->keyD = false;
-        //qDebug()<<"released D";
-    }
-    if(event->key() == Qt::Key_A){
-        player->keyA = false;
-        //qDebug()<<"released A";
-    }
-    if(event->key() == Qt::Key_S){
-        player->keyS = false;
-        //qDebug()<<"released S";
-    }
-    if(event->key() == Qt::Key_Space)
+    if(player != nullptr)
     {
-        player->keySpace = false;
-
+        if(event->key() == Qt::Key_W){
+            player->keyW = false;
+            //qDebug()<<"released W";
+        }
+        if(event->key() == Qt::Key_D){
+            player->keyD = false;
+            //qDebug()<<"released D";
+        }
+        if(event->key() == Qt::Key_A){
+            player->keyA = false;
+            //qDebug()<<"released A";
+        }
+        if(event->key() == Qt::Key_S){
+            player->keyS = false;
+            //qDebug()<<"released S";
+        }
+        if(event->key() == Qt::Key_Space)
+        {
+            player->keySpace = false;
+        }
     }
 }
 
 void Game::keyPressEvent(QKeyEvent *event){
 //qDebug()<<colliding_items;
 //grabKeyboard();
-    if(event->key() == Qt::Key_A)
+    if(player != nullptr)
     {
-        player->keyA = true;
-        //qDebug()<<"pressed A";
-    }
+        if(event->key() == Qt::Key_A)
+        {
+            player->keyA = true;
+            //qDebug()<<"pressed A";
+        }
 
-    if(event->key() == Qt::Key_D)
-    {
-        player->keyD = true;
-        //qDebug()<<"pressed D";
-    }
+        if(event->key() == Qt::Key_D)
+        {
+            player->keyD = true;
+            //qDebug()<<"pressed D";
+        }
 
-    if(event->key() == Qt::Key_W)
-    {
-        player->keyW = true;
-        //qDebug()<<"pressed W";
-    }
+        if(event->key() == Qt::Key_W)
+        {
+            player->keyW = true;
+            //qDebug()<<"pressed W";
+        }
 
-    if(event->key() == Qt::Key_S)
-    {
-        player->keyS = true;
-        //qDebug()<<"pressed S";
-    }
-    if(event->key() == Qt::Key_Space)
-    {
-        player->keySpace = true;
-
+        if(event->key() == Qt::Key_S)
+        {
+            player->keyS = true;
+            //qDebug()<<"pressed S";
+        }
+        if(event->key() == Qt::Key_Space)
+        {
+            player->keySpace = true;
+        }
     }
 }

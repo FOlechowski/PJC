@@ -7,20 +7,34 @@ Menu::Menu(Game *parent) : QGraphicsView(parent)
 
 {
     game = parent;
-
     this->setFixedSize(QSize(game->width(), game->height()));
-
     this->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     this->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-
     this->display();
+}
+
+Menu::~Menu()
+{
+    qDebug()<<"Wchodzę w destruktor menu";
+    delete menu;
+    qDebug()<<"Usuwam menu";
+    delete dialog_view;
+    qDebug()<<"Usuwam dialog_view";
+    delete cr_dialog_view;
+    qDebug()<<"Usuwam cr_dialog_view";
+    delete intro;
+    qDebug()<<"Usuwam intro";
+    delete dialog;
+    qDebug()<<"Usuwam dialog";
+    delete cr_dialog;
+    qDebug()<<"Usuwam cr_dialog";
 }
 
 
 void Menu::play_music()
 {
     //Intro sound
-    QMediaPlayer* intro = new QMediaPlayer;
+    intro = new QMediaPlayer;
     intro->setMedia(QUrl("qrc:/sound/snd/Intro3.WAV"));
     //intro->play();
 }
@@ -33,22 +47,24 @@ void  Menu::display()
     this->setScene(menu);
 
     //Add background image to the scene
-    QPixmap bground_img(game->bckg_path);
+    QString path = game->getPath(bck);
+    QPixmap bground_img(path);
     bground_img = bground_img.scaled(this->size(), Qt::IgnoreAspectRatio);      //scale background image to window size
     menu->setBackgroundBrush(QBrush(bground_img));
 
     play_music();
 
     //Add version information
-    QGraphicsTextItem *ver_inf = new QGraphicsTextItem();
+    ver_inf = new QGraphicsTextItem();
     ver_inf->setPlainText(QString("Version alpha 0.0.5"));
     ver_inf->setDefaultTextColor(Qt::white);
     ver_inf->setFont(QFont("calibri", font_size));
     ver_inf->setPos(5, this->height() - 2*font_size);
 
     //Add Title
-    QGraphicsTextItem *title = new QGraphicsTextItem();
-    title -> setPlainText(game->win_title);
+    title = new QGraphicsTextItem();
+    path = game->getPath(tl);
+    title -> setPlainText(path);
     title -> setDefaultTextColor(Qt::white);
     title -> setFont(QFont("calibri", font_size*2));
     int txPos = this->width()/2 - title->boundingRect().width()/2;
@@ -59,27 +75,27 @@ void  Menu::display()
 
     //Create some button below
 
-    Button *new_game = new Button(400, 80,QString("Nowa gra"));
+    new_game = new Button(400, 80,QString("Nowa gra"));
     int ngbxPos = this->width()/2 - new_game->boundingRect().width()/2;
     int ngbyPos = 250;
     new_game->setPos(ngbxPos,ngbyPos);
     connect(new_game, SIGNAL(clicked()), this, SLOT(start_game()));
     menu->addItem(new_game);
 
-    Button *load_game = new Button(400, 80, QString("Wczytaj gre"));
+    load_game = new Button(400, 80, QString("Wczytaj gre"));
     int lgbxPos = this->width()/2 - load_game->boundingRect().width()/2;
     int lgbyPos = 350;
     load_game->setPos(lgbxPos,lgbyPos);
     menu->addItem(load_game);
 
-    Button *info = new Button(400, 80, QString("Credits"));
+    info = new Button(400, 80, QString("Credits"));
     int cxPos = this->width()/2 - info->boundingRect().width()/2;
     int cyPos = 450;
     info->setPos(cxPos,cyPos);
     connect(info, SIGNAL(clicked()), this, SLOT(credits()));
     menu->addItem(info);
 
-    Button *quit_butt = new Button(400, 80, QString("Wyjdź z gry"));
+    quit_butt = new Button(400, 80, QString("Wyjdź z gry"));
     int qxPos = this->width()/2 - quit_butt->boundingRect().width()/2;
     int qyPos = 550;
     quit_butt->setPos(qxPos,qyPos);
@@ -94,7 +110,8 @@ void Menu::quit_ask()
     dialog = new QDialog();
 
     dialog->setModal(true);
-    dialog->setWindowIcon(QIcon(game->icon_path));
+    QString path = game->getPath(ico);
+    dialog->setWindowIcon(QIcon(path));
     dialog->setWindowTitle(QString("Dezercja!!!"));
 
     QMediaPlayer leave_ask;
@@ -118,21 +135,21 @@ void Menu::quit_ask()
     quit_image = quit_image.scaled(dialog_view->size(), Qt::IgnoreAspectRatio);      //scale background image to window size
     dialog_scene->setBackgroundBrush(QBrush(quit_image));
 
-    Button *stay = new Button(300,80,"Wracam!");
+    stay = new Button(300,80,"Wracam!");
     int xsPos = 200 - stay->boundingRect().width()/2;
     int ysPos = 250;
     stay->setPos(xsPos,ysPos);
     connect(stay, SIGNAL(clicked()), dialog, SLOT(close()));
     dialog_scene->addItem(stay);
 
-    Button *leave = new Button(300,80,"Uciekam!");
+    leave = new Button(300,80,"Uciekam!");
     int xlPos = 600 - leave->boundingRect().width()/2;
     int ylPos = 250;
     leave->setPos(xlPos,ylPos);
     connect(leave, SIGNAL(clicked()), this, SLOT(quit_all()));
     dialog_scene->addItem(leave);
 
-    dialog->exec();
+    dialog->show();
 }
 
 void Menu::credits()
@@ -140,7 +157,8 @@ void Menu::credits()
     cr_dialog = new QDialog;
 
     cr_dialog->setModal(true);
-    cr_dialog->setWindowIcon(QIcon(game->icon_path));
+    QString path = game->getPath(ico);
+    cr_dialog->setWindowIcon(QIcon(path));
     cr_dialog->setWindowTitle(QString("O autorach..."));
 
     cr_dialog->setFixedSize(QSize(800, 500));
@@ -168,7 +186,7 @@ void Menu::credits()
     comment.setMedia(QUrl("qrc:/sound/snd/Nothing.WAV"));
     comment.play();
 
-    cr_dialog->exec();
+    cr_dialog->show();
 }
 
 void Menu::start_game()
@@ -179,8 +197,10 @@ void Menu::start_game()
 void Menu::quit_all()
 {
     dialog->close();
-    delete dialog;
+    dialog->deleteLater();
+
     game->close();
+    game->deleteLater();
 }
 
 

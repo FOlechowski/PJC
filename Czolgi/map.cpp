@@ -74,6 +74,7 @@ Map::~Map()
 {
     delete wall1;
     delete wall2;
+    ply = nullptr;
 }
 
 

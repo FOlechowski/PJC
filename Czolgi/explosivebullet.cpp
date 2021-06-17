@@ -64,10 +64,15 @@ void ExplosiveBullet::Explode()
 
             int root = sqrt(pow(explosion->x() - hitted->x(),2)+pow(explosion->y() - hitted->y(),2));
 
-            if(root!=0)
-                hitted->hp = hitted->hp - 200/root;
+            int hp = hitted->getHP();
 
-            if(hitted->hp <=0)
+            if(root!=0)
+            {
+                hp = hp - 200/root;
+                hitted->setHP(hp);
+            }
+
+            if(hp <= 0)
             {
                 scene()->removeItem(hitted);
                 delete hitted;
@@ -90,10 +95,11 @@ bool ExplosiveBullet::bulletIsCollidig()
         if(enemy && (colliding_items[i] != creator))                                            //if type id is matching and the bullet didn't hit the creators
         {
             hitted = dynamic_cast<Tank*>(colliding_items[i]);                                   //safe pointer to the hitted element
+            int dmg = creator->getDMG();
+            hitted->modifyHP(dmg,penetration);
+            int hp = hitted->getHP();
 
-            hitted->hp = hitted->hp - (penetration/200)*(creator->dmg - (hitted->armor*creator->dmg));
-
-            if(hitted->hp <=0)
+            if(hp <=0)
             {
                 scene()->removeItem(hitted);
                 delete hitted;

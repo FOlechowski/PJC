@@ -64,6 +64,30 @@
         <file>tex/rock.png</file>
         <file>tex/explosion.png</file>
         <file>tex/tex_bridge_1.png</file>
+        <file>tex/EM0.png</file>
+        <file>tex/EM15.png</file>
+        <file>tex/EM30.png</file>
+        <file>tex/EM45.png</file>
+        <file>tex/EM-15.png</file>
+        <file>tex/EM-30.png</file>
+        <file>tex/EM-45.png</file>
+        <file>tex/EM60.png</file>
+        <file>tex/EM-60.png</file>
+        <file>tex/EM75.png</file>
+        <file>tex/EM-75.png</file>
+        <file>tex/EM90.png</file>
+        <file>tex/EM-90.png</file>
+        <file>tex/EM105.png</file>
+        <file>tex/EM-105.png</file>
+        <file>tex/EM120.png</file>
+        <file>tex/EM-120.png</file>
+        <file>tex/EM135.png</file>
+        <file>tex/EM-135.png</file>
+        <file>tex/EM150.png</file>
+        <file>tex/EM-150.png</file>
+        <file>tex/EM165.png</file>
+        <file>tex/EM-165.png</file>
+        <file>tex/EM180.png</file>
     </qresource>
     <qresource prefix="/sound">
         <file>snd/Intro3.WAV</file>

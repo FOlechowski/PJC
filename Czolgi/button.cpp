@@ -49,5 +49,5 @@ void Button::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 
 Button::~Button()
 {
-
+    delete text;
 }
