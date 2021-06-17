@@ -31,11 +31,13 @@ public:
     void newGame();
     void keyPressEvent(QKeyEvent * event);
     void keyReleaseEvent(QKeyEvent *event);
+
     int diffic = 0;
 
     QString bckg_path = ":/img/img/background_02.png";
     QString icon_path = ":/img/img/icon.png";
     QString win_title = "CZOLGI WARS";
+    QGraphicsView* map_view;
 
 private slots:
     void set_baron();
@@ -50,7 +52,7 @@ private:
     QLineEdit* username;
 
     QGraphicsView* init_view;
-    QGraphicsView* map_view;
+
     QGraphicsView* game_interfece;
 
     QGraphicsScene* init_scene;

@@ -18,8 +18,8 @@ public:
     Map(Player* player, int diff);
     ~Map();
 
-    int ms_width = 1200;
-    int ms_height = 1000;
+    int ms_width = 1800;
+    int ms_height = 1500;
 
     int difficult = 0;
     //bool isonbridge();

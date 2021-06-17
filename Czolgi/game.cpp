@@ -3,6 +3,7 @@
 #include "menu.h"
 #include <QDebug>
 #include <QMessageBox>
+#include <QScrollBar>
 
 Game::Game()
 {
@@ -27,12 +28,15 @@ void Game::displayMenu()
 
 void Game::draw_interface(Player* player)
 {
+
     map_view = new QGraphicsView(this);
+
     map_view->setRenderHint(QPainter::HighQualityAntialiasing);
     map_view->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     map_view->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     map_view->setFixedSize(QSize(this->width(), this->height()-100));
     map_view->show();
+
 
     game_interfece = new QGraphicsView(this);
     game_interfece->setRenderHint(QPainter::HighQualityAntialiasing);
@@ -45,9 +49,11 @@ void Game::draw_interface(Player* player)
     map = new Map(player,this->diffic);
 
     map_view->setScene(map);
+    player->setPointerToView(map_view);
     //qDebug()<<game_interfece->verticalScrollBar();
     //game_interfece->setVerticalScrollBar()->setValue(600,100,50,10);
 }
+
 
 void Game::newGame()
 {
@@ -116,6 +122,7 @@ void Game::newGame()
         init_scene->addItem(text);
 
         init_view->show();
+
 }
 
 void Game::set_baron()
@@ -192,8 +199,11 @@ void Game::set_fiolet()
 
 void Game::keyReleaseEvent(QKeyEvent *event)
 {
+
+    //move_map();
     if(event->key() == Qt::Key_W){
         player->keyW = false;
+
         //qDebug()<<"released W";
     }
     if(event->key() == Qt::Key_D){

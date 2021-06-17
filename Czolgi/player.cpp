@@ -19,6 +19,10 @@ Player::Player()
     connect(player_timer, SIGNAL(timeout()),this,SLOT(movePlayer()));        //connect to the slot that will emitate the smooth movement
     player_timer->start(40);
 
+
+
+
+
 }
 
 void Player::setPlayerName(QString Pname)
@@ -36,6 +40,11 @@ void Player::shot()
         is_loading = true;
         bullets = bullets - 1;
     }
+}
+
+void Player::setPointerToView(QGraphicsView *view)
+{
+    this->view = view;
 }
 
 void Player::moveForward(qreal m_distance, double m_angle)
@@ -120,6 +129,10 @@ void Player::movePlayer()
 {
     if (checkCol()&&!(keyA&&keyD)){
 
+        if(view!=nullptr){
+        view->centerOn(this);
+        view->show();
+        }
 
         if(keyA){
             if(keyW){
@@ -232,7 +245,7 @@ void Player::movePlayer()
         }
     }
 
-    qDebug()<<rotate_angle;
+
 
     //if(!rotate_angle%15){
     Tank::setTexture(-rotate_angle);
