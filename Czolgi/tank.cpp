@@ -32,6 +32,7 @@ void Tank::move(qreal dx, qreal dy)
 
 void Tank::setTexture(int angle )
 {
+
     switch (angle)
     {
         case 0:
