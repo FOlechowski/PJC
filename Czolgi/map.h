@@ -18,18 +18,17 @@ public:
     Map(Player* player, int diff);
     ~Map();
 
-    int ms_width = 1200;
-    int ms_height = 1000;
-
-    int difficult = 0;
-    //bool isonbridge();
-
 public slots:
 
 private:
     Player* ply;
     QGraphicsRectItem* wall1;
     QGraphicsRectItem* wall2;
+
+    int ms_width = 1200;
+    int ms_height = 1000;
+
+    int difficult = 0;
 };
 
 #endif // MAP_H

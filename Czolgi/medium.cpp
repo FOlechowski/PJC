@@ -48,30 +48,30 @@ Medium::Medium(qreal x, qreal y, int dif, Player* pl)
 
 void Medium::setPathTextures()
 {
-    tex_path[0] = ":/img/tex/arrow_0.png";
-    tex_path[1] = ":/img/tex/arrow_15.png";
-    tex_path[2] = ":/img/tex/arrow_30.png";
-    tex_path[3] = ":/img/tex/arrow_45.png";
-    tex_path[4] = ":/img/tex/arrow_60.png";
-    tex_path[5] = ":/img/tex/arrow_75.png";
-    tex_path[6] = ":/img/tex/arrow_90.png";
-    tex_path[7] = ":/img/tex/arrow_105.png";
-    tex_path[8] = ":/img/tex/arrow_120.png";
-    tex_path[9] = ":/img/tex/arrow_135.png";
-    tex_path[10] = ":/img/tex/arrow_150.png";
-    tex_path[11] = ":/img/tex/arrow_165.png";
-    tex_path[12] = ":/img/tex/arrow_180.png";
-    tex_path[13] = ":/img/tex/arrow_-15.png";
-    tex_path[14] = ":/img/tex/arrow_-30.png";
-    tex_path[15] = ":/img/tex/arrow_-45.png";
-    tex_path[16] = ":/img/tex/arrow_-60.png";
-    tex_path[17] = ":/img/tex/arrow_-75.png";
-    tex_path[18] = ":/img/tex/arrow_-90.png";
-    tex_path[19] = ":/img/tex/arrow_-105.png";
-    tex_path[20] = ":/img/tex/arrow_-120.png";
-    tex_path[21] = ":/img/tex/arrow_-135.png";
-    tex_path[22] = ":/img/tex/arrow_-150.png";
-    tex_path[23] = ":/img/tex/arrow_-165.png";
+    tex_path[0] = ":/img/tex/EM0.png";
+    tex_path[1] = ":/img/tex/EM15.png";
+    tex_path[2] = ":/img/tex/EM30.png";
+    tex_path[3] = ":/img/tex/EM45.png";
+    tex_path[4] = ":/img/tex/EM60.png";
+    tex_path[5] = ":/img/tex/EM75.png";
+    tex_path[6] = ":/img/tex/EM90.png";
+    tex_path[7] = ":/img/tex/EM105.png";
+    tex_path[8] = ":/img/tex/EM120.png";
+    tex_path[9] = ":/img/tex/EM135.png";
+    tex_path[10] = ":/img/tex/EM150.png";
+    tex_path[11] = ":/img/tex/EM165.png";
+    tex_path[12] = ":/img/tex/EM180.png";
+    tex_path[13] = ":/img/tex/EM-15.png";
+    tex_path[14] = ":/img/tex/EM-30.png";
+    tex_path[15] = ":/img/tex/EM-45.png";
+    tex_path[16] = ":/img/tex/EM-60.png";
+    tex_path[17] = ":/img/tex/EM-75.png";
+    tex_path[18] = ":/img/tex/EM-90.png";
+    tex_path[19] = ":/img/tex/EM-105.png";
+    tex_path[20] = ":/img/tex/EM-120.png";
+    tex_path[21] = ":/img/tex/EM-135.png";
+    tex_path[22] = ":/img/tex/EM-150.png";
+    tex_path[23] = ":/img/tex/EM-165.png";
 }
 
 
