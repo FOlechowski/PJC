@@ -5,6 +5,7 @@
 #include <QMessageBox>
 #include <QScrollBar>
 
+
 Game::Game()
 {
     setFixedSize(QSize(win_width, win_height));
@@ -31,6 +32,10 @@ Game::~Game()
     delete init_scene;
 
     delete text;
+
+    delete hp_bar;
+    delete interface_scene;
+    delete player_name;
 
 }
 
@@ -89,6 +94,17 @@ void Game::draw_interface(Player* player)
 
 
     interface_scene->addItem(player_name);
+
+    hp_bar = new QProgressBar();
+    hp_bar->reset();
+
+    hp_bar->setFormat("%v");
+    hp_bar->setMinimum(0);
+    hp_bar->setMaximum(150);
+
+    hp_bar->setValue(50);
+    hp_bar->move(300,5);
+    interface_scene->addWidget(hp_bar);
 
     game_interface->setScene(interface_scene);
     game_interface->show();

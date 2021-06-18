@@ -8,6 +8,7 @@
 #include <QMediaPlayer>
 #include <QLineEdit>
 #include <QKeyEvent>
+#include <QProgressBar>
 #include "button.h"
 #include "map.h"
 #include "player.h"
@@ -64,6 +65,8 @@ private:
 
     QGraphicsTextItem *text = nullptr;
     QGraphicsTextItem *player_name = nullptr;
+
+    QProgressBar* hp_bar = nullptr;
 
     int diffic = 0;
 
