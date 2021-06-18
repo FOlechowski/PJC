@@ -19,9 +19,9 @@ public:
     void modifyHP(int dmg, int penetration);
     int getDMG();
     int getHP();
+    float getArmor();
     void setHP(int hp);
     void setInitialParameters(int hp, int dmg, float armor);
-    void getParameters(float *armor, int *rotation_angle);
 
 public slots:
     void reload();

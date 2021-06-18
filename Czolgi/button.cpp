@@ -1,7 +1,5 @@
 #include "button.h"
 
-
-
 Button::Button( int width, int height, QString name, QObject *parent) : QObject(parent)
 {
     //creating rectangle button

@@ -23,7 +23,7 @@ public:
     Bridge();
 };
 
-class Rock : public QGraphicsPixmapItem
+class Rock : public Obstacles
 {
 public:
     Rock();

@@ -33,7 +33,6 @@ Bullet::Bullet(float ang, Tank* tank)
     QTimer * timer = new QTimer(this);                                  //start timer for it
     connect(timer, SIGNAL(timeout()),this,SLOT(moveBullet()));          //connect to the slot that will emitate the smooth movement
     timer->start(10);                                                   //start timer
-
 }
 
 Bullet::Bullet()
@@ -79,6 +78,7 @@ bool Bullet::bulletIsCollidig()
 
     for (int i = 0, n = colliding_items.size(); i < n; i++)                                                 //check the whole list
     {
+
         if(colliding_items[i] != creator && typeid(*(colliding_items[i])) != typeid(QGraphicsRectItem))
         {
             bool enemy = checkIfEnemy(colliding_items[i]);                                                      //check if enemy
@@ -88,18 +88,21 @@ bool Bullet::bulletIsCollidig()
                 hitted = dynamic_cast<Tank*>(colliding_items[i]);                                               //safe pointer to the hitted element as Tank
 
                 int hp = hitted->getHP();
-                float armor;
-                int rotate_angle;
+                float armor = hitted->getArmor();
                 int dmg = creator->getDMG();
 
-                hitted->getParameters(&armor, &rotate_angle);
-
-                bool is_bouncing = bounce(armor, penetration, (angle*180)/M_PI, rotate_angle);                  //check if bullet has been bounced
+                bool is_bouncing = false;//bounce();                                                                    //check if bullet has been bounced
 
                 if(!is_bouncing)                                                                                //calculate damage
                 {
                     hp = hp - (dmg - (armor*dmg));                                                              //calculate damage
                     hitted->setHP(hp);
+                }
+
+                if(typeid(*(colliding_items[i])) == typeid(Boss))
+                {
+                    Boss *P_Boss = dynamic_cast<Boss*>(colliding_items[i]);
+                    P_Boss->getHelp(P_Boss->x()-200,P_Boss->y()-200);
                 }
 
                 if(hp <= 0 && enemy)                                                                             //if hp is over
@@ -114,17 +117,15 @@ bool Bullet::bulletIsCollidig()
 
                 else if(hp <=0 && !enemy)
                 {
-                    qDebug()<<"Game Over!!!";
                     hitted->setHP(0);
                 }
 
                 scene()->removeItem(this);                                                                     //remove only bullet if hp is not over
                 delete this;
-                qDebug()<<hp;
                 return true;                                                                                   //end the function
             }
 
-            if(typeid (*(colliding_items[i])) != typeid (Water) && typeid(*(colliding_items[i])) != typeid (Bridge))
+            if(typeid (*(colliding_items[i]))!=typeid(Water) && typeid(*(colliding_items[i]))!=typeid(Bridge) && typeid(*(colliding_items[i]))!=typeid(QGraphicsTextItem))
             {
                 scene()->removeItem(this);
                 delete this;
@@ -135,20 +136,19 @@ bool Bullet::bulletIsCollidig()
     return false;
 }
 
-bool Bullet::bounce(float armor, int penetration, qreal bullet_angle, int hitted_angle)
+bool Bullet::bounce()
 {
-    qreal angle_to_normal = abs(180-abs(hitted_angle - bullet_angle));                                      //calculate the angle
+//    qreal angle_to_normal = abs(180-abs(hitted_angle - bullet_angle));                                      //calculate the angle
 
-    if(angle_to_normal>90)                                                                                  //check if it is in range 0-90
-        angle_to_normal = 180-angle_to_normal;
+//    if(angle_to_normal>90)                                                                                  //check if it is in range 0-90
+//        angle_to_normal = 180-angle_to_normal;
 
-    quint32 chance = QRandomGenerator::global()->bounded(10,20)-(armor*10)+penetration/(angle_to_normal+1); //generate the chance to bounce
+    quint32 chance = QRandomGenerator::global()->bounded(1,10);        //-(armor*10)+penetration/(angle_to_normal+1); //generate the chance to bounce
 
-    qDebug()<<chance;
-
-    if(chance < 11)
+    if(chance < 2)
     {
        return true;
     }
+
     return false;
 }

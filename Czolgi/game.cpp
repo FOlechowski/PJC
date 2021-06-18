@@ -15,23 +15,13 @@ Game::Game()
 Game::~Game()
 {
     delete menu;
-    qDebug()<<"Usuwam menu";
     delete player;
-    qDebug()<<"Usuwam player";
     delete map;
-    qDebug()<<"Usuwam map";
-    delete username;
-    qDebug()<<"Usuwam username";
     delete init_view;
-    qDebug()<<"Usuwam init_view";
     delete map_view;
-    qDebug()<<"Usuwam map_view";
     delete game_interfece;
-    qDebug()<<"Usuwam game_interface";
     delete init_scene;
-    qDebug()<<"Usuwam init_scene";
     delete text;
-    qDebug()<<"Destruktor wywołany pomyślnie";
 }
 
 void Game::create_player(QString name)
@@ -167,8 +157,6 @@ QString Game::getPath(int path_type)
 void Game::set_baron()
 {
     diffic = easy;
-    qDebug()<<diffic;
-    qDebug()<<"Red Baron";
 
     QString name = username->text();
 
@@ -192,8 +180,6 @@ void Game::set_baron()
 void Game::set_kabaczek()
 {
     diffic = medium;
-    qDebug()<<diffic;
-    qDebug()<<"Kabaczek";
 
     QString name = username->text();
 
@@ -217,8 +203,6 @@ void Game::set_kabaczek()
 void Game::set_fiolet()
 {
     diffic = hard;
-    qDebug()<<diffic;
-    qDebug()<<"Fiolet";
 
     QString name = username->text();
 

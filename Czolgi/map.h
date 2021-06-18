@@ -18,17 +18,19 @@ public:
     Map(Player* player, int diff);
     ~Map();
 
+    void changeLevel();
+    void createFinalLevel();
+
 public slots:
 
 private:
     Player* ply;
-    QGraphicsRectItem* wall1;
-    QGraphicsRectItem* wall2;
 
     int ms_width = 1800;
     int ms_height = 1500;
 
     int difficult = 0;
+    int level;
 };
 
 #endif // MAP_H

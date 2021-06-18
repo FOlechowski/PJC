@@ -11,10 +11,13 @@ Enemy::Enemy()                                              //empty default cons
 {
 }
 
+Enemy::~Enemy()
+{
+    qDebug()<<"Robię destruktor enemy";
+}
+
 void Enemy::holdPos()
 {
-    if(rotate_angle == -1000)
-        rotate_angle = 180;
 }
 
 bool Enemy::check()
@@ -93,6 +96,8 @@ void Enemy::aim(float angle)
 void Enemy::setCommand(char comm)
 {
     command = comm;                                         //set command
+    if(rotate_angle == -1000)
+        rotate_angle = 180;
 }
 
 void Enemy::followPlayer()
@@ -103,7 +108,7 @@ void Enemy::followPlayer()
 void Enemy::addStick()
 {
     stick = new QGraphicsRectItem(this);
-    stick->setRect(25,80,50,(view_range));
+    stick->setRect(25,50,50,(view_range));
     stick->setTransformOriginPoint(50,50);
     stick->setVisible(false);
 
@@ -118,22 +123,10 @@ bool Enemy::obstacleInLine()
     QList<QGraphicsItem*> colliding_items = stick->collidingItems();
     for (int i = 0, n = colliding_items.size(); i < n; i++)
     {
-        if(typeid(*(colliding_items[i])) != typeid(Water) && typeid(*(colliding_items[i])) != typeid(Bridge) && colliding_items[i] != this && typeid(*(colliding_items[i])) != typeid(Player))
+        if(typeid(*(colliding_items[i])) != typeid(Water) && typeid(*(colliding_items[i])) != typeid(Bridge) && colliding_items[i] != this && typeid(*(colliding_items[i])) != typeid(Player) && typeid(*(colliding_items[i])) != typeid(QGraphicsTextItem) && typeid(*(colliding_items[i])) != typeid(QGraphicsRectItem))
             return true;
     }
     return false;
-}
-
-bool Enemy::avoidObstacle()
-{
-    bool obstacle_in_view = false;
-    if(!is_rotating)
-        obstacle_in_view = obstacleInLine();
-    if(obstacle_in_view)
-    {
-        return false;
-    }
-    return true;
 }
 
 void Enemy::addPointToPath(int x, int y, QList<QPoint> &list)

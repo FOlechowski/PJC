@@ -15,19 +15,12 @@ Menu::Menu(Game *parent) : QGraphicsView(parent)
 
 Menu::~Menu()
 {
-    qDebug()<<"Wchodzę w destruktor menu";
     delete menu;
-    qDebug()<<"Usuwam menu";
     delete dialog_view;
-    qDebug()<<"Usuwam dialog_view";
     delete cr_dialog_view;
-    qDebug()<<"Usuwam cr_dialog_view";
     delete intro;
-    qDebug()<<"Usuwam intro";
     delete dialog;
-    qDebug()<<"Usuwam dialog";
     delete cr_dialog;
-    qDebug()<<"Usuwam cr_dialog";
 }
 
 

@@ -19,7 +19,7 @@ private slots:
 protected:
     bool checkIfEnemy(QGraphicsItem *colliding_item);
     virtual bool bulletIsCollidig();
-    bool bounce(float armor, int penetration, qreal bullet_angle, int hitted_angle);
+    bool bounce();
 
     qreal speed = 8;
     int penetration = 100;

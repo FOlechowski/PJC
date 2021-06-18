@@ -20,6 +20,7 @@ class Enemy : public Tank
 public:
 
     Enemy();
+    ~Enemy();
 
     void holdPos();
     bool check();
@@ -29,7 +30,6 @@ public:
     void addStick();
 
     bool obstacleInLine();
-    bool avoidObstacle();
 
     void addPointToPath(int x, int y, QList<QPoint> &list);
 

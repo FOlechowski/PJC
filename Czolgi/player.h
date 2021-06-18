@@ -8,8 +8,10 @@
 #include <QString>
 #include "obstacles.h"
 #include "game.h"
+#include "map.h"
 
 class Game;
+class Map;
 
 class Player : public Tank
 {
@@ -17,11 +19,14 @@ class Player : public Tank
 
 public:
     Player();
+    ~Player();
 
     void setPlayerName(QString Pname);
     void shot();
     bool keyA, keyW, keyD, keyS,keySpace = false;
     void setPointerToView(QGraphicsView *view);
+    void setPointerToMap(Map *map);
+
 public slots:
 
 private:
@@ -33,6 +38,7 @@ private:
     bool checkCol();
     int bullets = 50;
     QGraphicsView *view = nullptr;
+    Map *map = nullptr;
     QString name;
 
     bool front_hit, back_hit, right_hit, left_hit = false;

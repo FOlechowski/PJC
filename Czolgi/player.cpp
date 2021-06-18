@@ -2,7 +2,7 @@
 #include <cmath>
 #include "bullet.h"
 #include "explosivebullet.h"
-
+#include "map.h"
 
 Player::Player()
 {
@@ -21,10 +21,14 @@ Player::Player()
 
 }
 
+Player::~Player()
+{
+    qDebug()<<"Robię destruktor playera";
+}
+
 void Player::setPlayerName(QString Pname)
 {
     name = Pname;
-    qDebug()<<name;
 }
 
 void Player::shot()
@@ -41,6 +45,11 @@ void Player::shot()
 void Player::setPointerToView(QGraphicsView *view)
 {
     this->view = view;
+}
+
+void Player::setPointerToMap(Map *map)
+{
+    this->map = map;
 }
 
 void Player::moveForward(qreal m_distance, int m_angle)
@@ -112,8 +121,14 @@ bool Player::checkCol()
     }
 
 }
+
 void Player::movePlayer()
 {
+    if(this->x() >= 400 && this->y() >= 400)
+    {
+        this->map->changeLevel();
+    }
+
     if (checkCol()&&!(keyA&&keyD)){
         bool aw,dw,as,ds = true;
 
@@ -232,9 +247,7 @@ void Player::movePlayer()
         }
     }
 
-    qDebug()<<rotate_angle;
     Tank::setTexture(-rotate_angle);
-
 
     if((this->pos()).y()>=450){
 

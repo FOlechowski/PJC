@@ -3,6 +3,7 @@
 #include <QDebug>
 #include "player.h"
 #include <QGraphicsPixmapItem>
+#include <boss.h>
 
 ExplosiveBullet::ExplosiveBullet(float ang, Tank* tank)
 {
@@ -105,11 +106,17 @@ bool ExplosiveBullet::bulletIsCollidig()
                 delete hitted;
             }
 
+            if(typeid(*(colliding_items[i])) == typeid(Boss))
+            {
+                Boss *P_Boss = dynamic_cast<Boss*>(colliding_items[i]);
+                P_Boss->getHelp(P_Boss->x()-200, P_Boss->y()-200);
+            }
+
             Explode();
             return true;
         }
 
-        if(colliding_items[i] != creator)
+        if(colliding_items[i] != creator && typeid(*(colliding_items[i])) != typeid(QGraphicsRectItem) && typeid(*(colliding_items[i])) != typeid(QGraphicsTextItem))
         {
             Explode();
             return true;

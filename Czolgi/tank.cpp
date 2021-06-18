@@ -10,7 +10,7 @@ Tank::Tank()
 
 Tank::~Tank()
 {
-    delete timer_reload;
+    qDebug()<<"Robię destruktor tanka";
 }
 
 void Tank::shot(float angle)
@@ -147,6 +147,11 @@ int Tank::getHP()
     return hp;
 }
 
+float Tank::getArmor()
+{
+    return armor;
+}
+
 void Tank::setHP(int hp)
 {
     this->hp = hp;
@@ -157,12 +162,6 @@ void Tank::setInitialParameters(int hp, int dmg, float armor)
     this->dmg = dmg;
     this->hp = hp;
     this->armor = armor;
-}
-
-void Tank::getParameters(float *armor, int *rotation_angle)
-{
-    armor = &(this->armor);
-    rotation_angle = &(this->rotate_angle);
 }
 
 void Tank::reload()
