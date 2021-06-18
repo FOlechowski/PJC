@@ -8,6 +8,7 @@
 #include <QMediaPlayer>
 #include <QLineEdit>
 #include <QKeyEvent>
+#include <QProgressBar>
 #include "button.h"
 #include "map.h"
 #include "player.h"
@@ -33,7 +34,7 @@ public:
     void displayMenu();
     void draw_interface(Player* player);
     void newGame();
-    QGraphicsView* map_view = nullptr;
+
     QString getPath(int path_type);
 
 private slots:
@@ -52,21 +53,27 @@ private:
 
     QGraphicsView* init_view = nullptr;
 
-    QGraphicsView* game_interfece = nullptr;
+    QGraphicsView* game_interface = nullptr;
+    QGraphicsView* map_view = nullptr;
 
     QGraphicsScene* init_scene = nullptr;
+    QGraphicsScene* interface_scene = nullptr;
 
     Button* red_baron = nullptr;
     Button* kabaczek = nullptr;
     Button* fiolet = nullptr;
 
     QGraphicsTextItem *text = nullptr;
+    QGraphicsTextItem *player_name = nullptr;
+
+    QProgressBar* hp_bar = nullptr;
 
     int diffic = 0;
 
     QString bckg_path = ":/img/img/background_02.png";
     QString icon_path = ":/img/img/icon.png";
     QString win_title = "CZOLGI WARS";
+    QString interface_background = ":/img/img/interface_bckg.jpg";
 
 protected:
 

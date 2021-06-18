@@ -113,6 +113,7 @@
         <file>tex/p-165.png</file>
         <file>tex/p-180 .png</file>
         <file>tex/p180.png</file>
+        <file>img/interface_bckg.jpg</file>
     </qresource>
     <qresource prefix="/sound">
         <file>snd/Intro3.WAV</file>
