@@ -20,12 +20,11 @@ Game::~Game()
     delete map;
     delete init_view;
     delete map_view;
-    delete game_interfece;
+    delete game_interface;
     delete init_scene;
     delete text;
     delete hp_bar;
     delete interface_scene;
-    delete player_name;
 }
 
 void Game::create_player(QString name)

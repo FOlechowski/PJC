@@ -3,6 +3,7 @@
 #include "destroyer.h"
 #include "light.h"
 #include "boss.h"
+#include <QFile>
 
 Map::Map(Player* player, int diff)
 {
@@ -76,6 +77,8 @@ Map::Map(Player* player, int diff)
 //    this->addItem(enemy3);
 //    this->addItem(enemy4);
     this->addItem(ply);
+
+    this->safeToFile();
 }
 
 Map::~Map()
@@ -114,6 +117,20 @@ void Map::createFinalLevel()
     enemy->addPointToPath(500,400, enemy->pointList);
 }
 
+void Map::safeToFile()
+{
+    //QFile file("D:/Testowy/test.txt");
+    QList<QGraphicsItem*> all = items();
+    for(int i=0;i<all.size();i++)
+    {
+//        if(file.open(QIODevice::WriteOnly | QIODevice::Text | QIODevice::Append))
+//        {
+//            QTextStream stream(&file);
 
+//            stream << "Pozycja elementu: " << all[i]->x() <<" "<< all[i]->y() <<'\n';
+//            stream << "Typ elementu: " << typeid(*all[i]).name() << '\n';
 
-
+//            file.close();
+//        }
+    }
+}

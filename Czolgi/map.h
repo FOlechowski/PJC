@@ -20,6 +20,7 @@ public:
 
     void changeLevel();
     void createFinalLevel();
+    void safeToFile();
 
 public slots:
 
