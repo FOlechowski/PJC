@@ -33,7 +33,7 @@ void Game::create_player(QString name)
 {
     player = new Player();
     player->setPlayerName(name);
-    player->setInitialParameters(300, 120, 0.5);
+    player->setInitialParameters(300, 120, 0.5, 10, 10);
     player->getPointerToGame(this);
 }
 

@@ -132,6 +132,22 @@ void Tank::setTexture(int angle )
     }
 }
 
+void Tank::setAPshells(int number)
+{
+    if(number>=0)
+    {
+    APShells = number;
+    }
+}
+
+void Tank::setHEshells(int number)
+{
+    if(number>=0)
+    {
+        HEShells = number;
+    }
+}
+
 void Tank::modifyHP(int dmg, int penetration)
 {
     this->hp = this->hp - (penetration/200)*(dmg - (this->armor*dmg));
@@ -145,6 +161,16 @@ int Tank::getDMG()
 int Tank::getHP()
 {
     return hp;
+}
+
+int Tank::getAP()
+{
+    return APShells;
+}
+
+int Tank::getHE()
+{
+    return HEShells;
 }
 
 float Tank::getArmor()
@@ -164,11 +190,13 @@ void Tank::setHP(int hp)
 
 }
 
-void Tank::setInitialParameters(int hp, int dmg, float armor)
+void Tank::setInitialParameters(int hp, int dmg, float armor, int APShells, int HEShells)
 {
     this->dmg = dmg;
     this->hp = hp;
     this->armor = armor;
+    this->APShells = APShells;
+    this->HEShells = APShells;
 }
 
 void Tank::reload()
