@@ -4,6 +4,7 @@
 #include <QDebug>
 #include <QMessageBox>
 #include <QScrollBar>
+#include <QGraphicsPixmapItem>
 
 
 Game::Game()
@@ -25,6 +26,7 @@ Game::~Game()
     delete text;
     delete hp_bar;
     delete interface_scene;
+
 }
 
 void Game::create_player(QString name)
@@ -90,11 +92,36 @@ void Game::draw_interface(Player* player)
     hp_bar->setMaximum(player->getHP());
     hp_bar->setFormat(QString("%v / " + QString::number(hp_bar->maximum())));
     hp_bar->setTextVisible(true);
-    hp_bar->setTextDirection(QProgressBar::BottomToTop);
+
     hp_bar->setValue(hp_bar->maximum());
     hp_bar->move(300,20);
 
     interface_scene->addWidget(hp_bar);
+    QGraphicsPixmapItem* APShell = new QGraphicsPixmapItem;
+    QGraphicsPixmapItem* HEShell = new QGraphicsPixmapItem;
+    APShell->setPixmap(QPixmap(AP_icon));
+    APShell->setScale(0.2);
+    APShell->setPos(10,70);
+    HEShell->setPixmap(QPixmap(HE_icon));
+    HEShell->setScale(0.2);
+    HEShell->setPos(80,70);
+
+    interface_scene->addItem(APShell);
+    interface_scene->addItem(HEShell);
+
+    QGraphicsTextItem* APText = new QGraphicsTextItem;
+    QGraphicsTextItem* HEText = new QGraphicsTextItem;
+    APText->setFont(QFont("Calibri", 10));
+    APText->setPlainText(QString("AP"));
+    APText->setDefaultTextColor(Qt::white);
+    APText->setPos(25, 45);
+    HEText->setFont(QFont("Calibri", 10));
+    HEText->setPlainText(QString("HE"));
+    HEText->setDefaultTextColor(Qt::white);
+    HEText->setPos(95, 45);
+
+    interface_scene->addItem(APText);
+    interface_scene->addItem(HEText);
 
     game_interface->setScene(interface_scene);
     game_interface->show();

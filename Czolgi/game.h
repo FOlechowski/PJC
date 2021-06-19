@@ -53,7 +53,6 @@ private:
     QLineEdit* username = nullptr;
 
     QGraphicsView* init_view = nullptr;
-
     QGraphicsView* game_interface = nullptr;
     QGraphicsView* map_view = nullptr;
 
@@ -67,6 +66,9 @@ private:
     QGraphicsTextItem *text = nullptr;
     QGraphicsTextItem *player_name = nullptr;
 
+
+
+
     QProgressBar* hp_bar = nullptr;
 
     int diffic = 0;
@@ -75,6 +77,9 @@ private:
     QString icon_path = ":/img/img/icon.png";
     QString win_title = "CZOLGI WARS";
     QString interface_background = ":/img/img/interface_bckg.jpg";
+    QString AP_icon = ":/img/img/APShell.png";
+    QString HE_icon = ":/img/img/HEShell.png";
+
 
 protected:
 
