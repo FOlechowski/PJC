@@ -26,6 +26,7 @@ Game::~Game()
     delete text;
     delete hp_bar;
     delete interface_scene;
+    delete frame;
 
 }
 
@@ -33,7 +34,7 @@ void Game::create_player(QString name)
 {
     player = new Player();
     player->setPlayerName(name);
-    player->setInitialParameters(300, 120, 0.5, 10, 10);
+    player->setInitialParameters(300, 120, 0.5);
     player->getPointerToGame(this);
 }
 
@@ -94,17 +95,18 @@ void Game::draw_interface(Player* player)
     hp_bar->setTextVisible(true);
 
     hp_bar->setValue(hp_bar->maximum());
-    hp_bar->move(300,20);
+    hp_bar->move(10,60);
+    hp_bar->setMinimumSize(300,70);
 
     interface_scene->addWidget(hp_bar);
     QGraphicsPixmapItem* APShell = new QGraphicsPixmapItem;
     QGraphicsPixmapItem* HEShell = new QGraphicsPixmapItem;
     APShell->setPixmap(QPixmap(AP_icon));
     APShell->setScale(0.2);
-    APShell->setPos(10,70);
+    APShell->setPos(410,40);
     HEShell->setPixmap(QPixmap(HE_icon));
     HEShell->setScale(0.2);
-    HEShell->setPos(80,70);
+    HEShell->setPos(480,40);
 
     interface_scene->addItem(APShell);
     interface_scene->addItem(HEShell);
@@ -114,14 +116,36 @@ void Game::draw_interface(Player* player)
     APText->setFont(QFont("Calibri", 10));
     APText->setPlainText(QString("AP"));
     APText->setDefaultTextColor(Qt::white);
-    APText->setPos(25, 45);
+    APText->setPos(425, 15);
     HEText->setFont(QFont("Calibri", 10));
     HEText->setPlainText(QString("HE"));
     HEText->setDefaultTextColor(Qt::white);
-    HEText->setPos(95, 45);
+    HEText->setPos(495, 15);
 
     interface_scene->addItem(APText);
     interface_scene->addItem(HEText);
+
+    APNum = new QGraphicsTextItem;
+    HENum = new QGraphicsTextItem;
+
+    APNum->setFont(QFont("Calibri", 12));
+    APNum->setPlainText(QString::number(player->getAP()));
+    APNum->setDefaultTextColor(Qt::white);
+    APNum->setPos(425, 105);
+    HENum->setFont(QFont("Calibri", 12));
+    HENum->setPlainText(QString(QString::number(player->getHE())));
+    HENum->setDefaultTextColor(Qt::white);
+    HENum->setPos(495, 105);
+
+    interface_scene->addItem(APNum);
+    interface_scene->addItem(HENum);
+
+    frame = new QGraphicsPixmapItem;
+    frame->setPixmap(QPixmap(ramka));
+    frame->setScale(0.2);
+    frame->setPos(410,40);
+
+    interface_scene->addItem(frame);
 
     game_interface->setScene(interface_scene);
     game_interface->show();
@@ -314,12 +338,44 @@ void Game::keyReleaseEvent(QKeyEvent *event)
         {
             player->keySpace = false;
         }
+        if(event->key() == Qt::Key_1)
+        {
+            player->key1 = false;
+
+        }
+        if(event->key() == Qt::Key_2)
+        {
+            player->key2 = false;
+
+        }
     }
 }
 
 void Game::modifyHpBar()
 {
     hp_bar->setValue(player->getHP());
+}
+
+void Game::modifyAmmo()
+{
+
+
+    APNum->setPlainText(QString::number(player->getAP()));
+    HENum->setPlainText(QString(QString::number(player->getHE())));
+
+
+}
+
+void Game::modifyAmmoFrame()
+{
+    if(player->getAmmo())
+    {
+        frame->setPos(410,40);
+
+    }else
+    {
+        frame->setPos(480,40);
+    }
 }
 
 void Game::keyPressEvent(QKeyEvent *event){
@@ -353,6 +409,16 @@ void Game::keyPressEvent(QKeyEvent *event){
         if(event->key() == Qt::Key_Space)
         {
             player->keySpace = true;
+        }
+        if(event->key() == Qt::Key_1)
+        {
+            player->key1 = true;
+
+        }
+        if(event->key() == Qt::Key_2)
+        {
+            player->key2 = true;
+
         }
     }
 }

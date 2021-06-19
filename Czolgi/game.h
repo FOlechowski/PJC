@@ -35,6 +35,8 @@ public:
     void draw_interface(Player* player);
     void newGame();
     void modifyHpBar();
+    void modifyAmmo();
+    void modifyAmmoFrame();
     QString getPath(int path_type);
 
 private slots:
@@ -66,8 +68,10 @@ private:
     QGraphicsTextItem *text = nullptr;
     QGraphicsTextItem *player_name = nullptr;
 
+    QGraphicsTextItem* APNum = nullptr;
+    QGraphicsTextItem* HENum = nullptr;
 
-
+     QGraphicsPixmapItem* frame = nullptr;
 
     QProgressBar* hp_bar = nullptr;
 
@@ -79,6 +83,7 @@ private:
     QString interface_background = ":/img/img/interface_bckg.jpg";
     QString AP_icon = ":/img/img/APShell.png";
     QString HE_icon = ":/img/img/HEShell.png";
+    QString ramka = ":/img/img/ramka.png";
 
 
 protected:

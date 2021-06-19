@@ -36,12 +36,20 @@ void Player::setPlayerName(QString Pname)
 
 void Player::shot()
 {
-    if(bullets && !is_loading)
+    if(getAP() && !is_loading && APisloaded)
     {
         timer_reload->start(reload_time);
 
         is_loading = true;
-        bullets = bullets - 1;
+        setAPshells(getAP()-1);
+        updateAmmo();
+    }else if(getHE() && !is_loading && !APisloaded)
+    {
+        timer_reload->start(reload_time);
+
+        is_loading = true;
+        setHEshells(getHE()-1);
+        updateAmmo();
     }
 }
 
@@ -63,6 +71,16 @@ void Player::getPointerToGame(Game *game)
 void Player::updateHpBar()
 {
     game->modifyHpBar();
+}
+
+void Player::updateAmmo()
+{
+    game->modifyAmmo();
+}
+
+bool Player::getAmmo()
+{
+    return APisloaded;
 }
 
 void Player::moveForward(qreal m_distance, int m_angle)
@@ -118,7 +136,7 @@ bool Player::checkCol()
         }else{
             isonwater = false;
         }
-        if (typeid((*colliding_items[i])) == typeid(QGraphicsRectItem)){
+        if (typeid((*colliding_items[i])) == typeid(QGraphicsRectItem) || typeid((*colliding_items[i])) == typeid(QGraphicsTextItem)){
             stick = true;
             //qDebug()<<"patykuje";
         }else{
@@ -134,6 +152,44 @@ bool Player::checkCol()
     }
 
 }
+
+void Player::setAPshells(int number)
+{
+    if(number>=0)
+    {
+    APShells = number;
+    }
+}
+
+void Player::setHEshells(int number)
+{
+    if(number>=0)
+    {
+        HEShells = number;
+    }
+}
+
+void Player::setAP()
+{
+    APisloaded = true;
+}
+
+void Player::setHE()
+{
+    APisloaded = false;
+}
+
+int Player::getAP()
+{
+    return APShells;
+}
+
+int Player::getHE()
+{
+    return HEShells;
+}
+
+
 
 void Player::movePlayer()
 {
@@ -248,15 +304,41 @@ void Player::movePlayer()
         }
 
     }
+    if(key1&&!APisloaded)
+    {
+        APisloaded = true;
+        key1 = false;
+        timer_reload->start(reload_time);
+        is_loading = true;
+        game->modifyAmmoFrame();
+    }
+    if(key2&&APisloaded)
+    {
+        APisloaded = false;
+        key2 = false;
+        timer_reload->start(reload_time);
+        is_loading = true;
+        game->modifyAmmoFrame();
+    }
+
 
     if(keySpace)
     {
-        if(bullets && !is_loading)
+        if(getAP() && !is_loading && APisloaded)
         {
             Bullet *bullet = new Bullet(-rotate_angle*M_PI/180, this);
             bullet->setPos(x()+50,y()+35);
             scene()->addItem(bullet);
             shot();
+        }else if (getHE() && !is_loading && !APisloaded)
+        {
+            ExplosiveBullet *explosivebullet = new ExplosiveBullet(-rotate_angle*M_PI/180, this);
+            explosivebullet->setPos(x()+50,y()+35);
+            scene()->addItem(explosivebullet);
+            shot();
+        }else if(!getHE()||!getAP())
+        {
+            qDebug()<<"koniec amunicji!";
         }
     }
 

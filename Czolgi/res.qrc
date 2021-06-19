@@ -116,6 +116,7 @@
         <file>img/interface_bckg.jpg</file>
         <file>img/APShell.png</file>
         <file>img/HEShell.png</file>
+        <file>img/ramka.png</file>
     </qresource>
     <qresource prefix="/sound">
         <file>snd/Intro3.WAV</file>

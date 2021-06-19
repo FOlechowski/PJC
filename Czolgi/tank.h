@@ -15,16 +15,14 @@ public:
     void shot(float angle);
     void move(qreal dx, qreal dy);
     void setTexture(int angle);
-    void setAPshells(int number);
-    void setHEshells(int number);
+
     void modifyHP(int dmg, int penetration);
     int getDMG();
     int getHP();
-    int getAP();
-    int getHE();
+
     float getArmor();
     void setHP(int hp);
-    void setInitialParameters(int hp, int dmg, float armor, int APShells, int HEShells);
+    void setInitialParameters(int hp, int dmg, float armor);
 
 public slots:
     void reload();
@@ -44,8 +42,7 @@ protected:
     bool is_rotating = false;
 
     int rotate_angle = -1000;
-    int APShells;               //number of bullets
-    int HEShells;               //number of bullets
+
 
     QTimer *timer_reload = new QTimer(this);
 };

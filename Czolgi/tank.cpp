@@ -17,6 +17,7 @@ void Tank::shot(float angle)
 {
     if(!is_loading && !is_rotating)
     {
+
         timer_reload->start(reload_time);
         is_loading = true;
         Bullet *bullet = new Bullet(angle, this);
@@ -132,21 +133,7 @@ void Tank::setTexture(int angle )
     }
 }
 
-void Tank::setAPshells(int number)
-{
-    if(number>=0)
-    {
-    APShells = number;
-    }
-}
 
-void Tank::setHEshells(int number)
-{
-    if(number>=0)
-    {
-        HEShells = number;
-    }
-}
 
 void Tank::modifyHP(int dmg, int penetration)
 {
@@ -163,15 +150,6 @@ int Tank::getHP()
     return hp;
 }
 
-int Tank::getAP()
-{
-    return APShells;
-}
-
-int Tank::getHE()
-{
-    return HEShells;
-}
 
 float Tank::getArmor()
 {
@@ -190,13 +168,11 @@ void Tank::setHP(int hp)
 
 }
 
-void Tank::setInitialParameters(int hp, int dmg, float armor, int APShells, int HEShells)
+void Tank::setInitialParameters(int hp, int dmg, float armor)
 {
     this->dmg = dmg;
     this->hp = hp;
     this->armor = armor;
-    this->APShells = APShells;
-    this->HEShells = APShells;
 }
 
 void Tank::reload()
