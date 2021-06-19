@@ -5,6 +5,7 @@
 #include <QGraphicsPixmapItem>
 #include <QTimer>
 #include "tank.h"
+#include "game.h"
 
 class Bullet: public QObject, public QGraphicsPixmapItem
 {
@@ -26,6 +27,8 @@ protected:
     float angle;
     Tank* creator;
     Tank* hitted;
+private:
+    Game* game;
 };
 
 #endif // BULLET_H

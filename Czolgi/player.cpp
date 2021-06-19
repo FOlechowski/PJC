@@ -24,6 +24,9 @@ Player::Player()
 Player::~Player()
 {
     qDebug()<<"Robię destruktor playera";
+    delete game;
+    delete map;
+    delete view;
 }
 
 void Player::setPlayerName(QString Pname)
@@ -50,6 +53,16 @@ void Player::setPointerToView(QGraphicsView *view)
 void Player::setPointerToMap(Map *map)
 {
     this->map = map;
+}
+
+void Player::getPointerToGame(Game *game)
+{
+    this->game = game;
+}
+
+void Player::updateHpBar()
+{
+    game->modifyHpBar();
 }
 
 void Player::moveForward(qreal m_distance, int m_angle)

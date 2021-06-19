@@ -23,10 +23,11 @@ public:
 
     void setPlayerName(QString Pname);
     void shot();
-    bool keyA, keyW, keyD, keyS,keySpace = false;
+    bool keyA, keyW, keyD, keyS, keySpace = false;
     void setPointerToView(QGraphicsView *view);
     void setPointerToMap(Map *map);
-
+    void getPointerToGame(Game* game);
+    void updateHpBar();
 public slots:
 
 private:
@@ -40,7 +41,7 @@ private:
     QGraphicsView *view = nullptr;
     Map *map = nullptr;
     QString name;
-
+    Game* game;
     bool front_hit, back_hit, right_hit, left_hit = false;
 private slots:
     void movePlayer();

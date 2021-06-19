@@ -154,7 +154,14 @@ float Tank::getArmor()
 
 void Tank::setHP(int hp)
 {
+   if(hp>0)
+   {
     this->hp = hp;
+   }else
+   {
+    this->hp = 0;
+   }
+
 }
 
 void Tank::setInitialParameters(int hp, int dmg, float armor)

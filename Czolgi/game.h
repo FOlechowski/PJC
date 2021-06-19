@@ -34,7 +34,7 @@ public:
     void displayMenu();
     void draw_interface(Player* player);
     void newGame();
-
+    void modifyHpBar();
     QString getPath(int path_type);
 
 private slots:
@@ -45,6 +45,7 @@ private slots:
     void keyReleaseEvent(QKeyEvent *event);
 
 private:
+
     Menu* menu = nullptr;
     Player* player = nullptr;
     Map* map = nullptr;

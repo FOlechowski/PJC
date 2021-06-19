@@ -32,6 +32,7 @@ void Game::create_player(QString name)
     player = new Player();
     player->setPlayerName(name);
     player->setInitialParameters(300, 120, 0.5);
+    player->getPointerToGame(this);
 }
 
 void Game::displayMenu()
@@ -84,14 +85,15 @@ void Game::draw_interface(Player* player)
     interface_scene->addItem(player_name);
 
     hp_bar = new QProgressBar();
-    hp_bar->reset();
 
-    hp_bar->setFormat("%v");
     hp_bar->setMinimum(0);
-    hp_bar->setMaximum(150);
+    hp_bar->setMaximum(player->getHP());
+    hp_bar->setFormat(QString("%v / " + QString::number(hp_bar->maximum())));
+    hp_bar->setTextVisible(true);
+    hp_bar->setTextDirection(QProgressBar::BottomToTop);
+    hp_bar->setValue(hp_bar->maximum());
+    hp_bar->move(300,20);
 
-    hp_bar->setValue(50);
-    hp_bar->move(300,5);
     interface_scene->addWidget(hp_bar);
 
     game_interface->setScene(interface_scene);
@@ -286,6 +288,11 @@ void Game::keyReleaseEvent(QKeyEvent *event)
             player->keySpace = false;
         }
     }
+}
+
+void Game::modifyHpBar()
+{
+    hp_bar->setValue(player->getHP());
 }
 
 void Game::keyPressEvent(QKeyEvent *event){
