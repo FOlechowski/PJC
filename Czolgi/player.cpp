@@ -70,7 +70,8 @@ void Player::savePlayer(QFile *file)
     stream << "Player hp =" <<this->hp<<'\n';
     stream << "Player dmg =" <<this->dmg<<'\n';
     stream << "Player armor =" <<this->armor<<'\n';
-
+    stream << "Normal bullets ="<<this->APShells<<'\n';
+    stream << "Player e_bullets ="<<this->HEShells<<'\n';
     stream << "Player reaload time =" <<this->reload_time<<'\n';
 }
 void Player::getPointerToGame(Game *game)

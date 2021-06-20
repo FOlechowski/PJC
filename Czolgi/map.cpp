@@ -146,12 +146,6 @@ void Map::safeToFile()
                 enemy->saveEnemy(&file, name);
             }
 
-            else
-            {
-                stream << "Typ elementu: " << typeid(*all[i]).name() << '\n';
-                stream << "Pozycja elementu: " << all[i]->x() <<" "<< all[i]->y() <<'\n';
-            }
-
             file.close();
         }
     }
