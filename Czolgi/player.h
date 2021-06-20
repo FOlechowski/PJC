@@ -29,6 +29,7 @@ public:
     void savePlayer(QFile *file);
     void getPointerToGame(Game* game);
     void updateHpBar();
+    void updateReloadBar();
     void updateAmmo();
     bool getAmmo();
     void setAPshells(int number);

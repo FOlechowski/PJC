@@ -27,6 +27,7 @@ Game::~Game()
     delete hp_bar;
     delete interface_scene;
     delete frame;
+    delete reload_bar;
 
 }
 
@@ -99,6 +100,19 @@ void Game::draw_interface(Player* player)
     hp_bar->setMinimumSize(300,70);
 
     interface_scene->addWidget(hp_bar);
+
+    reload_bar = new QProgressBar();
+
+    reload_bar->setMinimum(-1);
+    reload_bar->setMaximum(player->reloadTime());
+    //reload_bar->setInvertedAppearance(true);
+    reload_bar->setOrientation(Qt::Vertical);
+    reload_bar->move(550,20);
+    reload_bar->setMinimumHeight(110);
+    reload_bar->setMaximumWidth(15);
+
+    interface_scene->addWidget(reload_bar);
+
     QGraphicsPixmapItem* APShell = new QGraphicsPixmapItem;
     QGraphicsPixmapItem* HEShell = new QGraphicsPixmapItem;
     APShell->setPixmap(QPixmap(AP_icon));
@@ -354,6 +368,13 @@ void Game::keyReleaseEvent(QKeyEvent *event)
 void Game::modifyHpBar()
 {
     hp_bar->setValue(player->getHP());
+}
+
+void Game::modifyReloadBar(int time)
+{
+    reload_bar->setValue(2000-time);
+    reload_bar->setMaximum(player->reloadTime());
+
 }
 
 void Game::modifyAmmo()
