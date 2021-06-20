@@ -38,8 +38,11 @@ public:
     void setHE();
     int getAP();
     int getHE();
+    float getArmor();
     void changeRotateAngle(int newAngle);
-    void upgradeTrack();
+
+
+
 
 public slots:
 
@@ -50,6 +53,9 @@ private:
     void moveBackward(qreal m_distance, int m_angle);
     void turnLeft(int &m_angle);
     void turnRight(int &m_angle);
+    void upgradeSpeed();
+    void upgradeTrack();
+    void upgradeArmor();
     bool checkCol();
 
     QGraphicsView *view = nullptr;

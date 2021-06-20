@@ -177,17 +177,17 @@ void Game::draw_interface(Player* player)
 
     interface_scene->addItem(UTrack);
 
-    QGraphicsTextItem* UEngine = new QGraphicsTextItem;
+    UEngine = new QGraphicsTextItem;
     UEngine->setFont(QFont("Calibri", 14));
-    UEngine->setPlainText(QString("Silnik: " + QString::number(0) + "/3"));
+    UEngine->setPlainText(QString("Silnik: " + QString::number(0) + "/1"));
     UEngine->setDefaultTextColor(Qt::white);
     UEngine->setPos(625, 70);
 
     interface_scene->addItem(UEngine);
 
-    QGraphicsTextItem* UArmor = new QGraphicsTextItem;
+    UArmor = new QGraphicsTextItem;
     UArmor->setFont(QFont("Calibri", 14));
-    UArmor->setPlainText(QString("Pancerz: " ));
+    UArmor->setPlainText(QString("Pancerz: " + QString::number(player->getArmor())));
     UArmor->setDefaultTextColor(Qt::white);
     UArmor->setPos(625, 100);
 
@@ -434,6 +434,16 @@ void Game::modifyAmmoFrame()
 void Game::modifyUTracks(int number)
 {
     UTrack->setPlainText(QString("Gąsienice: " + QString::number(number) + "/1"));
+}
+
+void Game::modifyUEngine(int number)
+{
+    UEngine->setPlainText(QString("Silnik: " + QString::number(number) + "/1"));
+}
+
+void Game::modifyUArmor()
+{
+    UArmor->setPlainText(QString("Pancerz: " + QString::number(player->getArmor())));
 }
 
 

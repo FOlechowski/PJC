@@ -21,7 +21,6 @@ public:
     void changeLevel();
     void createFinalLevel();
     void safeToFile();
-    void removeTrack();
 
 public slots:
 
@@ -33,7 +32,8 @@ private:
 
     int difficult = 0;
     int level;
-    UTrack* track = nullptr;
+    //UTrack* track = nullptr;
+    //UEngine *engine = nullptr;
 };
 
 #endif // MAP_H

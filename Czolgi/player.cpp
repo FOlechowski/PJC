@@ -81,6 +81,8 @@ void Player::getPointerToGame(Game *game)
     this->game = game;
 }
 
+
+
 void Player::updateHpBar()
 {
     game->modifyHpBar();
@@ -141,6 +143,16 @@ void Player::turnRight(int &m_angle)
     }
 }
 
+void Player::upgradeSpeed()
+{
+    if(engine>-1 && engine <3)
+    {
+        speed += 1;
+        engine += 1;
+    }
+    game->modifyUEngine(engine);
+}
+
 bool Player::checkCol()
 {
     QList<QGraphicsItem*> colliding_items = collidingItems();
@@ -150,10 +162,38 @@ bool Player::checkCol()
      for (int i = 0, n = colliding_items.size(); i < n; i++){
          if(typeid((*colliding_items[i])) == typeid(UTrack))
          {
-             map->removeTrack();
              changeRotateAngle(5);
              upgradeTrack();
+             scene()->removeItem(colliding_items[i]);
+             delete colliding_items[i];
          }
+         if(typeid((*colliding_items[i])) == typeid(UEngine))
+         {
+
+             upgradeSpeed();
+             scene()->removeItem(colliding_items[i]);
+             delete colliding_items[i];
+
+         }
+         if(typeid((*colliding_items[i])) == typeid(UArmor))
+         {
+
+             upgradeArmor();
+             scene()->removeItem(colliding_items[i]);
+             delete colliding_items[i];
+
+         }
+         if(typeid((*colliding_items[i])) == typeid(UChest))
+         {
+
+             setAPshells(getAP()+5);
+             setHEshells(getHE()+5);
+             updateAmmo();
+             scene()->removeItem(colliding_items[i]);
+             delete colliding_items[i];
+
+         }
+
      }
 
     colliding_items = collidingItems();
@@ -222,6 +262,11 @@ int Player::getHE()
     return HEShells;
 }
 
+float Player::getArmor()
+{
+    return armor;
+}
+
 void Player::changeRotateAngle(int newAngle)
 {
     rotate = newAngle;
@@ -239,6 +284,17 @@ void Player::upgradeTrack()
     game->modifyUTracks(tracks);
 
 }
+
+void Player::upgradeArmor()
+{
+    if(armor == 0.5)
+    {
+       armor = 0.75;
+    }
+    game->modifyUArmor();
+
+}
+
 
 
 
@@ -393,6 +449,7 @@ void Player::movePlayer()
         }
 
     }
+
 
     //qDebug()<<timer_reload->remainingTime();
     updateReloadBar();

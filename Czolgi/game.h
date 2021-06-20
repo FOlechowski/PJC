@@ -39,6 +39,8 @@ public:
     void modifyAmmo();
     void modifyAmmoFrame();
     void modifyUTracks(int number);
+    void modifyUEngine(int number);
+    void modifyUArmor();
     QString getPath(int path_type);
 
 private slots:
@@ -73,6 +75,8 @@ private:
     QGraphicsTextItem* APNum = nullptr;
     QGraphicsTextItem* HENum = nullptr;
     QGraphicsTextItem* UTrack = nullptr;
+    QGraphicsTextItem* UEngine = nullptr;
+    QGraphicsTextItem* UArmor = nullptr;
 
     QGraphicsPixmapItem* frame = nullptr;
 
