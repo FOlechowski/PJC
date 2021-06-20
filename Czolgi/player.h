@@ -38,6 +38,8 @@ public:
     void setHE();
     int getAP();
     int getHE();
+    void changeRotateAngle(int newAngle);
+    void upgradeTrack();
 
 public slots:
 
@@ -55,10 +57,13 @@ private:
     QString name;
     Game* game;
     bool front_hit, back_hit, right_hit, left_hit = false;
-
+    int rotate = 0;
     int APShells = 25;               //number of bullets
     int HEShells = 25;               //number of bullets
     bool APisloaded = true;          //false means HE is loaded
+    //numbers of upgrades
+    int tracks = 0;
+    int engine = 0;
 
 private slots:
     void movePlayer();

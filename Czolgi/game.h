@@ -38,6 +38,7 @@ public:
     void modifyReloadBar(int time);
     void modifyAmmo();
     void modifyAmmoFrame();
+    void modifyUTracks(int number);
     QString getPath(int path_type);
 
 private slots:
@@ -71,13 +72,15 @@ private:
 
     QGraphicsTextItem* APNum = nullptr;
     QGraphicsTextItem* HENum = nullptr;
+    QGraphicsTextItem* UTrack = nullptr;
 
-     QGraphicsPixmapItem* frame = nullptr;
+    QGraphicsPixmapItem* frame = nullptr;
 
     QProgressBar* hp_bar = nullptr;
     QProgressBar* reload_bar = nullptr;
 
     int diffic = 0;
+
 
     QString bckg_path = ":/img/img/background_02.png";
     QString icon_path = ":/img/img/icon.png";

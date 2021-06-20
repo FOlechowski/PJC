@@ -20,3 +20,9 @@ Water::Water()
     QPixmap wt_tex(QString(":/img/tex/tex_water_01.png"));
     this->setBrush(QBrush(wt_tex));
 }
+
+UTrack::UTrack()
+{
+    this->setPixmap(QPixmap(":/img/tex/track.png"));
+    this->setScale(0.15);
+}

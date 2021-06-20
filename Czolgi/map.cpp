@@ -36,6 +36,11 @@ Map::Map(Player* player, int diff)
 //    rock_2->setPos(750,200);
 //    this->addItem(rock_2);
 
+    track = new UTrack;
+
+    track->setPos(300,350);
+    this->addItem(track);
+
     ply = player;
     ply->setFlag(QGraphicsItem::ItemIsFocusable);
     ply->setFocus();
@@ -149,4 +154,10 @@ void Map::safeToFile()
             file.close();
         }
     }
+}
+
+void Map::removeTrack()
+{
+    this->removeItem(track);
+    delete track;
 }

@@ -30,5 +30,11 @@ public:
 
 };
 
+class UTrack : public Obstacles
+{
+public:
+    UTrack();
+};
+
 
 #endif // OBSTACLES_H
