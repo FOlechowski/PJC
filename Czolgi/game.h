@@ -34,7 +34,9 @@ public:
     void displayMenu();
     void draw_interface(Player* player);
     void newGame();
-
+    void modifyHpBar();
+    void modifyAmmo();
+    void modifyAmmoFrame();
     QString getPath(int path_type);
 
 private slots:
@@ -45,6 +47,7 @@ private slots:
     void keyReleaseEvent(QKeyEvent *event);
 
 private:
+
     Menu* menu = nullptr;
     Player* player = nullptr;
     Map* map = nullptr;
@@ -52,7 +55,6 @@ private:
     QLineEdit* username = nullptr;
 
     QGraphicsView* init_view = nullptr;
-
     QGraphicsView* game_interface = nullptr;
     QGraphicsView* map_view = nullptr;
 
@@ -66,6 +68,11 @@ private:
     QGraphicsTextItem *text = nullptr;
     QGraphicsTextItem *player_name = nullptr;
 
+    QGraphicsTextItem* APNum = nullptr;
+    QGraphicsTextItem* HENum = nullptr;
+
+     QGraphicsPixmapItem* frame = nullptr;
+
     QProgressBar* hp_bar = nullptr;
 
     int diffic = 0;
@@ -74,6 +81,10 @@ private:
     QString icon_path = ":/img/img/icon.png";
     QString win_title = "CZOLGI WARS";
     QString interface_background = ":/img/img/interface_bckg.jpg";
+    QString AP_icon = ":/img/img/APShell.png";
+    QString HE_icon = ":/img/img/HEShell.png";
+    QString ramka = ":/img/img/ramka.png";
+
 
 protected:
 

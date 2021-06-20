@@ -19,6 +19,7 @@ public:
     void modifyHP(int dmg, int penetration);
     int getDMG();
     int getHP();
+
     float getArmor();
     void setHP(int hp);
     void setInitialParameters(int hp, int dmg, float armor);
@@ -41,6 +42,7 @@ protected:
     bool is_rotating = false;
 
     int rotate_angle = -1000;
+
 
     QTimer *timer_reload = new QTimer(this);
 };

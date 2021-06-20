@@ -23,10 +23,20 @@ public:
 
     void setPlayerName(QString Pname);
     void shot();
-    bool keyA, keyW, keyD, keyS,keySpace = false;
+    bool keyA, keyW, keyD, keyS, keySpace = false, key1 = false, key2 = false;
     void setPointerToView(QGraphicsView *view);
     void setPointerToMap(Map *map);
     void savePlayer(QFile *file);
+    void getPointerToGame(Game* game);
+    void updateHpBar();
+    void updateAmmo();
+    bool getAmmo();
+    void setAPshells(int number);
+    void setHEshells(int number);
+    void setAP();
+    void setHE();
+    int getAP();
+    int getHE();
 
 public slots:
 
@@ -39,17 +49,17 @@ private:
     void turnRight(int &m_angle);
     bool checkCol();
 
-    int bullets = 50;
-
-
     QGraphicsView *view = nullptr;
     Map *map = nullptr;
     QString name;
-
+    Game* game;
     bool front_hit, back_hit, right_hit, left_hit = false;
 
-private slots:
+    int APShells = 25;               //number of bullets
+    int HEShells = 25;               //number of bullets
+    bool APisloaded = true;          //false means HE is loaded
 
+private slots:
     void movePlayer();
 };
 

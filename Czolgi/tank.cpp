@@ -17,6 +17,7 @@ void Tank::shot(float angle)
 {
     if(!is_loading && !is_rotating)
     {
+
         timer_reload->start(reload_time);
         is_loading = true;
         Bullet *bullet = new Bullet(angle, this);
@@ -132,6 +133,8 @@ void Tank::setTexture(int angle )
     }
 }
 
+
+
 void Tank::modifyHP(int dmg, int penetration)
 {
     this->hp = this->hp - (penetration/200)*(dmg - (this->armor*dmg));
@@ -147,6 +150,7 @@ int Tank::getHP()
     return hp;
 }
 
+
 float Tank::getArmor()
 {
     return armor;
@@ -154,7 +158,14 @@ float Tank::getArmor()
 
 void Tank::setHP(int hp)
 {
+   if(hp>0)
+   {
     this->hp = hp;
+   }else
+   {
+    this->hp = 0;
+   }
+
 }
 
 void Tank::setInitialParameters(int hp, int dmg, float armor)

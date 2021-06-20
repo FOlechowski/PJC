@@ -98,6 +98,11 @@ bool Bullet::bulletIsCollidig()
                     hp = hp - (dmg - (armor*dmg));                                                              //calculate damage
                     hitted->setHP(hp);
                 }
+                if(typeid(*(colliding_items[i])) == typeid(Player))
+                {
+                    Player *player = dynamic_cast<Player*>(colliding_items[i]);
+                    player->updateHpBar();
+                }
 
                 if(typeid(*(colliding_items[i])) == typeid(Boss))
                 {
