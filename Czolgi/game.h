@@ -35,6 +35,7 @@ public:
     void draw_interface(Player* player);
     void newGame();
     void modifyHpBar();
+    void modifyReloadBar(int time);
     void modifyAmmo();
     void modifyAmmoFrame();
     QString getPath(int path_type);
@@ -74,6 +75,7 @@ private:
      QGraphicsPixmapItem* frame = nullptr;
 
     QProgressBar* hp_bar = nullptr;
+    QProgressBar* reload_bar = nullptr;
 
     int diffic = 0;
 

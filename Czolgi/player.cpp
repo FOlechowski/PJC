@@ -84,6 +84,17 @@ void Player::updateHpBar()
     game->modifyHpBar();
 }
 
+void Player::updateReloadBar()
+{
+    if(is_loading)
+    {
+    game->modifyReloadBar(timer_reload->remainingTime());
+    }else
+    {
+        game->modifyReloadBar(0);
+    }
+}
+
 void Player::updateAmmo()
 {
     game->modifyAmmo();
@@ -350,7 +361,11 @@ void Player::movePlayer()
         {
             qDebug()<<"koniec amunicji!";
         }
+
     }
+
+    qDebug()<<timer_reload->remainingTime();
+    updateReloadBar();
 
     Tank::setTexture(-rotate_angle);
 

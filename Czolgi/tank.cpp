@@ -175,6 +175,16 @@ void Tank::setInitialParameters(int hp, int dmg, float armor)
     this->armor = armor;
 }
 
+bool Tank::isLoading()
+{
+    return is_loading;
+}
+
+int Tank::reloadTime()
+{
+    return reload_time;
+}
+
 void Tank::reload()
 {
     timer_reload->stop();

@@ -23,6 +23,8 @@ public:
     float getArmor();
     void setHP(int hp);
     void setInitialParameters(int hp, int dmg, float armor);
+    bool isLoading();
+    int reloadTime();
 
 public slots:
     void reload();
