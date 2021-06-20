@@ -109,7 +109,7 @@ void Map::changeLevel()
 
 void Map::createFinalLevel()
 {
-    Medium *enemy = new Medium(500,200, difficult, ply);
+    Medium *enemy = new Medium(500, 200, difficult, ply);
     enemy->setPos(enemy->pointList[0].x(), enemy->pointList[0].y());
     enemy->setCommand(PATROL);
     this->addItem(enemy);
@@ -119,18 +119,40 @@ void Map::createFinalLevel()
 
 void Map::safeToFile()
 {
-    //QFile file("D:/Testowy/test.txt");
+    QFile file("D:/Testowy/test2.sav");
+    QTextStream stream(&file);
+
+    if(file.open(QIODevice::WriteOnly | QIODevice::Text | QIODevice::Append))
+    {
+        stream << "Level: " << this->level <<'\n';
+    }
+    file.close();
+
     QList<QGraphicsItem*> all = items();
+
     for(int i=0;i<all.size();i++)
     {
-//        if(file.open(QIODevice::WriteOnly | QIODevice::Text | QIODevice::Append))
-//        {
-//            QTextStream stream(&file);
+        if(file.open(QIODevice::WriteOnly | QIODevice::Text | QIODevice::Append))
+        {
+            if(typeid(*(all[i])) == typeid(Player))
+            {
+                ply->savePlayer(&file);
+            }
 
-//            stream << "Pozycja elementu: " << all[i]->x() <<" "<< all[i]->y() <<'\n';
-//            stream << "Typ elementu: " << typeid(*all[i]).name() << '\n';
+            else if(typeid (*all[i]) == typeid (Boss))
+            {
+                QString name = typeid (*all[i]).name();
+                Enemy *enemy = dynamic_cast<Enemy*>(all[i]);
+                enemy->saveEnemy(&file, name);
+            }
 
-//            file.close();
-//        }
+            else
+            {
+                stream << "Typ elementu: " << typeid(*all[i]).name() << '\n';
+                stream << "Pozycja elementu: " << all[i]->x() <<" "<< all[i]->y() <<'\n';
+            }
+
+            file.close();
+        }
     }
 }

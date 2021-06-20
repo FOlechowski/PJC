@@ -7,9 +7,13 @@
 #include <QGraphicsTextItem>
 #include <QDialog>
 #include <QMediaPlayer>
-
 #include "button.h"
 #include "game.h"
+#include <QFileSystemModel>
+#include <QTreeView>
+#include <QVBoxLayout>
+#include <QTextEdit>
+#include <QPushButton>
 
 class Menu : public QGraphicsView
 {
@@ -27,6 +31,8 @@ public slots:
     void credits();
     void start_game();
     void quit_all();
+    void loadGame();
+    void loadFile();
 
 private:
     QGraphicsScene* menu = nullptr;
@@ -46,6 +52,9 @@ private:
     Button *quit_butt = nullptr;
     Button *stay = nullptr;
     Button *leave = nullptr;
+
+    QFileSystemModel *model = nullptr;
+    QTreeView *tree = nullptr;
 
     int font_size = 32;
 };

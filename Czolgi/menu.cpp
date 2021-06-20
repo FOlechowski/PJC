@@ -2,7 +2,6 @@
 #include "game.h"
 #include <QIcon>
 
-
 Menu::Menu(Game *parent) : QGraphicsView(parent)
 
 {
@@ -16,11 +15,9 @@ Menu::Menu(Game *parent) : QGraphicsView(parent)
 Menu::~Menu()
 {
     delete menu;
-    delete dialog_view;
-    delete cr_dialog_view;
     delete intro;
-    delete dialog;
-    delete cr_dialog;
+    delete model;
+    delete tree;
 }
 
 
@@ -79,6 +76,7 @@ void  Menu::display()
     int lgbxPos = this->width()/2 - load_game->boundingRect().width()/2;
     int lgbyPos = 350;
     load_game->setPos(lgbxPos,lgbyPos);
+    connect(load_game, SIGNAL(clicked()), this, SLOT(loadGame()));
     menu->addItem(load_game);
 
     info = new Button(400, 80, QString("Credits"));
@@ -132,7 +130,7 @@ void Menu::quit_ask()
     int xsPos = 200 - stay->boundingRect().width()/2;
     int ysPos = 250;
     stay->setPos(xsPos,ysPos);
-    connect(stay, SIGNAL(clicked()), dialog, SLOT(close()));
+    connect(stay, SIGNAL(clicked()), dialog, SLOT(deleteLater()));
     dialog_scene->addItem(stay);
 
     leave = new Button(300,80,"Uciekam!");
@@ -172,7 +170,7 @@ void Menu::credits()
     int xsPos = cr_dialog->width()/2 - quit->boundingRect().width()/2;
     int ysPos = 250;
     quit->setPos(xsPos,ysPos);
-    connect(quit, SIGNAL(clicked()), cr_dialog, SLOT(close()));
+    connect(quit, SIGNAL(clicked()), cr_dialog, SLOT(deleteLater()));
     dialog_scene->addItem(quit);
 
     QMediaPlayer comment;
@@ -194,6 +192,54 @@ void Menu::quit_all()
 
     game->close();
     game->deleteLater();
+}
+
+void Menu::loadGame()
+{
+    dialog = new QDialog();
+    dialog->setModal(true);
+    QString path = game->getPath(ico);
+    dialog->setWindowIcon(QIcon(path));
+    dialog->setWindowTitle(QString("Wczytywanie gry"));
+    dialog->setFixedSize(600,400);
+
+    QVBoxLayout *m_layout = new QVBoxLayout(this);
+    tree = new QTreeView;
+
+    QPushButton *load = new QPushButton;
+    connect(load, SIGNAL(clicked()), this, SLOT(loadFile()));
+    load->setText("Wczytaj");
+    load->setFont(QFont("calibri", 20));
+
+    model = new QFileSystemModel;
+
+    QStringList filters;
+    filters <<"*.sav";
+
+    model->setRootPath("D:/Testowy");
+    model->setNameFilters(filters);
+    model->setNameFilterDisables(false);
+
+    tree->setModel(model);
+    tree->setColumnHidden(1, true);
+    tree->setColumnHidden(2, true);
+    tree->setColumnWidth(0,250);
+    tree->setColumnWidth(3,250);
+    tree->setRootIndex(model->index("D:/Testowy"));
+
+    m_layout->addWidget(tree);
+    m_layout->addWidget(load);
+
+    dialog->setLayout(m_layout);
+
+    dialog->show();
+}
+
+void Menu::loadFile()
+{
+    QModelIndex index = tree->selectionModel()->currentIndex();
+    QVariant data = tree->model()->data(index);
+    qDebug()<<data.toString();
 }
 
 

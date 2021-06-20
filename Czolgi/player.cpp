@@ -18,7 +18,6 @@ Player::Player()
     QTimer * player_timer = new QTimer();                              //start timer for it
     connect(player_timer, SIGNAL(timeout()),this,SLOT(movePlayer()));        //connect to the slot that will emitate the smooth movement
     player_timer->start(50);
-
 }
 
 Player::~Player()
@@ -36,7 +35,6 @@ void Player::shot()
     if(bullets && !is_loading)
     {
         timer_reload->start(reload_time);
-
         is_loading = true;
         bullets = bullets - 1;
     }
@@ -50,6 +48,19 @@ void Player::setPointerToView(QGraphicsView *view)
 void Player::setPointerToMap(Map *map)
 {
     this->map = map;
+}
+
+void Player::savePlayer(QFile *file)
+{
+    QTextStream stream(file);
+    stream << "Type =Player" <<'\n';
+    stream << "Player name =" <<this->name<<'\n';
+    stream << "Player pos =" <<this->x()<<","<< this->y() <<'\n';
+    stream << "Player hp =" <<this->hp<<'\n';
+    stream << "Player dmg =" <<this->dmg<<'\n';
+    stream << "Player armor =" <<this->armor<<'\n';
+    stream << "Player bullets =" <<this->bullets<<'\n';
+    stream << "Player reaload time =" <<this->reload_time<<'\n';
 }
 
 void Player::moveForward(qreal m_distance, int m_angle)
@@ -111,7 +122,6 @@ bool Player::checkCol()
         }else{
             stick = false;
         }
-
     }
 
     if(colliding_items.size()==0||(isonbridge&&!isonwater)||(stick&&colliding_items.size()==1)||(stick&&!isonwater&&colliding_items.size()==2)||(stick&&!isonwater&&isonbridge&&colliding_items.size()==3)){
@@ -254,7 +264,8 @@ void Player::movePlayer()
     }
 }
 
-void Player::addPlayerTextures(){
+void Player::addPlayerTextures()
+{
     tex_path[0] = ":/img/tex/p0.png";
     tex_path[1] = ":/img/tex/p15.png";
     tex_path[2] = ":/img/tex/p30.png";
@@ -279,6 +290,5 @@ void Player::addPlayerTextures(){
     tex_path[21] = ":/img/tex/p-135.png";
     tex_path[22] = ":/img/tex/p-150.png";
     tex_path[23] = ":/img/tex/p-165.png";
-
 }
 

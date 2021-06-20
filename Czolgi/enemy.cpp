@@ -7,7 +7,7 @@
 #include "obstacles.h"
 #include <cmath>
 
-Enemy::Enemy()                                              //empty default constructor
+Enemy::Enemy()                                                                             //empty default constructor
 {
 }
 
@@ -95,7 +95,7 @@ void Enemy::aim(float angle)
 
 void Enemy::setCommand(char comm)
 {
-    command = comm;                                         //set command
+    command = comm;                                                                         //set command
     if(rotate_angle == -1000)
         rotate_angle = 180;
 }
@@ -116,6 +116,26 @@ void Enemy::addStick()
     txt -> setDefaultTextColor(Qt::red);
     txt -> setFont(QFont("calibri", 24));
     txt -> setPos(20, -35);
+}
+
+void Enemy::saveEnemy(QFile *file, QString type)
+{
+    QTextStream stream(file);
+    stream << "Type ="<< type <<'\n';
+    stream << "Enemy pos =" <<this->x()<<","<< this->y() <<'\n';
+    stream << "Enemy hp =" <<this->hp<<'\n';
+    stream << "Enemy dmg =" <<this->dmg<<'\n';
+    stream << "Enemy armor =" <<this->armor<<'\n';
+    stream << "Enemy reaload time =" <<this->reload_time<<'\n';
+    stream << "Enemy path points lenght ="<<pointList.size()<<'\n';
+    stream << "Points ={"<<'\n';
+
+    for(int i=0;i<pointList.size();i++)
+    {
+        stream << pointList[i].x() <<","<< pointList[i].y() <<'\n';
+    }
+
+    stream << "}" <<'\n';
 }
 
 bool Enemy::obstacleInLine()
@@ -245,12 +265,10 @@ void Enemy::move()
         }
     }
 
-    if(stick != NULL)
+    if(stick != nullptr)
     {
         stick->setRotation(rotate_angle-90);
         QString hp = QString::number(this->hp);
         txt -> setPlainText(hp);
     }
 }
-
-

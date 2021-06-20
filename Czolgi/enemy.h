@@ -28,6 +28,7 @@ public:
     void setCommand(char comm);
     void followPlayer();
     void addStick();
+    void saveEnemy(QFile *file, QString type);
 
     bool obstacleInLine();
 
@@ -45,7 +46,7 @@ protected:
     Player *player;
 
 private:
-    QGraphicsRectItem *stick = NULL;
+    QGraphicsRectItem *stick = nullptr;
     QGraphicsTextItem *txt;
 
     int lastPosx = 0;
