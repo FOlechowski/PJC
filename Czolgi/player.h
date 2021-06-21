@@ -58,6 +58,7 @@ private:
     void upgradeTrack();
     void upgradeArmor();
     bool checkCol();
+    bool outOfMap();
 
     QGraphicsView *view = nullptr;
     Map *map = nullptr;

@@ -21,6 +21,8 @@ public:
     void changeLevel();
     void createFinalLevel();
     void safeToFile();
+    int getWidth();
+    int getHeight();
 
 public slots:
 

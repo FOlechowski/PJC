@@ -5,6 +5,7 @@
 #include "boss.h"
 #include "heavy.h"
 #include <QFile>
+#include <QPainter>
 
 Map::Map(Player* player, int diff)
 {
@@ -179,5 +180,15 @@ void Map::safeToFile()
             file.close();
         }
     }
+}
+
+int Map::getWidth()
+{
+    return ms_width;
+}
+
+int Map::getHeight()
+{
+    return ms_height;
 }
 

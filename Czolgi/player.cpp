@@ -226,12 +226,24 @@ bool Player::checkCol()
         }
     }
 
-    if(colliding_items.size()==0||(isonbridge&&!isonwater)||(stick&&colliding_items.size()==1)||(stick&&!isonwater&&colliding_items.size()==2)||(stick&&!isonwater&&isonbridge&&colliding_items.size()==3)){
+    if(!outOfMap()&&(colliding_items.size()==0||(isonbridge&&!isonwater)||(stick&&colliding_items.size()==1)||(stick&&!isonwater&&colliding_items.size()==2)||(stick&&!isonwater&&isonbridge&&colliding_items.size()==3))){
         return true;
     }else if(colliding_items.size()!=0){
         return false;
     }
 
+}
+
+bool Player::outOfMap()
+{
+    qDebug()<<this->pos();
+    if(this->x()<0||this->x()>=map->getWidth()-150||this->y()<0||this->y()>=map->getHeight()-100)
+    {
+        return true;
+    }else
+    {
+        return false;
+    }
 }
 
 void Player::setAPshells(int number)
