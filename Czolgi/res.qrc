@@ -123,6 +123,8 @@
         <file>tex/explosion1.png</file>
         <file>tex/Health.png</file>
         <file>tex/rock.png</file>
+        <file>tex/decoration_1.png</file>
+        <file>tex/decoration_2.png</file>
     </qresource>
     <qresource prefix="/sound">
         <file>snd/Intro3.WAV</file>

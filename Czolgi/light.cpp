@@ -19,7 +19,7 @@ Light::Light(qreal x, qreal y, int dif, Player* pl)
             view_range = 400;
             hp = 50;
             armor = 0.1;
-            dmg = 50;
+            dmg = 40;
             reload_time = 3000;
             break;
         case 1:
@@ -27,7 +27,7 @@ Light::Light(qreal x, qreal y, int dif, Player* pl)
             view_range = 500;
             hp = 150;
             armor = 0.2;
-            dmg = 100;
+            dmg = 80;
             reload_time = 2500;
             break;
         case 2:
