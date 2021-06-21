@@ -54,4 +54,10 @@ public:
     UChest();
 };
 
+class UHealth : public Obstacles
+{
+ public:
+    UHealth();
+};
+
 #endif // OBSTACLES_H

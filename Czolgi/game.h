@@ -34,7 +34,7 @@ public:
     void displayMenu();
     void draw_interface(Player* player);
     void newGame();
-    void modifyHpBar();
+    void modifyHpBar(bool upgrade);
     void modifyReloadBar(int time);
     void modifyAmmo();
     void modifyAmmoFrame();

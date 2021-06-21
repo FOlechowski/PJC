@@ -54,6 +54,10 @@ Map::Map(Player* player, int diff)
     chest->setPos(220,50);
     this->addItem(chest);
 
+    UHealth* health = new UHealth;
+    health->setPos(500,70);
+    this->addItem(health);
+
     ply = player;
     ply->setFlag(QGraphicsItem::ItemIsFocusable);
     ply->setFocus();

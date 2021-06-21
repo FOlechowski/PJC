@@ -85,7 +85,7 @@ void Player::getPointerToGame(Game *game)
 
 void Player::updateHpBar()
 {
-    game->modifyHpBar();
+    game->modifyHpBar(false);
 }
 
 void Player::updateReloadBar()
@@ -193,6 +193,14 @@ bool Player::checkCol()
              delete colliding_items[i];
 
          }
+         if(typeid((*colliding_items[i])) == typeid(UHealth))
+         {
+             setHP(init_hp + 50);
+             game->modifyHpBar(true);
+             scene()->removeItem(colliding_items[i]);
+             delete colliding_items[i];
+
+         }
 
      }
 
@@ -273,6 +281,11 @@ void Player::changeRotateAngle(int newAngle)
     while(rotate_angle%newAngle){
         rotate_angle++;
     }
+}
+
+int Player::getInitHp()
+{
+    return init_hp;
 }
 
 void Player::upgradeTrack()

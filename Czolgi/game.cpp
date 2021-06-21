@@ -35,8 +35,9 @@ void Game::create_player(QString name)
 {
     player = new Player();
     player->setPlayerName(name);
-    player->setInitialParameters(300, 120, 0.5);
+    player->setInitialParameters(player->getInitHp(), 120, 0.5);
     player->getPointerToGame(this);
+
 }
 
 void Game::displayMenu()
@@ -397,10 +398,16 @@ void Game::keyReleaseEvent(QKeyEvent *event)
     }
 }
 
-void Game::modifyHpBar()
+void Game::modifyHpBar(bool upgrade)
 {
+    if(upgrade)
+    {
+        hp_bar->setMaximum(player->getHP());
+        hp_bar->setFormat(QString("%v / " + QString::number(hp_bar->maximum())));
+    }
     hp_bar->setValue(player->getHP());
 }
+
 
 void Game::modifyReloadBar(int time)
 {

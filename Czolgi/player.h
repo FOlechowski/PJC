@@ -40,6 +40,7 @@ public:
     int getHE();
     float getArmor();
     void changeRotateAngle(int newAngle);
+    int getInitHp();
 
 
 
@@ -70,6 +71,7 @@ private:
     //numbers of upgrades
     int tracks = 0;
     int engine = 0;
+    int init_hp = 300;
 
 private slots:
     void movePlayer();

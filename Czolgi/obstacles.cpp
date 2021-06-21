@@ -44,3 +44,9 @@ UChest::UChest()
     this->setPixmap(QPixmap(":/img/tex/Chest.png"));
     this->setScale(0.15);
 }
+
+UHealth::UHealth()
+{
+    this->setPixmap((QPixmap(":/img/tex/Health.png")));
+    this->setScale(0.05);
+}
