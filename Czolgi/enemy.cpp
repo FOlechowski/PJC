@@ -128,6 +128,7 @@ void Enemy::saveEnemy(QFile *file, QString type)
     stream << "Enemy armor =" <<this->armor<<'\n';
     stream << "Enemy reaload time =" <<this->reload_time<<'\n';
     stream << "Enemy path points lenght ="<<pointList.size()<<'\n';
+    stream << "Path pointer ="<<pointer<<'\n';
     stream << "Points ={"<<'\n';
 
     for(int i=0;i<pointList.size();i++)
@@ -136,15 +137,55 @@ void Enemy::saveEnemy(QFile *file, QString type)
     }
 
     stream << "}" <<'\n';
+    stream << "Enemy pursuit path lenght ="<<pursuitList.size()<<'\n';
+    stream << "Pursuit pointer ="<<pr_pointer<<'\n';
+    stream << "Points ={"<<'\n';
+
+    for(int i=0;i<pursuitList.size();i++)
+    {
+        stream << pursuitList[i].x() <<","<< pursuitList[i].y()<<'\n';
+    }
+    stream << "}" <<'\n';
 }
 
 bool Enemy::obstacleInLine()
 {
+    int x[2];
+    int y[2];
+
+    if(this->x() > player_lastx)
+    {
+        x[0]=player_lastx;
+        x[1]=this->x();
+    }
+    else
+    {
+        x[0]=this->x();
+        x[1]=player_lastx;
+    }
+
+    if(this->y() > player_lasty)
+    {
+        y[0] = player_lasty;
+        y[1] = this->y();
+    }
+    else
+    {
+        y[0] = this->y();
+        y[1] = player_lasty;
+    }
+
     QList<QGraphicsItem*> colliding_items = stick->collidingItems();
     for (int i = 0, n = colliding_items.size(); i < n; i++)
     {
         if(typeid(*(colliding_items[i])) != typeid(Water) && typeid(*(colliding_items[i])) != typeid(Bridge) && colliding_items[i] != this && typeid(*(colliding_items[i])) != typeid(Player) && typeid(*(colliding_items[i])) != typeid(QGraphicsTextItem) && typeid(*(colliding_items[i])) != typeid(QGraphicsRectItem))
-            return true;
+        {
+            int cx = colliding_items[i]->x();
+            int cy = colliding_items[i]->y();
+
+            if((cx > x[0] && cx < x[1]) && (cy > y[0] && cy < y[1]))
+                return true;
+        }
     }
     return false;
 }

@@ -239,7 +239,30 @@ void Menu::loadFile()
 {
     QModelIndex index = tree->selectionModel()->currentIndex();
     QVariant data = tree->model()->data(index);
-    qDebug()<<data.toString();
+    QString f_name = data.toString();
+
+    QFile file("D:/Testowy/"+f_name);
+
+    if(file.open(QIODevice::ReadOnly))
+    {
+        QTextStream stream(&file);
+        while(!stream.atEnd())
+        {
+            QString line = stream.readLine();
+            s_file[stack_pointer] = line;
+            stack_pointer++;
+        }
+    }
+    file.close();
+
+    stack_pointer = 1;
+
+    while(s_file[stack_pointer] != "")
+    {
+        qDebug()<<s_file[stack_pointer];
+        stack_pointer++;
+    }
+
 }
 
 

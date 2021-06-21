@@ -214,7 +214,7 @@ int Player::getHE()
 
 void Player::movePlayer()
 {
-    if(this->x() >= 400 && this->y() >= 400)
+    if(this->x() >= 800 && this->y() >= 800)
     {
         this->map->changeLevel();
     }

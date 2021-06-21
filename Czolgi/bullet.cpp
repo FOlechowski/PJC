@@ -91,7 +91,7 @@ bool Bullet::bulletIsCollidig()
                 float armor = hitted->getArmor();
                 int dmg = creator->getDMG();
 
-                bool is_bouncing = false;//bounce();                                                                    //check if bullet has been bounced
+                bool is_bouncing = bounce();                                                                    //check if bullet has been bounced
 
                 if(!is_bouncing)                                                                                //calculate damage
                 {
@@ -143,11 +143,6 @@ bool Bullet::bulletIsCollidig()
 
 bool Bullet::bounce()
 {
-//    qreal angle_to_normal = abs(180-abs(hitted_angle - bullet_angle));                                      //calculate the angle
-
-//    if(angle_to_normal>90)                                                                                  //check if it is in range 0-90
-//        angle_to_normal = 180-angle_to_normal;
-
     quint32 chance = QRandomGenerator::global()->bounded(1,10);        //-(armor*10)+penetration/(angle_to_normal+1); //generate the chance to bounce
 
     if(chance < 2)

@@ -3,6 +3,7 @@
 #include "destroyer.h"
 #include "light.h"
 #include "boss.h"
+#include "heavy.h"
 #include <QFile>
 
 Map::Map(Player* player, int diff)
@@ -42,12 +43,19 @@ Map::Map(Player* player, int diff)
     ply->setPos(0, 0);
     ply->setPointerToMap(this);
 
-    Boss *enemy = new Boss(500,200, difficult, ply);
+    Medium *enemy = new Medium(500,200, difficult, ply);
     enemy->setPos(enemy->pointList[0].x(), enemy->pointList[0].y());
-    enemy->setCommand(PATROL);
+    enemy->setCommand(GUARD);
     this->addItem(enemy);
     enemy->addStick();
-    enemy->addPointToPath(500,400, enemy->pointList);
+
+    Medium *enemy2 = new Medium(600,300, difficult, ply);
+    enemy2->setPos(enemy2->pointList[0].x(), enemy2->pointList[0].y());
+    enemy2->setCommand(GUARD);
+    this->addItem(enemy2);
+    enemy2->addStick();
+
+    //enemy->addPointToPath(500,400, enemy->pointList);
 
 //    Boss *boss = new Boss(900,500,difficult,ply);
 //    boss->setPos(boss->pointList[0].x(), boss->pointList[0].y());
@@ -124,7 +132,8 @@ void Map::safeToFile()
 
     if(file.open(QIODevice::WriteOnly | QIODevice::Text | QIODevice::Append))
     {
-        stream << "Level: " << this->level <<'\n';
+        stream << "Level =" << this->level <<'\n';
+        stream << "Dif =" << this->difficult <<'\n';
     }
     file.close();
 
@@ -139,7 +148,7 @@ void Map::safeToFile()
                 ply->savePlayer(&file);
             }
 
-            else if(typeid (*all[i]) == typeid (Boss))
+            else if(typeid (*all[i]) == typeid (Boss) || typeid (*all[i]) == typeid (Medium) || typeid (*all[i]) == typeid (Light) || typeid (*all[i]) == typeid (Heavy) || typeid (*all[i]) == typeid (Destroyer))
             {
                 QString name = typeid (*all[i]).name();
                 Enemy *enemy = dynamic_cast<Enemy*>(all[i]);

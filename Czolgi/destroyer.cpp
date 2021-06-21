@@ -70,4 +70,3 @@ void Destroyer::setPathTextures()
     tex_path[22] = ":/img/tex/arrow_-150.png";
     tex_path[23] = ":/img/tex/arrow_-165.png";
 }
-
