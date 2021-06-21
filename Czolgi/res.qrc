@@ -61,7 +61,6 @@
         <file>tex/arrow_150.png</file>
         <file>tex/arrow_165.png</file>
         <file>tex/arrow_180.png</file>
-        <file>tex/rock.png</file>
         <file>tex/explosion.png</file>
         <file>tex/tex_bridge_1.png</file>
         <file>tex/EM0.png</file>
@@ -123,6 +122,7 @@
         <file>tex/Chest.png</file>
         <file>tex/explosion1.png</file>
         <file>tex/Health.png</file>
+        <file>tex/rock.png</file>
     </qresource>
     <qresource prefix="/sound">
         <file>snd/Intro3.WAV</file>

@@ -236,8 +236,8 @@ bool Player::checkCol()
 
 bool Player::outOfMap()
 {
-    qDebug()<<this->pos();
-    if(this->x()<0||this->x()>=map->getWidth()-150||this->y()<0||this->y()>=map->getHeight()-100)
+
+    if(this->x()<-50||this->x()>=map->getWidth()-150||this->y()<0||this->y()>=map->getHeight()-100)
     {
         return true;
     }else

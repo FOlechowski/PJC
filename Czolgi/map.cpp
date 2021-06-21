@@ -30,9 +30,10 @@ Map::Map(Player* player, int diff)
 //        this->addItem(rock_1);
 //    }
 
-//    Rock* rock_1 = new Rock;
-//    rock_1->setPos(750,100);
-//    this->addItem(rock_1);
+    Rock* rock_1 = new Rock;
+    rock_1->setPos(750,100);
+    rock_1->setScale(0.8);
+    this->addItem(rock_1);
 
 //    Rock* rock_2 = new Rock;
 //    rock_2->setPos(750,200);
