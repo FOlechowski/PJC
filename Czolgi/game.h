@@ -85,7 +85,6 @@ private:
 
     int diffic = 0;
 
-
     QString bckg_path = ":/img/img/background_02.png";
     QString icon_path = ":/img/img/icon.png";
     QString win_title = "CZOLGI WARS";
@@ -94,9 +93,7 @@ private:
     QString HE_icon = ":/img/img/HEShell.png";
     QString ramka = ":/img/img/ramka.png";
 
-
 protected:
-
     int win_width = 1360;
     int win_height = 800;
 };

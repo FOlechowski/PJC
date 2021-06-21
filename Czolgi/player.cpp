@@ -75,13 +75,15 @@ void Player::savePlayer(QFile *file)
     stream << "Normal bullets ="<<this->APShells<<'\n';
     stream << "Player e_bullets ="<<this->HEShells<<'\n';
     stream << "Player reaload time =" <<this->reload_time<<'\n';
+    stream << "Tracks ="<<this->tracks<<'\n';
+    stream << "Engine ="<<this->engine<<'\n';
+    stream << "Speed ="<<this->speed<<'\n';
 }
+
 void Player::getPointerToGame(Game *game)
 {
     this->game = game;
 }
-
-
 
 void Player::updateHpBar()
 {
@@ -250,7 +252,7 @@ void Player::setAPshells(int number)
 {
     if(number>=0)
     {
-    APShells = number;
+        APShells = number;
     }
 }
 
@@ -307,7 +309,6 @@ void Player::upgradeTrack()
         tracks += 1;
     }
     game->modifyUTracks(tracks);
-
 }
 
 void Player::upgradeArmor()
@@ -317,11 +318,7 @@ void Player::upgradeArmor()
        armor = 0.75;
     }
     game->modifyUArmor();
-
 }
-
-
-
 
 void Player::movePlayer()
 {
@@ -474,15 +471,13 @@ void Player::movePlayer()
         }
 
     }
-
-
     //qDebug()<<timer_reload->remainingTime();
     updateReloadBar();
 
     Tank::setTexture(-rotate_angle);
 
-    if((this->pos()).y()>=450){
-
+    if((this->pos()).y()>=450)
+    {
     }
 }
 
@@ -513,4 +508,3 @@ void Player::addPlayerTextures()
     tex_path[22] = ":/img/tex/p-150.png";
     tex_path[23] = ":/img/tex/p-165.png";
 }
-

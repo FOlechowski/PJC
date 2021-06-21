@@ -21,6 +21,7 @@ public:
     void changeLevel();
     void createFinalLevel();
     void safeToFile();
+    void initialLevel();
     int getWidth();
     int getHeight();
 

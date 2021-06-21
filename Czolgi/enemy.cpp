@@ -127,6 +127,7 @@ void Enemy::saveEnemy(QFile *file, QString type)
     stream << "Enemy dmg =" <<this->dmg<<'\n';
     stream << "Enemy armor =" <<this->armor<<'\n';
     stream << "Enemy reaload time =" <<this->reload_time<<'\n';
+    stream << "Command =" <<this->command<<'\n';
     stream << "Enemy path points lenght ="<<pointList.size()<<'\n';
     stream << "Path pointer ="<<pointer<<'\n';
     stream << "Points ={"<<'\n';

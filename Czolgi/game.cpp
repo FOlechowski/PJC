@@ -6,7 +6,6 @@
 #include <QScrollBar>
 #include <QGraphicsPixmapItem>
 
-
 Game::Game()
 {
     setFixedSize(QSize(win_width, win_height));
@@ -28,7 +27,6 @@ Game::~Game()
     delete interface_scene;
     delete frame;
     delete reload_bar;
-
 }
 
 void Game::create_player(QString name)
@@ -37,7 +35,6 @@ void Game::create_player(QString name)
     player->setPlayerName(name);
     player->setInitialParameters(player->getInitHp(), 120, 0.5);
     player->getPointerToGame(this);
-
 }
 
 void Game::displayMenu()
@@ -196,7 +193,6 @@ void Game::draw_interface(Player* player)
 
     game_interface->setScene(interface_scene);
     game_interface->show();
-
 }
 
 void Game::newGame()

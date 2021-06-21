@@ -255,14 +255,13 @@ void Menu::loadFile()
     }
     file.close();
 
-    stack_pointer = 1;
+    stack_pointer = 0;
 
-    while(s_file[stack_pointer] != "")
-    {
-        qDebug()<<s_file[stack_pointer];
-        stack_pointer++;
-    }
+    int lvl = s_file[stack_pointer++].right(1).toInt();
+    int dif = s_file[stack_pointer++].right(1).toInt();
 
+    qDebug()<<lvl;
+    qDebug()<<dif;
 }
 
 
