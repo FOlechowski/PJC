@@ -13,6 +13,7 @@ Player::Player()
     speed = 4;
     addPlayerTextures();
     rotate_angle = 0;
+    rotate = 3;
     keyA = keyW = keyD = keyS = false;
 
     QTimer * player_timer = new QTimer();                              //start timer for it
@@ -41,6 +42,7 @@ void Player::shot()
         is_loading = true;
         setAPshells(getAP()-1);
         updateAmmo();
+
     }else if(getHE() && !is_loading && !APisloaded)
     {
         timer_reload->start(reload_time);
@@ -78,6 +80,8 @@ void Player::getPointerToGame(Game *game)
 {
     this->game = game;
 }
+
+
 
 void Player::updateHpBar()
 {
@@ -120,23 +124,33 @@ void Player::moveBackward(qreal m_distance, int m_angle)
 void Player::turnLeft(int &m_angle)
 {
     //m_angle = float(m_angle);
-    m_angle += 3;
+    m_angle += rotate;
     //this->setRotation(-m_angle);
     if(m_angle>180)
     {
-        m_angle=-177;
+        m_angle=-(180-rotate);
     }
 }
 
 void Player::turnRight(int &m_angle)
 {
     m_angle = float(m_angle);
-    m_angle -= 3;
+    m_angle -= rotate;
     //this->setRotation(-m_angle);
     if(m_angle<-180)
     {
-        m_angle=177;
+        m_angle=(180-rotate);
     }
+}
+
+void Player::upgradeSpeed()
+{
+    if(engine>-1 && engine <3)
+    {
+        speed += 1;
+        engine += 1;
+    }
+    game->modifyUEngine(engine);
 }
 
 bool Player::checkCol()
@@ -145,6 +159,44 @@ bool Player::checkCol()
     //qDebug()<<typeid(Bridge);
     bool isonbridge,isonwater,stick = false;
 
+     for (int i = 0, n = colliding_items.size(); i < n; i++){
+         if(typeid((*colliding_items[i])) == typeid(UTrack))
+         {
+             changeRotateAngle(5);
+             upgradeTrack();
+             scene()->removeItem(colliding_items[i]);
+             delete colliding_items[i];
+         }
+         if(typeid((*colliding_items[i])) == typeid(UEngine))
+         {
+
+             upgradeSpeed();
+             scene()->removeItem(colliding_items[i]);
+             delete colliding_items[i];
+
+         }
+         if(typeid((*colliding_items[i])) == typeid(UArmor))
+         {
+
+             upgradeArmor();
+             scene()->removeItem(colliding_items[i]);
+             delete colliding_items[i];
+
+         }
+         if(typeid((*colliding_items[i])) == typeid(UChest))
+         {
+
+             setAPshells(getAP()+5);
+             setHEshells(getHE()+5);
+             updateAmmo();
+             scene()->removeItem(colliding_items[i]);
+             delete colliding_items[i];
+
+         }
+
+     }
+
+    colliding_items = collidingItems();
     for (int i = 0, n = colliding_items.size(); i < n; i++){
 
         if(typeid((*colliding_items[i])) == typeid(Bridge)){
@@ -209,6 +261,40 @@ int Player::getHE()
 {
     return HEShells;
 }
+
+float Player::getArmor()
+{
+    return armor;
+}
+
+void Player::changeRotateAngle(int newAngle)
+{
+    rotate = newAngle;
+    while(rotate_angle%newAngle){
+        rotate_angle++;
+    }
+}
+
+void Player::upgradeTrack()
+{
+    if(!tracks)
+    {
+        tracks += 1;
+    }
+    game->modifyUTracks(tracks);
+
+}
+
+void Player::upgradeArmor()
+{
+    if(armor == 0.5)
+    {
+       armor = 0.75;
+    }
+    game->modifyUArmor();
+
+}
+
 
 
 
@@ -364,7 +450,8 @@ void Player::movePlayer()
 
     }
 
-    qDebug()<<timer_reload->remainingTime();
+
+    //qDebug()<<timer_reload->remainingTime();
     updateReloadBar();
 
     Tank::setTexture(-rotate_angle);

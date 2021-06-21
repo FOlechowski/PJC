@@ -38,6 +38,11 @@ public:
     void setHE();
     int getAP();
     int getHE();
+    float getArmor();
+    void changeRotateAngle(int newAngle);
+
+
+
 
 public slots:
 
@@ -48,6 +53,9 @@ private:
     void moveBackward(qreal m_distance, int m_angle);
     void turnLeft(int &m_angle);
     void turnRight(int &m_angle);
+    void upgradeSpeed();
+    void upgradeTrack();
+    void upgradeArmor();
     bool checkCol();
 
     QGraphicsView *view = nullptr;
@@ -55,10 +63,13 @@ private:
     QString name;
     Game* game;
     bool front_hit, back_hit, right_hit, left_hit = false;
-
+    int rotate = 0;
     int APShells = 25;               //number of bullets
     int HEShells = 25;               //number of bullets
     bool APisloaded = true;          //false means HE is loaded
+    //numbers of upgrades
+    int tracks = 0;
+    int engine = 0;
 
 private slots:
     void movePlayer();

@@ -37,6 +37,23 @@ Map::Map(Player* player, int diff)
 //    rock_2->setPos(750,200);
 //    this->addItem(rock_2);
 
+    UTrack* track = new UTrack;
+
+    track->setPos(300,350);
+    this->addItem(track);
+
+    UEngine* engine = new UEngine;
+    engine->setPos(200,350);
+    this->addItem(engine);
+
+    UArmor* armor = new UArmor;
+    armor->setPos(69,420);
+    this->addItem(armor);
+
+    UChest* chest = new UChest;
+    chest->setPos(220,50);
+    this->addItem(chest);
+
     ply = player;
     ply->setFlag(QGraphicsItem::ItemIsFocusable);
     ply->setFocus();
@@ -159,3 +176,4 @@ void Map::safeToFile()
         }
     }
 }
+

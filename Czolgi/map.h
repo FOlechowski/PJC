@@ -32,6 +32,8 @@ private:
 
     int difficult = 0;
     int level;
+    //UTrack* track = nullptr;
+    //UEngine *engine = nullptr;
 };
 
 #endif // MAP_H

@@ -161,6 +161,38 @@ void Game::draw_interface(Player* player)
 
     interface_scene->addItem(frame);
 
+    QGraphicsTextItem* UTitle = new QGraphicsTextItem;
+    UTitle->setFont(QFont("Calibri", 16));
+    UTitle->setPlainText(QString("Ulepszenia:"));
+    UTitle->setDefaultTextColor(Qt::white);
+    UTitle->setPos(625, 10);
+
+    interface_scene->addItem(UTitle);
+
+    UTrack = new QGraphicsTextItem;
+    UTrack->setFont(QFont("Calibri", 14));
+    UTrack->setPlainText(QString("Gąsienice: " + QString::number(0) + "/1"));
+    UTrack->setDefaultTextColor(Qt::white);
+    UTrack->setPos(625, 40);
+
+    interface_scene->addItem(UTrack);
+
+    UEngine = new QGraphicsTextItem;
+    UEngine->setFont(QFont("Calibri", 14));
+    UEngine->setPlainText(QString("Silnik: " + QString::number(0) + "/1"));
+    UEngine->setDefaultTextColor(Qt::white);
+    UEngine->setPos(625, 70);
+
+    interface_scene->addItem(UEngine);
+
+    UArmor = new QGraphicsTextItem;
+    UArmor->setFont(QFont("Calibri", 14));
+    UArmor->setPlainText(QString("Pancerz: " + QString::number(player->getArmor())));
+    UArmor->setDefaultTextColor(Qt::white);
+    UArmor->setPos(625, 100);
+
+    interface_scene->addItem(UArmor);
+
     game_interface->setScene(interface_scene);
     game_interface->show();
 
@@ -398,6 +430,22 @@ void Game::modifyAmmoFrame()
         frame->setPos(480,40);
     }
 }
+
+void Game::modifyUTracks(int number)
+{
+    UTrack->setPlainText(QString("Gąsienice: " + QString::number(number) + "/1"));
+}
+
+void Game::modifyUEngine(int number)
+{
+    UEngine->setPlainText(QString("Silnik: " + QString::number(number) + "/1"));
+}
+
+void Game::modifyUArmor()
+{
+    UArmor->setPlainText(QString("Pancerz: " + QString::number(player->getArmor())));
+}
+
 
 void Game::keyPressEvent(QKeyEvent *event){
 //qDebug()<<colliding_items;

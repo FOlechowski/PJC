@@ -117,6 +117,11 @@
         <file>img/APShell.png</file>
         <file>img/HEShell.png</file>
         <file>img/ramka.png</file>
+        <file>tex/track.png</file>
+        <file>tex/Engine.png</file>
+        <file>tex/Armor.png</file>
+        <file>tex/Chest.png</file>
+        <file>tex/explosion1.png</file>
     </qresource>
     <qresource prefix="/sound">
         <file>snd/Intro3.WAV</file>

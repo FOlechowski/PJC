@@ -41,7 +41,7 @@ void ExplosiveBullet::Explode()
     if(!explosion_is_set)
     {
         explosion = new QGraphicsPixmapItem();
-        explosion->setPixmap(QPixmap(":/img/tex/explosion.png"));
+        explosion->setPixmap(QPixmap(":/img/tex/explosion1.png"));
         explosion->setPos(this->x()-35,this->y()-50);
         scene()->addItem(explosion);
 

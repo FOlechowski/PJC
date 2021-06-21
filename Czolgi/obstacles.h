@@ -30,5 +30,28 @@ public:
 
 };
 
+class UTrack : public Obstacles
+{
+public:
+    UTrack();
+};
+
+class UEngine : public Obstacles
+{
+public:
+    UEngine();
+};
+
+class UArmor : public Obstacles
+{
+public:
+    UArmor();
+};
+
+class UChest : public Obstacles
+{
+public:
+    UChest();
+};
 
 #endif // OBSTACLES_H
