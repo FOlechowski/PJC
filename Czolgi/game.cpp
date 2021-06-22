@@ -29,20 +29,7 @@ Game::~Game()
     delete reload_bar;
 }
 
-void Game::create_player(QString name)
-{
-    player = new Player();
-    player->setPlayerName(name);
-    player->setInitialParameters(player->getInitHp(), 120, 0.5);
-    player->getPointerToGame(this);
-}
-
-void Game::displayMenu()
-{
-    menu = new Menu(this);
-}
-
-void Game::draw_interface(Player* player)
+void Game::drawInterface()
 {
     map_view = new QGraphicsView(this);
     map_view->setRenderHint(QPainter::HighQualityAntialiasing);
@@ -58,58 +45,11 @@ void Game::draw_interface(Player* player)
     game_interface->setFixedSize(QSize(this->width(), 150));
     game_interface->move(0,this->height()-150);
 
-
-    map = new Map(player,this->diffic);
-
-    map_view->setScene(map);
-    player->setPointerToView(map_view);
-    //qDebug()<<game_interfece->verticalScrollBar();
-    //game_interfece->setVerticalScrollBar()->setValue(600,100,50,10);
-
     interface_scene = new QGraphicsScene;
     interface_scene->setSceneRect(0, 0, this->width(), 150);
 
-    //game_interface->setScene(interface_scene);
-
     QPixmap intreface_bckg(this->interface_background);
     interface_scene->setBackgroundBrush(QBrush(intreface_bckg));
-
-    QString name = username->text();
-    QFont font("Calibri", 18);
-    //qDebug()<<name;
-    player_name = new QGraphicsTextItem();
-    player_name->setPlainText(QString("Gracz: " + name));
-    player_name->setDefaultTextColor(Qt::white);
-    player_name->setFont(font);
-    player_name->setPos(5, 0);
-
-
-    interface_scene->addItem(player_name);
-
-    hp_bar = new QProgressBar();
-
-    hp_bar->setMinimum(0);
-    hp_bar->setMaximum(player->getHP());
-    hp_bar->setFormat(QString("%v / " + QString::number(hp_bar->maximum())));
-    hp_bar->setTextVisible(true);
-
-    hp_bar->setValue(hp_bar->maximum());
-    hp_bar->move(10,60);
-    hp_bar->setMinimumSize(300,70);
-
-    interface_scene->addWidget(hp_bar);
-
-    reload_bar = new QProgressBar();
-
-    reload_bar->setMinimum(-1);
-    reload_bar->setMaximum(player->reloadTime());
-    //reload_bar->setInvertedAppearance(true);
-    reload_bar->setOrientation(Qt::Vertical);
-    reload_bar->move(550,20);
-    reload_bar->setMinimumHeight(110);
-    reload_bar->setMaximumWidth(15);
-
-    interface_scene->addWidget(reload_bar);
 
     QGraphicsPixmapItem* APShell = new QGraphicsPixmapItem;
     QGraphicsPixmapItem* HEShell = new QGraphicsPixmapItem;
@@ -137,18 +77,27 @@ void Game::draw_interface(Player* player)
     interface_scene->addItem(APText);
     interface_scene->addItem(HEText);
 
+    hp_bar = new QProgressBar();
+    hp_bar->move(10,60);
+    hp_bar->setMinimumSize(300,70);
+    hp_bar->setTextVisible(true);
+    interface_scene->addWidget(hp_bar);
+
+    reload_bar = new QProgressBar();
+    reload_bar->setOrientation(Qt::Vertical);
+    reload_bar->move(550,20);
+    reload_bar->setMinimumHeight(110);
+    reload_bar->setMaximumWidth(15);
+    interface_scene->addWidget(reload_bar);
+
     APNum = new QGraphicsTextItem;
     HENum = new QGraphicsTextItem;
-
     APNum->setFont(QFont("Calibri", 12));
-    APNum->setPlainText(QString::number(player->getAP()));
     APNum->setDefaultTextColor(Qt::white);
     APNum->setPos(425, 105);
     HENum->setFont(QFont("Calibri", 12));
-    HENum->setPlainText(QString(QString::number(player->getHE())));
     HENum->setDefaultTextColor(Qt::white);
     HENum->setPos(495, 105);
-
     interface_scene->addItem(APNum);
     interface_scene->addItem(HENum);
 
@@ -156,7 +105,6 @@ void Game::draw_interface(Player* player)
     frame->setPixmap(QPixmap(ramka));
     frame->setScale(0.2);
     frame->setPos(410,40);
-
     interface_scene->addItem(frame);
 
     QGraphicsTextItem* UTitle = new QGraphicsTextItem;
@@ -164,8 +112,14 @@ void Game::draw_interface(Player* player)
     UTitle->setPlainText(QString("Ulepszenia:"));
     UTitle->setDefaultTextColor(Qt::white);
     UTitle->setPos(625, 10);
-
     interface_scene->addItem(UTitle);
+
+    QFont font("Calibri", 18);
+    player_name = new QGraphicsTextItem();
+    player_name->setDefaultTextColor(Qt::white);
+    player_name->setFont(font);
+    player_name->setPos(5, 0);
+    interface_scene->addItem(player_name);
 
     UTrack = new QGraphicsTextItem;
     UTrack->setFont(QFont("Calibri", 14));
@@ -173,15 +127,11 @@ void Game::draw_interface(Player* player)
     UTrack->setDefaultTextColor(Qt::white);
     UTrack->setPos(625, 40);
 
-    interface_scene->addItem(UTrack);
-
     UEngine = new QGraphicsTextItem;
     UEngine->setFont(QFont("Calibri", 14));
     UEngine->setPlainText(QString("Silnik: " + QString::number(0) + "/1"));
     UEngine->setDefaultTextColor(Qt::white);
     UEngine->setPos(625, 70);
-
-    interface_scene->addItem(UEngine);
 
     UArmor = new QGraphicsTextItem;
     UArmor->setFont(QFont("Calibri", 14));
@@ -190,9 +140,56 @@ void Game::draw_interface(Player* player)
     UArmor->setPos(625, 100);
 
     interface_scene->addItem(UArmor);
+    interface_scene->addItem(UEngine);
+    interface_scene->addItem(UTrack);
 
     game_interface->setScene(interface_scene);
     game_interface->show();
+}
+
+void Game::create_player(QString name)
+{
+    player = new Player();
+    player->setPlayerName(name);
+    player->setInitialParameters(player->getInitHp(), 120, 0.5);
+    player->getPointerToGame(this);
+}
+
+void Game::createMap(int lvl, int dif)
+{
+    map = new Map(this->player, dif, lvl);
+}
+
+void Game::displayMenu()
+{
+    menu = new Menu(this);
+}
+
+void Game::setInterface()
+{
+    drawInterface();
+
+    map_view->setScene(map);
+    player->setPointerToView(map_view);
+
+    QString name = "";
+    if(username != nullptr)
+        name = username->text();
+
+    player_name->setPlainText(QString("Gracz: " + name));
+
+    hp_bar->setMinimum(0);
+    hp_bar->setMaximum(player->getHP());
+    hp_bar->setFormat(QString("%v / " + QString::number(hp_bar->maximum())));  
+
+    hp_bar->setValue(hp_bar->maximum());
+
+    reload_bar->setMinimum(-1);
+    reload_bar->setMaximum(player->reloadTime()); 
+
+
+    APNum->setPlainText(QString::number(player->getAP()));
+    HENum->setPlainText(QString(QString::number(player->getHE())));
 }
 
 void Game::newGame()
@@ -300,7 +297,9 @@ void Game::set_baron()
         init_view->close();
         init_view->deleteLater();
         init_view = nullptr;
-        draw_interface(player);
+
+        createMap(1,diffic);
+        setInterface();
     }
     else
     {
@@ -323,7 +322,9 @@ void Game::set_kabaczek()
         init_view->close();
         init_view->deleteLater();
         init_view = nullptr;
-        draw_interface(player);
+
+        createMap(1,diffic);
+        setInterface();
     }
     else
     {
@@ -346,7 +347,9 @@ void Game::set_fiolet()
         init_view->close();
         init_view->deleteLater();
         init_view = nullptr;
-        draw_interface(player);
+
+        createMap(1,diffic);
+        setInterface();
     }
     else
     {
@@ -414,12 +417,8 @@ void Game::modifyReloadBar(int time)
 
 void Game::modifyAmmo()
 {
-
-
     APNum->setPlainText(QString::number(player->getAP()));
     HENum->setPlainText(QString(QString::number(player->getHE())));
-
-
 }
 
 void Game::modifyAmmoFrame()
@@ -448,7 +447,6 @@ void Game::modifyUArmor()
 {
     UArmor->setPlainText(QString("Pancerz: " + QString::number(player->getArmor())));
 }
-
 
 void Game::keyPressEvent(QKeyEvent *event){
 //qDebug()<<colliding_items;

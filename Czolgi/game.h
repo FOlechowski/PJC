@@ -30,9 +30,11 @@ public:
     Game();
     ~Game();
 
+    void drawInterface();
     void create_player(QString name);
+    void createMap(int lvl, int dif);
     void displayMenu();
-    void draw_interface(Player* player);
+    void setInterface();
     void newGame();
     void modifyHpBar(bool upgrade);
     void modifyReloadBar(int time);

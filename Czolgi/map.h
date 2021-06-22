@@ -9,13 +9,14 @@
 #include <QDebug>
 #include "player.h"
 #include "obstacles.h"
+
 class Player;
 
 class Map: public QGraphicsScene
 {
 
 public:
-    Map(Player* player, int diff);
+    Map(Player* player, int diff, int lvl);
     ~Map();
 
     void changeLevel();
@@ -24,6 +25,7 @@ public:
     void initialLevel();
     int getWidth();
     int getHeight();
+    void setLevel(int lvl);
 
 public slots:
 

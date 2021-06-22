@@ -257,11 +257,13 @@ void Menu::loadFile()
 
     stack_pointer = 0;
 
-    int lvl = s_file[stack_pointer++].right(1).toInt();
-    int dif = s_file[stack_pointer++].right(1).toInt();
+    game->create_player("");
 
-    qDebug()<<lvl;
-    qDebug()<<dif;
+    int lvl = s_file[stack_pointer++].rightRef(1).toInt();
+    int dif = s_file[stack_pointer++].rightRef(1).toInt();
+
+    game->createMap(lvl,dif);
+    game->setInterface();
 }
 
 
