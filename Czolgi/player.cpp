@@ -27,6 +27,7 @@ Player::~Player()
     delete game;
     delete map;
     delete view;
+
 }
 
 void Player::setPlayerName(QString Pname)
@@ -88,6 +89,9 @@ void Player::getPointerToGame(Game *game)
 void Player::updateHpBar()
 {
     game->modifyHpBar(false);
+    if(getHP()<=0){
+        game->endGame(false);
+    }
 }
 
 void Player::updateReloadBar()
@@ -304,6 +308,8 @@ int Player::getInitHp()
     return init_hp;
 }
 
+
+
 void Player::upgradeTrack()
 {
     if(!tracks)
@@ -328,6 +334,8 @@ void Player::movePlayer()
     {
         this->map->changeLevel();
     }
+
+
 
     if (checkCol()&&!(keyA&&keyD)){
         bool aw,dw,as,ds = true;

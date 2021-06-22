@@ -97,6 +97,7 @@ bool Bullet::bulletIsCollidig()
                 {
                     hp = hp - (dmg - (armor*dmg));                                                              //calculate damage
                     hitted->setHP(hp);
+
                 }
                 if(typeid(*(colliding_items[i])) == typeid(Player))
                 {
@@ -108,6 +109,9 @@ bool Bullet::bulletIsCollidig()
                 {
                     Boss *P_Boss = dynamic_cast<Boss*>(colliding_items[i]);
                     P_Boss->getHelp(P_Boss->x()-200,P_Boss->y()-200);
+                    if(hp<=0){
+                        game->endGame(true);
+                    }
                 }
 
                 if(hp <= 0 && enemy)                                                                             //if hp is over

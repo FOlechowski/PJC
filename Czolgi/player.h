@@ -6,6 +6,7 @@
 #include <QObject>
 #include "tank.h"
 #include <QString>
+#include <QMessageBox>
 #include "obstacles.h"
 #include "game.h"
 #include "map.h"
