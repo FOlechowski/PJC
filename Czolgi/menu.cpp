@@ -249,21 +249,51 @@ void Menu::loadFile()
         while(!stream.atEnd())
         {
             QString line = stream.readLine();
-            s_file[stack_pointer] = line;
-            stack_pointer++;
+            s_file[sp] = line;
+            sp++;
         }
     }
     file.close();
 
-    stack_pointer = 0;
+    sp = 0;
 
-    game->create_player("");
+    int lvl = s_file[sp++].rightRef(1).toInt();
+    int dif = s_file[sp++].rightRef(1).toInt();
 
-    int lvl = s_file[stack_pointer++].rightRef(1).toInt();
-    int dif = s_file[stack_pointer++].rightRef(1).toInt();
+    QString type = s_file[sp].left(4);
+    if(type == "Type")
+    {
+        int lenght = s_file[sp].length()-1;
+        QString tname;
 
-    game->createMap(lvl,dif);
-    game->setInterface();
+        while(s_file[sp][lenght] != "=")
+        {
+            tname = tname+s_file[sp][lenght--];
+        }
+
+        std::reverse(tname.begin(), tname.end());
+        sp++;
+
+        if(tname == "Player")
+        {
+            lenght = s_file[sp].length()-1;
+            QString pname;
+            while(s_file[sp][lenght] != "=")
+            {
+                pname = pname+s_file[sp][lenght--];
+            }
+            std::reverse(pname.begin(),pname.end());
+            game->create_player(pname);
+            sp++;
+
+            int px;
+            int py;
+
+
+        }
+    }
+    //game->createMap(lvl,dif);
+    //game->setInterface();
 }
 
 

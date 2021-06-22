@@ -57,7 +57,7 @@ private:
     QTreeView *tree = nullptr;
 
     QString s_file [400];
-    int stack_pointer = 0;
+    int sp = 0;
 
     int font_size = 32;
 };

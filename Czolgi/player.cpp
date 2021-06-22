@@ -125,9 +125,7 @@ void Player::moveBackward(qreal m_distance, int m_angle)
 
 void Player::turnLeft(int &m_angle)
 {
-    //m_angle = float(m_angle);
     m_angle += rotate;
-    //this->setRotation(-m_angle);
     if(m_angle>180)
     {
         m_angle=-(180-rotate);
@@ -138,7 +136,7 @@ void Player::turnRight(int &m_angle)
 {
     m_angle = float(m_angle);
     m_angle -= rotate;
-    //this->setRotation(-m_angle);
+
     if(m_angle<-180)
     {
         m_angle=(180-rotate);
@@ -157,9 +155,7 @@ void Player::upgradeSpeed()
 
 bool Player::checkCol()
 {
-    qDebug()<<this->pos();
     QList<QGraphicsItem*> colliding_items = collidingItems();
-    //qDebug()<<typeid(Bridge);
     bool isonbridge,isonwater,stick = false;
 
      for (int i = 0, n = colliding_items.size(); i < n; i++){
@@ -302,6 +298,19 @@ void Player::changeRotateAngle(int newAngle)
 int Player::getInitHp()
 {
     return init_hp;
+}
+
+void Player::loadPlayer(int hp, int dmg, float armor, int b, int eb, int rtime, int spd, int tr, int eng)
+{
+    this->hp = hp;
+    this->dmg = dmg;
+    this->armor = armor;
+    this->APShells = b;
+    this->HEShells = eb;
+    this->reload_time = rtime;
+    this->speed = spd;
+    this->tracks = tr;
+    this->engine = eng;
 }
 
 void Player::upgradeTrack()

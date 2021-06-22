@@ -42,8 +42,7 @@ public:
     void changeRotateAngle(int newAngle);
     int getInitHp();
 
-
-
+    void loadPlayer(int hp, int dmg, float armor, int b, int eb, int rtime, int spd, int tr, int eng);
 
 public slots:
 

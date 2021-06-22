@@ -110,7 +110,7 @@ void Enemy::addStick()
     stick = new QGraphicsRectItem(this);
     stick->setRect(25,50,50,(view_range));
     stick->setTransformOriginPoint(50,50);
-    stick->setVisible(false);
+    stick->setVisible(true);
 
     txt = new QGraphicsTextItem(this);
     txt -> setDefaultTextColor(Qt::red);
