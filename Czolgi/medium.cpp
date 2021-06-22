@@ -24,7 +24,7 @@ Medium::Medium(qreal x, qreal y, int dif, Player* pl)
             view_range = 250;
             hp = 150;
             armor = 0.35;
-            dmg = 20;
+            dmg = 30;
             reload_time = 5000;
             break;
         case 1:
@@ -32,7 +32,7 @@ Medium::Medium(qreal x, qreal y, int dif, Player* pl)
             view_range = 350;
             hp = 350;
             armor = 0.45;
-            dmg = 50;
+            dmg = 60;
             reload_time = 4000;
             break;
         case 2:

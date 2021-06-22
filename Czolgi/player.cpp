@@ -157,6 +157,7 @@ void Player::upgradeSpeed()
 
 bool Player::checkCol()
 {
+    qDebug()<<this->pos();
     QList<QGraphicsItem*> colliding_items = collidingItems();
     //qDebug()<<typeid(Bridge);
     bool isonbridge,isonwater,stick = false;
@@ -220,7 +221,8 @@ bool Player::checkCol()
         }else{
             isonwater = false;
         }
-        if (typeid((*colliding_items[i])) == typeid(QGraphicsRectItem) || typeid((*colliding_items[i])) == typeid(QGraphicsTextItem)){
+        if (typeid((*colliding_items[i])) == typeid(QGraphicsRectItem) || typeid((*colliding_items[i])) == typeid(QGraphicsTextItem)
+                || typeid((*colliding_items[i])) == typeid(Decoration1) || typeid((*colliding_items[i])) == typeid(Decoration2)){
             stick = true;
             //qDebug()<<"patykuje";
         }else{
@@ -239,7 +241,7 @@ bool Player::checkCol()
 bool Player::outOfMap()
 {
 
-    if(this->x()<-50||this->x()>=map->getWidth()-150||this->y()<0||this->y()>=map->getHeight()-100)
+    if(this->x()<-55||this->x()>=map->getWidth()-140||this->y()<-5||this->y()>=map->getHeight()-90)
     {
         return true;
     }else
@@ -322,7 +324,7 @@ void Player::upgradeArmor()
 
 void Player::movePlayer()
 {
-    if(this->x() >= 800 && this->y() >= 800)
+    if(this->x() >= 1600 && this->y() >= 1050 && this->y() <= 1300)
     {
         this->map->changeLevel();
     }

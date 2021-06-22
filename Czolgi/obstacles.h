@@ -17,7 +17,7 @@ public:
     Water();
 };
 
-class Bridge : public QGraphicsPixmapItem
+class Bridge : public Obstacles
 {
 public:
     Bridge();
@@ -27,6 +27,20 @@ class Rock : public Obstacles
 {
 public:
     Rock();
+
+};
+
+class Decoration1 : public Obstacles
+{
+public:
+    Decoration1();
+
+};
+
+class Decoration2 : public Obstacles
+{
+public:
+    Decoration2();
 
 };
 

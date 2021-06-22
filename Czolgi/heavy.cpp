@@ -17,17 +17,17 @@ Heavy::Heavy(qreal x, qreal y, int dif, Player* pl)
     {
         case 0:
             speed = 1;
-            view_range = 150;
+            view_range = 300;
             hp = 300;
-            armor = 0.6;
+            armor = 0.7;
             dmg = 90;
             reload_time = 5500;
             break;
         case 1:
             speed = 1;
-            view_range = 150;
+            view_range = 400;
             hp = 500;
-            armor = 0.7;
+            armor = 0.8;
             dmg = 130;
             reload_time = 5000;
             break;

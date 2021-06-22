@@ -21,6 +21,17 @@ Water::Water()
     this->setBrush(QBrush(wt_tex));
 }
 
+Decoration1::Decoration1()
+{
+     this->setPixmap(QPixmap(":/img/tex/decoration_1.png"));
+}
+
+Decoration2::Decoration2()
+{
+     this->setPixmap(QPixmap(":/img/tex/decoration_2.png"));
+}
+
+
 UTrack::UTrack()
 {
     this->setPixmap(QPixmap(":/img/tex/track.png"));
@@ -50,3 +61,4 @@ UHealth::UHealth()
     this->setPixmap((QPixmap(":/img/tex/Health.png")));
     this->setScale(0.05);
 }
+
