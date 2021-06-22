@@ -151,7 +151,7 @@ void Game::create_player(QString name)
 {
     player = new Player();
     player->setPlayerName(name);
-    player->setInitialParameters(player->getInitHp(), 120, 0.5);
+    player->setInitialParameters(player->getInitHp(), 520, 0.5);
     player->getPointerToGame(this);
 }
 
@@ -491,4 +491,22 @@ void Game::keyPressEvent(QKeyEvent *event){
 
         }
     }
+}
+
+void Game::endGame(bool win)
+{
+    QMessageBox* end = new QMessageBox;
+    if(win)
+    {
+        end->setText(QString("Gratulacje żołnierzu!"));
+        end->exec();
+    }
+    else
+    {
+        map->removeItem(player);
+        end->setText(QString("Koniec gry żołnierzu!"));
+        end->exec();
+        player->deleteLater();
+    }
+
 }

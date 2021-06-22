@@ -43,6 +43,7 @@ public:
     void modifyUTracks(int number);
     void modifyUEngine(int number);
     void modifyUArmor();
+    void endGame(bool win);
     QString getPath(int path_type);
 
 private slots:
